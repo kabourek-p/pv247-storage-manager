@@ -1,0 +1,100 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum ProcessingType {
+  SQUARE
+  BEND
+  STRAIGHT
+}
+
+enum Unit {
+  KG
+  MM
+  PIECE
+}
+
+model Commodity {
+  id                  Int                  @id @default(autoincrement())
+  name                String
+  unit                Unit
+  restocks            Restock[]
+  orderElements       OrderElement[]
+  weightToLenghtRatio WeightToLenghtRatio?
+}
+
+model WeightToLenghtRatio {
+  commodityId        Int       @id
+  commodity          Commodity @relation(fields: [commodityId], references: [id])
+  weightPerMilimeter Decimal
+}
+
+model Restock {
+  id              Int             @id @default(autoincrement())
+  date            DateTime        @default(now())
+  commodityId     Int
+  commodity       Commodity       @relation(fields: [commodityId], references: [id])
+  quantity        Decimal
+  supllierName    String?
+  invoiceNumber   String?
+  unitPrice       Decimal
+  authorId        Int
+  author          User            @relation(fields: [authorId], references: [id])
+  stockDispatches StockDispatch[]
+}
+
+model Order {
+  id            Int            @id @default(autoincrement())
+  date          DateTime       @default(now())
+  authorId      Int
+  author        User           @relation(fields: [authorId], references: [id])
+  note          String?
+  orderElements OrderElement[]
+  invoices      Invoice?
+}
+
+model OrderElement {
+  id              Int             @id @default(autoincrement())
+  orderId         Int
+  order           Order           @relation(fields: [orderId], references: [id])
+  commodityId     Int
+  commodity       Commodity       @relation(fields: [commodityId], references: [id])
+  processingNote  String?
+  processingType  ProcessingType
+  unitLength      Decimal
+  numberOfUnits   Decimal
+  unitPrice       Decimal
+  ticketNumber    String?
+  stockDispatches StockDispatch[]
+}
+
+model Invoice {
+  invoiceNumber String   @id
+  date          DateTime @default(now())
+  orderId       Int      @unique
+  order         Order    @relation(fields: [orderId], references: [id])
+}
+
+model StockDispatch {
+  id             Int          @id @default(autoincrement())
+  date           DateTime     @default(now())
+  orderElementId Int
+  orderElement   OrderElement @relation(fields: [orderElementId], references: [id])
+  quantity       Decimal
+  restockId      Int
+  restockSource  Restock      @relation(fields: [restockId], references: [id])
+}
+
+model User {
+  id       Int       @id @default(autoincrement())
+  name     String
+  surname  String
+  email    String    @unique
+  restocks Restock[]
+  orders   Order[]
+}
