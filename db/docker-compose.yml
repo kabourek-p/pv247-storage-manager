@@ -1,21 +1,20 @@
 ---
-version: '3.8'
 services:
   adminer:
     image: adminer
-    restart: unless-stopped
+    restart: no
     ports:
       - 9002:8080
   
   db:
     image: postgres
-    restart: unless-stopped
+    restart: no
     ports:
       - 5432:5432
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: 123
-      POSTGRES_DB: llws
+      POSTGRES_DB: pv247-storage-manager
     volumes:
       - ./db:/var/lib/postgresql/data
 

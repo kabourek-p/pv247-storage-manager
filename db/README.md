@@ -4,9 +4,9 @@ How to setup a usable development database for storage-manager
 
 # Prerequisiuties
 
-You need docker and docker-compose installed
-https://docs.docker.com/engine/install/
-https://docs.docker.com/compose/install/
+You need docker and docker-compose installed:
+- https://docs.docker.com/engine/install/
+- https://docs.docker.com/compose/install/
 
 ## Start db
 
@@ -15,8 +15,10 @@ cd db/
 docker compose up -d
 ~~~
 this will pull docker image with postgress database and adminer ui
-Database will be available on https://localhost:5432
-Adminer ui on [https://localhost:9002](https://localhost:9002)
+
+Database will be available on http://localhost:5432
+
+Adminer ui on [http://localhost:9002](http://localhost:9002)
 
 ## Setup prisma
 
@@ -32,7 +34,7 @@ prisma generate && prisma migrate deploy
 ~~~
 
 ## Connect to adminer:
-Visit [https://localhost:9002](https://localhost:9002) and login screen will appear:
+Visit [http://localhost:9002](http://localhost:9002) and login screen will appear:
 You can connect to the devel db using:
 - System: `PostgreSQL`
 - Server: `db` (name provided by docker-compose
