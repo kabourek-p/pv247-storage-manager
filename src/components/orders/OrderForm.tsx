@@ -55,7 +55,7 @@ const OrderForm = ({
 		console.log('data', values);
 		await submitFn(values);
 	};
-
+	console.log(form.formState.errors?.note?.message);
 	return (
 		<div className="flex p-4">
 			<FormProvider {...form}>
@@ -63,48 +63,55 @@ const OrderForm = ({
 					className="space-x-2 w-full"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
-					<div className="flex items-center justify-between space-x-10 w-full">
-						<FormTextField
-							name="note"
-							label="Order Identifier"
-							className="flex-grow"
-							error={form.formState.errors?.note?.message}
-						/>
-
-						<Button
-							className="bg-strongblue w-40"
-							type="button"
-							onClick={() =>
-								append({
-									commodity: '',
-									note: '',
-									numUnits: 0,
-									quantity: 0,
-									unitPrice: 0
-								})
-							}
+					<div className="flex flex-col items-start justify-between space-y-4 w-full relative mx-2">
+						<div
+							className={`px-4 py-2 border rounded ${
+								form.formState.errors?.note
+									? 'border-red-600'
+									: 'border-gray-300'
+							}`}
 						>
-							Add field
-						</Button>
+							<FormTextField
+								name="note"
+								label="Order Identifier"
+								className="rounded-lg bg-slate-50 py-1.5 shadow m-4 w-64"
+								error={form.formState.errors?.note?.message}
+							/>
+						</div>
+						<div className="absolute bottom-0 right-0">
+							<Button
+								className="bg-strongblue w-40 mb-2"
+								type="button"
+								onClick={() =>
+									append({
+										commodity: '',
+										note: '',
+										numUnits: 0,
+										quantity: 0,
+										unitPrice: 0
+									})
+								}
+							>
+								Add field
+							</Button>
+						</div>
 					</div>
 
-					<div className="border-2 rounded-xl">
-						<table className="table-auto w-full border-collapse border border-gray-300">
-							<OrderElementHeader />
+					<table className="table-auto w-full border-collapse border border-gray-300">
+						<OrderElementHeader />
 
-							<tbody className="divide-y divide-gray-200">
-								{fields.map((field, index) => (
-									<OrderElementFormRow
-										commodities={commodities}
-										key={field.id}
-										onClick={() => remove(index)}
-										index={index}
-										errors={form.formState.errors?.orders?.[index]}
-									/>
-								))}
-							</tbody>
-						</table>
-					</div>
+						<tbody className="divide-y divide-gray-200">
+							{fields.map((field, index) => (
+								<OrderElementFormRow
+									commodities={commodities}
+									key={field.id}
+									onClick={() => remove(index)}
+									index={index}
+									errors={form.formState.errors?.orders?.[index]}
+								/>
+							))}
+						</tbody>
+					</table>
 
 					<Button className="bg-strongorage m-4" type="submit">
 						Submit

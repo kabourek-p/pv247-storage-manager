@@ -14,9 +14,7 @@ export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
 	quantity: z.coerce.number().positive('Quantity must be a positive number'),
 	unitPrice: z.coerce.number().positive('Unit price must be a positive number'),
-	numUnits: z.coerce
-		.number()
-		.positive('Number of units must be a positive number'),
+	numUnits: z.coerce.number().positive('Units must be a positive number'),
 	note: z.string().optional()
 });
 

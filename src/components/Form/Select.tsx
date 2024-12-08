@@ -23,14 +23,14 @@ export const Select = ({
 	const { register } = useFormContext();
 
 	return (
-		<div className="flex flex-col gap-2 p-1">
+		<div className="flex flex-col space-x-2">
 			{label && (
 				<label className="p-2" htmlFor={name}>
 					{label}
 				</label>
 			)}
 			<select
-				className={`rounded-lg bg-slate-50 px-3 py-1.5 shadow ${
+				className={`rounded-lg bg-slate-50 px-3 py-1.5 shadow border-2 ${
 					error ? 'border-red-600 border' : 'border-gray-300'
 				}`}
 				id={name}
@@ -43,7 +43,7 @@ export const Select = ({
 					</option>
 				))}
 			</select>
-			{error && <span className="text-red-600 text-sm mt-1">{error}</span>}
+			{error && <span className="text-red-600 text-sm">{error}</span>}
 		</div>
 	);
 };
