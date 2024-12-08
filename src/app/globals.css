@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/*@media (max-width: 768px) {*/
 @media (max-width: 1350px) {
     table {
         width: 100%;
@@ -35,7 +34,7 @@
     }
 
     tr:nth-child(even) {
-        background-color: #fef3c7;
+        background-color: #EFD5BE;
     }
 
     tr {

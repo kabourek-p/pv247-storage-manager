@@ -13,7 +13,9 @@ export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
 	quantity: z.coerce.number().positive('Quantity must be a positive number'),
 	unitPrice: z.coerce.number().positive('Unit price must be a positive number'),
-	numUnits: z.coerce.number().positive('Number of units must be a positive number'),
+	numUnits: z.coerce
+		.number()
+		.positive('Number of units must be a positive number'),
 	note: z.string().optional()
 });
 
@@ -36,7 +38,6 @@ const OrderElementFormRow = (props: {
 	errors?: OrderElementTableRowErrorSchema;
 }) => (
 	<tr className="hover:bg-gray-100">
-		{/* Remove Button */}
 		<td className="border border-gray-300 justify-center p-1">
 			<TrashButton type="button" onClick={props.onClick} />
 		</td>
@@ -55,14 +56,20 @@ const OrderElementFormRow = (props: {
 			/>
 		</td>
 
-		<td className="border border-gray-300 px-4 py-2" data-label="Price per unit">
+		<td
+			className="border border-gray-300 px-4 py-2"
+			data-label="Price per unit"
+		>
 			<FormTextField
 				name={`orders[${props.index}].unitPrice`}
 				error={props.errors?.unitPrice?.message}
 			/>
 		</td>
 
-		<td className="border border-gray-300 px-4 py-2" data-label="Number of Units">
+		<td
+			className="border border-gray-300 px-4 py-2"
+			data-label="Number of Units"
+		>
 			<FormTextField
 				name={`orders[${props.index}].numUnits`}
 				error={props.errors?.numUnits?.message}

@@ -75,7 +75,6 @@ const OrderForm = ({
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<div className="flex items-center justify-between space-x-10 w-full">
-						{/* Form Field aligned to the left */}
 						<FormTextField
 							name="note"
 							label="Order Identifier"
@@ -83,7 +82,6 @@ const OrderForm = ({
 							error={form.formState.errors?.note?.message}
 						/>
 
-						{/* Button aligned to the right */}
 						<Button
 							className="bg-strongblue w-40"
 							type="button"
@@ -95,10 +93,8 @@ const OrderForm = ({
 
 					<div className="border-2 rounded-xl">
 						<table className="table-auto w-full border-collapse border border-gray-300">
-							{/* Table Header */}
 							<OrderElementHeader />
 
-							{/* Table Body */}
 							<tbody className="divide-y divide-gray-200">
 								{fields.map((field, index) => (
 									<OrderElementFormRow
