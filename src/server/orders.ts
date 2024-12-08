@@ -37,7 +37,7 @@ export const createOrder = async (order: OrderFormSchema) => {
 			orderElements: {
 				create: order.orders.map(o => ({
 					commodity: {
-						connect: { id: 1 }
+						connect: { name: o.commodity }
 					},
 					processingNote: o.note,
 					processingType: ProcessingType.STRAIGHT,

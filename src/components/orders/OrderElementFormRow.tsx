@@ -8,6 +8,7 @@ import {
 
 import TrashButton from '@/components/TrashButton';
 import { FormTextField } from '@/components/Form/FormTextField';
+import { Select } from '@/components/Form/Select';
 
 export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
@@ -35,6 +36,7 @@ type OrderElementTableRowErrorSchema =
 const OrderElementFormRow = (props: {
 	onClick: () => void;
 	index: number;
+	commodities: string[];
 	errors?: OrderElementTableRowErrorSchema;
 }) => (
 	<tr className="hover:bg-gray-100">
@@ -43,7 +45,8 @@ const OrderElementFormRow = (props: {
 		</td>
 
 		<td className="border border-gray-300 px-4 py-2" data-label="Commodity">
-			<FormTextField
+			<Select
+				options={props.commodities}
 				name={`orders[${props.index}].commodity`}
 				error={props.errors?.commodity?.message}
 			/>

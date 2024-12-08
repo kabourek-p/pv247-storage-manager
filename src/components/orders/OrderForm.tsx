@@ -7,14 +7,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { FormTextField } from '@/components/Form/FormTextField';
 import { Button } from '@/components/Button';
+import OrderElementHeader from '@/components/orders/OrderElementHeader';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
 } from '@/components/orders/OrderElementFormRow';
-import OrderElementHeader from '@/components/orders/OrderElementHeader';
-import { createOrder } from '@/server/orders';
 
 export type OrderFormProps = {
-	// typeSelector: React.ReactNode;
 	defaultValues: {
 		note: string;
 		orders: {
@@ -25,7 +23,8 @@ export type OrderFormProps = {
 			unitPrice: number;
 		}[];
 	};
-	mutationFn: (data: OrderFormSchema) => Promise<unknown>;
+	commodities: string[];
+	submitFn: (data: OrderFormSchema) => Promise<unknown>;
 };
 
 const orderSchema = z.object({
@@ -35,7 +34,11 @@ const orderSchema = z.object({
 
 export type OrderFormSchema = z.infer<typeof orderSchema>;
 
-const OrderForm = ({ defaultValues, mutationFn }: OrderFormProps) => {
+const OrderForm = ({
+	defaultValues,
+	submitFn,
+	commodities
+}: OrderFormProps) => {
 	const form = useForm<OrderFormSchema>({
 		resolver: zodResolver(orderSchema),
 		defaultValues: {
@@ -50,7 +53,7 @@ const OrderForm = ({ defaultValues, mutationFn }: OrderFormProps) => {
 
 	const onSubmit = async (values: OrderFormSchema) => {
 		console.log('data', values);
-		await createOrder(values);
+		await submitFn(values);
 	};
 
 	return (
@@ -92,6 +95,7 @@ const OrderForm = ({ defaultValues, mutationFn }: OrderFormProps) => {
 							<tbody className="divide-y divide-gray-200">
 								{fields.map((field, index) => (
 									<OrderElementFormRow
+										commodities={commodities}
 										key={field.id}
 										onClick={() => remove(index)}
 										index={index}
