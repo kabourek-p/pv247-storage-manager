@@ -10,7 +10,11 @@ export default {
 		extend: {
 			colors: {
 				background: 'var(--background)',
-				foreground: 'var(--foreground)'
+				foreground: 'var(--foreground)',
+				strongblue: '#1E4173',
+				lightblue: '#A2B6D1',
+				strongorage: '#C2834C',
+				lightorange: '#EFD5BE'
 			}
 		}
 	},
