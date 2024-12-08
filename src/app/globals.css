@@ -1,3 +1,48 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*@media (max-width: 768px) {*/
+@media (max-width: 1350px) {
+    table {
+        width: 100%;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    tbody,
+    tr,
+    td {
+        display: block;
+        width: 100%;
+    }
+
+    td {
+        text-align: right;
+        padding: 8px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    td:before {
+        content: attr(data-label);
+        font-weight: bold;
+        padding-right: 8px;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #f9fafb;
+    }
+
+    tr:nth-child(even) {
+        background-color: #fef3c7;
+    }
+
+    tr {
+        border-bottom: 2px solid #333;
+    }
+
+    th {
+        display: none;
+    }
+}
