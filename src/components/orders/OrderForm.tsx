@@ -4,8 +4,6 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
 import { FormTextField } from '@/components/Form/FormTextField';
 import { Button } from '@/components/Button';
@@ -13,12 +11,19 @@ import OrderElementFormRow, {
 	OrderElementTableRowSchema
 } from '@/components/orders/OrderElementFormRow';
 import OrderElementHeader from '@/components/orders/OrderElementHeader';
+import { createOrder } from '@/server/orders';
 
 export type OrderFormProps = {
-	message: string;
 	// typeSelector: React.ReactNode;
 	defaultValues: {
-		orders: { firstName: string; lastName: string }[];
+		note: string;
+		orders: {
+			commodity: string;
+			note?: string;
+			numUnits: number;
+			quantity: number;
+			unitPrice: number;
+		}[];
 	};
 	mutationFn: (data: OrderFormSchema) => Promise<unknown>;
 };
@@ -30,18 +35,12 @@ const orderSchema = z.object({
 
 export type OrderFormSchema = z.infer<typeof orderSchema>;
 
-const OrderForm = ({
-	// defaultValues,
-	// typeSelector,
-	mutationFn
-}: OrderFormProps) => {
+const OrderForm = ({ defaultValues, mutationFn }: OrderFormProps) => {
 	const form = useForm<OrderFormSchema>({
 		resolver: zodResolver(orderSchema),
 		defaultValues: {
-			note: '',
-			orders: [
-				{ commodity: '', quantity: 0, unitPrice: 0, numUnits: 0, note: '' }
-			]
+			note: defaultValues.note,
+			orders: defaultValues.orders
 		}
 	});
 	const { fields, append, remove } = useFieldArray({
@@ -49,22 +48,9 @@ const OrderForm = ({
 		name: 'orders'
 	});
 
-	const router = useRouter();
-
-	const mutation = useMutation({
-		mutationFn,
-		onSuccess: () => {
-			router.push('/orders');
-			router.refresh();
-		},
-		onError: error => {
-			console.error('Error submitting movie:', error);
-		}
-	});
-
-	const onSubmit = (values: OrderFormSchema) => {
-		// mutation.mutate(values);
+	const onSubmit = async (values: OrderFormSchema) => {
 		console.log('data', values);
+		await createOrder(values);
 	};
 
 	return (
@@ -85,7 +71,15 @@ const OrderForm = ({
 						<Button
 							className="bg-strongblue w-40"
 							type="button"
-							onClick={() => append({})}
+							onClick={() =>
+								append({
+									commodity: '',
+									note: '',
+									numUnits: 0,
+									quantity: 0,
+									unitPrice: 0
+								})
+							}
 						>
 							Add field
 						</Button>
@@ -108,12 +102,8 @@ const OrderForm = ({
 						</table>
 					</div>
 
-					<Button
-						className="bg-strongorage m-4"
-						type="submit"
-						disabled={mutation.isPending}
-					>
-						{mutation.isPending ? 'Submitting...' : 'Submit'}
+					<Button className="bg-strongorage m-4" type="submit">
+						Submit
 					</Button>
 				</form>
 			</FormProvider>

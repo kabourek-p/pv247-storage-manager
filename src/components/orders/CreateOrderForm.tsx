@@ -3,13 +3,8 @@
 import OrderForm, { type OrderFormSchema } from '@/components/orders/OrderForm';
 
 const CreateOrderForm = () => {
-	const defaultValues = {
-		name: '',
-		type: ''
-	};
-
 	const mutationFn = async (data: OrderFormSchema) => {
-		const response = await fetch('/api/movie', {
+		const response = await fetch('/api/order', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -27,9 +22,13 @@ const CreateOrderForm = () => {
 	return (
 		<div>
 			<OrderForm
-				defaultValues={defaultValues}
+				defaultValues={{
+					note: '',
+					orders: [
+						{ commodity: '', quantity: 0, unitPrice: 0, numUnits: 0, note: '' }
+					]
+				}}
 				// typeSelector={typeSelector}
-
 				mutationFn={mutationFn}
 			/>
 		</div>
