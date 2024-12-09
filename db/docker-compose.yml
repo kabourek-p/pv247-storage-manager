@@ -5,7 +5,7 @@ services:
     restart: no
     ports:
       - 9002:8080
-  
+
   db:
     image: postgres
     restart: no
@@ -17,4 +17,3 @@ services:
       POSTGRES_DB: pv247-storage-manager
     volumes:
       - ./db:/var/lib/postgresql/data
-

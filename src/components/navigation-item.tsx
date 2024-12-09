@@ -13,7 +13,7 @@ export const NavItem = ({
 	<li className="relative mt-[2px] whitespace-nowrap">
 		<Link {...props}>{caption}</Link>
 		{active && (
-			<span className="bg-primary absolute -bottom-5 left-0 -mx-4 h-1 w-[calc(100%_+_2rem)] rounded-full" />
+			<span className="absolute -bottom-5 left-0 -mx-4 h-1 w-[calc(100%_+_2rem)] rounded-full bg-primary" />
 		)}
 	</li>
 );

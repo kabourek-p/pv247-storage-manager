@@ -34,7 +34,7 @@ const SignInPage = () => {
 					<h1 className="mb-6 self-center text-2xl">Login</h1>
 					<LoginForm />
 					<div className="mt-4">
-						<Link href="" className="text-secondary text-sm hover:underline">
+						<Link href="" className="text-sm text-secondary hover:underline">
 							Forgot password?
 						</Link>
 					</div>
