@@ -14,6 +14,6 @@ export const Button = ({
 		)}
 		{...props}
 	>
-		<div className="flex h-6 items-center gap-2">{children}</div>
+		{children}
 	</button>
 );

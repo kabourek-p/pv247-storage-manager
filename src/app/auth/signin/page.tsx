@@ -1,13 +1,13 @@
 'use client';
 import Image from 'next/image';
-import { getProviders, signIn, useSession } from 'next-auth/react';
+import { getProviders, useSession } from 'next-auth/react';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
 import { LoginForm } from '@/modules/user/components/login-form';
 
 const SignInPage = () => {
-	const [providers, setProviders] = useState<any>(null);
+	const [setProviders] = useState<any>(null);
 	const session = useSession();
 	console.log(session);
 

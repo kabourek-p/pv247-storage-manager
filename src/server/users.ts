@@ -1,6 +1,6 @@
 'use server';
 
-import { generateRandomString } from '@/server/utils';
+import generateRandomString from '@/server/utils';
 
 import prisma from '../lib/prisma';
 
