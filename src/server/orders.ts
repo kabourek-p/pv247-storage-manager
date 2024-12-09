@@ -1,7 +1,7 @@
 'use server';
 import { $Enums } from '@prisma/client';
 
-import { generateRandomString } from '@/server/utils';
+import generateRandomString from '@/server/utils';
 import { type OrderFormSchema } from '@/components/orders/OrderForm';
 
 import prisma from '../lib/prisma';
