@@ -6,15 +6,15 @@ type TextInputProps = HTMLProps<HTMLInputElement> & {
 
 export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 	({ error, ...inputProps }, ref) => (
-		<div className="flex-col flex">
+		<div className="flex flex-col">
 			<input
 				ref={ref}
-				className={`rounded-lg bg-slate-50 px-3 py-1.5 shadow border-2 ${
+				className={`rounded-lg border-2 bg-slate-50 px-3 py-1.5 shadow ${
 					error ? 'border-red-600' : 'border-gray-300'
 				}`}
 				{...inputProps}
 			/>
-			{error && <span className="text-red-600 text-sm">{error}</span>}
+			{error && <span className="text-sm text-red-600">{error}</span>}
 		</div>
 	)
 );

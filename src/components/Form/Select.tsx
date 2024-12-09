@@ -30,8 +30,8 @@ export const Select = ({
 				</label>
 			)}
 			<select
-				className={`rounded-lg bg-slate-50 px-3 py-1.5 shadow border-2 ${
-					error ? 'border-red-600 border' : 'border-gray-300'
+				className={`rounded-lg border-2 bg-slate-50 px-3 py-1.5 shadow ${
+					error ? 'border border-red-600' : 'border-gray-300'
 				}`}
 				id={name}
 				{...selectProps}
@@ -43,7 +43,7 @@ export const Select = ({
 					</option>
 				))}
 			</select>
-			{error && <span className="text-red-600 text-sm">{error}</span>}
+			{error && <span className="text-sm text-red-600">{error}</span>}
 		</div>
 	);
 };

@@ -9,12 +9,14 @@ export default {
 	theme: {
 		extend: {
 			colors: {
-				background: 'var(--background)',
-				foreground: 'var(--foreground)',
-				strongblue: '#1E4173',
-				lightblue: '#A2B6D1',
-				strongorage: '#C2834C',
-				lightorange: '#EFD5BE'
+				'background': 'var(--background)',
+				'foreground': 'var(--foreground)',
+				'primary': 'var(--primary)',
+				'primary-light': 'var(--primary-light)',
+				'primary-dark': 'var(--primary-dark)',
+				'secondary': 'var(--secondary)',
+				'secondary-light': 'var(--secondary-light)',
+				'secondary-dark': 'var(--secondary-dark)'
 			}
 		}
 	},

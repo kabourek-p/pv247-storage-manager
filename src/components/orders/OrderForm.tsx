@@ -6,7 +6,7 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { FormTextField } from '@/components/Form/FormTextField';
-import { Button } from '@/components/Button';
+import { Button } from '@/components/ui/button';
 import OrderElementHeader from '@/components/orders/OrderElementHeader';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
@@ -60,12 +60,12 @@ const OrderForm = ({
 		<div className="flex p-4">
 			<FormProvider {...form}>
 				<form
-					className="space-x-2 w-full"
+					className="w-full space-x-2"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
-					<div className="flex flex-col items-start justify-between space-y-4 w-full relative mx-2">
+					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
 						<div
-							className={`px-4 py-2 border rounded ${
+							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.note
 									? 'border-red-600'
 									: 'border-gray-300'
@@ -74,13 +74,13 @@ const OrderForm = ({
 							<FormTextField
 								name="note"
 								label="Order Identifier"
-								className="rounded-lg bg-slate-50 py-1.5 shadow m-4 w-64"
+								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
 							/>
 						</div>
 						<div className="absolute bottom-0 right-0">
 							<Button
-								className="bg-strongblue w-40 mb-2"
+								className="mb-2 w-40 bg-primary-dark"
 								type="button"
 								onClick={() =>
 									append({
@@ -97,7 +97,7 @@ const OrderForm = ({
 						</div>
 					</div>
 
-					<table className="table-auto w-full border-collapse border border-gray-300">
+					<table className="w-full table-auto border-collapse border border-gray-300">
 						<OrderElementHeader />
 
 						<tbody className="divide-y divide-gray-200">
@@ -113,7 +113,7 @@ const OrderForm = ({
 						</tbody>
 					</table>
 
-					<Button className="bg-strongorage m-4" type="submit">
+					<Button className="m-4 bg-secondary-dark" type="submit">
 						Submit
 					</Button>
 				</form>

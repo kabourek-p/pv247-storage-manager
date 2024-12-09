@@ -38,7 +38,7 @@ const OrderElementFormRow = (props: {
 	errors?: OrderElementTableRowErrorSchema;
 }) => (
 	<tr className="hover:bg-gray-100">
-		<td className="border border-gray-300 justify-center p-1">
+		<td className="justify-center border border-gray-300 p-1">
 			<TrashButton type="button" onClick={props.onClick} />
 		</td>
 
