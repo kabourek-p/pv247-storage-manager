@@ -1,10 +1,10 @@
-import {createRandomOrder} from "@/server/orders";
-import {createRandomUser} from "@/server/users";
+import { createRandomOrder } from '@/server/orders';
+import { createRandomUser } from '@/server/users';
 
 export const addRandomOrder = async () => {
-    await createRandomOrder();
-}
+	await createRandomOrder();
+};
 
 export const addRandomUser = async () => {
-    await createRandomUser();
-}
+	await createRandomUser();
+};
