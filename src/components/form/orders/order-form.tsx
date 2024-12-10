@@ -87,7 +87,7 @@ const OrderForm = ({
 								error={form.formState.errors?.note?.message}
 							/>
 						</div>
-						<div className="absolute bottom-0 right-0">
+						<div className="bottom-0 right-0">
 							<Button
 								className="mb-2 w-40 bg-primary-dark"
 								type="button"
