@@ -1,7 +1,7 @@
 import { type HTMLProps } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { TextInput } from '@/components/Form/TextInput';
+import { TextInput } from '@/components/form/text-input';
 
 type FormTextFieldProps = HTMLProps<HTMLInputElement> & {
 	name: string;

@@ -5,12 +5,12 @@ import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { FormTextField } from '@/components/Form/FormTextField';
+import { FormTextField } from '@/components/form/form-text-field';
 import { Button } from '@/components/ui/button';
-import OrderElementHeader from '@/components/orders/OrderElementHeader';
+import OrderElementHeader from '@/components/orders/order-element-header';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
-} from '@/components/orders/OrderElementFormRow';
+} from '@/components/orders/order-element-form-row';
 
 export type OrderFormProps = {
 	defaultValues: {

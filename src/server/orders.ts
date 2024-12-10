@@ -2,7 +2,7 @@
 import { $Enums } from '@prisma/client';
 
 import generateRandomString from '@/server/utils';
-import { type OrderFormSchema } from '@/components/orders/OrderForm';
+import { type OrderFormSchema } from '@/components/orders/order-form';
 
 import prisma from '../lib/prisma';
 

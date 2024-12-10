@@ -1,6 +1,6 @@
 'use client';
 
-import OrderForm from '@/components/orders/OrderForm';
+import OrderForm from '@/components/orders/order-form';
 import { createOrderServerAction } from '@/server-actions/orders';
 
 const CreateOrderForm = (props: { commodities: string[] }) => (
