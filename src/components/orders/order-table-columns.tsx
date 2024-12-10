@@ -1,12 +1,9 @@
 'use client';
 import { type ColumnDef } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
 
 import { type OrderRow } from '@/server-actions/orders';
 
-import { Button } from '../ui/button';
-
-export const columns: ColumnDef<OrderRow, string>[] = [
+export const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
 		accessorKey: 'note',
 		header: 'Identifier'

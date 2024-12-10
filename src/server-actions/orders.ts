@@ -1,7 +1,6 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { number } from 'zod';
 
 import type { OrderFormSchema } from '@/components/form/orders/order-form';
 import { createOrder, getOrders } from '@/server/orders';
@@ -28,7 +27,7 @@ export const createOrderServerAction = async (order: OrderFormSchema) => {
 	return { error: false, message: 'Order successfully created!' };
 };
 
-export const getOrderRows = async () => {
+export const getOrderRows = async (): Promise<OrderRow[]> => {
 	const orders = await getOrders();
 	return orders.map(o => {
 		const numberOfElements = o.orderElements.length;
@@ -38,7 +37,12 @@ export const getOrderRows = async () => {
 		return {
 			id: o.id,
 			note: o.note,
-			date: o.date,
+			date: new Intl.DateTimeFormat('cs-CZ', {
+				day: '2-digit',
+				//month: 'long',
+				month: '2-digit',
+				year: 'numeric'
+			}).format(new Date(o.date)),
 			numberOfElements,
 			totalPrice,
 			authorName: `${o.author.name} ${o.author.surname}`
@@ -48,8 +52,8 @@ export const getOrderRows = async () => {
 
 export type OrderRow = {
 	id: number;
-	note: string;
-	data: Date;
+	note: string | null;
+	date: string;
 	numberOfElements: number;
 	totalPrice: number;
 	authorName: string;

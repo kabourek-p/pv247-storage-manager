@@ -7,7 +7,6 @@ import {
 	getCoreRowModel,
 	getFilteredRowModel,
 	getPaginationRowModel,
-	type SortingState,
 	useReactTable
 } from '@tanstack/react-table';
 import React from 'react';
@@ -28,7 +27,7 @@ type DataTableProps<TData, TValue> = {
 	data: TData[];
 };
 
-const OrderTable = <TData, TValue>({
+const DataTable = <TData, TValue>({
 	columns,
 	data
 }: DataTableProps<TData, TValue>) => {
@@ -138,4 +137,4 @@ const OrderTable = <TData, TValue>({
 		</div>
 	);
 };
-export default OrderTable;
+export default DataTable;
