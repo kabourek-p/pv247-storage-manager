@@ -1,7 +1,7 @@
 'use client';
 import { type ColumnDef } from '@tanstack/react-table';
 
-import { type OrderRow } from '@/server-actions/orders';
+import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
 
 export const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
@@ -23,5 +23,28 @@ export const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
 		accessorKey: 'authorName',
 		header: 'Author'
+	}
+];
+
+export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
+	{
+		accessorKey: 'commodity',
+		header: 'Commodity'
+	},
+	{
+		accessorKey: 'numberOfUnits',
+		header: 'Number of units'
+	},
+	{
+		accessorKey: 'unitPrice',
+		header: 'Price per Unit'
+	},
+	{
+		accessorKey: 'note',
+		header: 'Identifier'
+	},
+	{
+		accessorKey: 'processingNote',
+		header: 'Note'
 	}
 ];

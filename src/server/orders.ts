@@ -41,3 +41,11 @@ export const getOrders = async () =>
 			author: true
 		}
 	});
+
+export const getOrderElements = async (id: number) =>
+	prisma.orderElement.findMany({
+		where: {
+			orderId: id
+		},
+		include: { commodity: true }
+	});

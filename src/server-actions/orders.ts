@@ -1,9 +1,10 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { OrderElement } from '@prisma/client';
 
 import type { OrderFormSchema } from '@/components/form/orders/order-form';
-import { createOrder, getOrders } from '@/server/orders';
+import { createOrder, getOrderElements, getOrders } from '@/server/orders';
 
 export const createOrderServerAction = async (order: OrderFormSchema) => {
 	try {
@@ -50,6 +51,20 @@ export const getOrderRows = async (): Promise<OrderRow[]> => {
 	});
 };
 
+export const getOrderElementRows = async (
+	id: number
+): Promise<OrderElementRow[]> => {
+	const orderElements = await getOrderElements(id);
+
+	return orderElements.map(e => ({
+		commodity: e.commodityId,
+		processingNote: e.processingNote,
+		unitLength: e.unitLength.toNumber(),
+		numberOfUnits: e.numberOfUnits.toNumber(),
+		unitPrice: e.unitPrice.toNumber()
+	}));
+};
+
 export type OrderRow = {
 	id: number;
 	note: string | null;
@@ -57,4 +72,12 @@ export type OrderRow = {
 	numberOfElements: number;
 	totalPrice: number;
 	authorName: string;
+};
+
+export type OrderElementRow = {
+	commodity: string;
+	processingNote: string | null;
+	unitLength: number;
+	numberOfUnits: number;
+	unitPrice: number;
 };

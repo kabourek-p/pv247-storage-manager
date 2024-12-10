@@ -25,11 +25,15 @@ import { Input } from '@/components/ui/input';
 type DataTableProps<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
+	rowClickHandler?: (id: string) => void;
+	filter?: boolean;
 };
 
 const DataTable = <TData, TValue>({
 	columns,
-	data
+	data,
+	rowClickHandler,
+	filter
 }: DataTableProps<TData, TValue>) => {
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
 		[]
@@ -46,22 +50,22 @@ const DataTable = <TData, TValue>({
 		}
 	});
 
-	const handleRowClick = (id: string) => {
-		console.log(id);
-	};
+	const handleRowClick = rowClickHandler ? rowClickHandler : (_: string) => {};
 
 	return (
 		<div>
-			<div className="flex items-center py-4">
-				<Input
-					placeholder="Filter by identifier..."
-					value={(table.getColumn('note')?.getFilterValue() as string) ?? ''}
-					onChange={event =>
-						table.getColumn('note')?.setFilterValue(event.target.value)
-					}
-					className="max-w-sm"
-				/>
-			</div>
+			{filter && (
+				<div className="flex items-center py-4">
+					<Input
+						placeholder="Filter by identifier..."
+						value={(table.getColumn('note')?.getFilterValue() as string) ?? ''}
+						onChange={event =>
+							table.getColumn('note')?.setFilterValue(event.target.value)
+						}
+						className="max-w-sm"
+					/>
+				</div>
+			)}
 			<div className="rounded-md border">
 				<Table>
 					<TableHeader>
@@ -93,7 +97,7 @@ const DataTable = <TData, TValue>({
 								>
 									{row.getVisibleCells().map(cell => (
 										<TableCell
-											className="cursor-pointer"
+											className={`${filter ? 'cursor-pointer' : ''}`}
 											key={cell.id}
 											data-label={`${cell.column.columnDef.header}:`}
 										>
