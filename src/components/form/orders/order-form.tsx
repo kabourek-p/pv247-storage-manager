@@ -4,6 +4,7 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import { FormTextField } from '@/components/form/form-text-field';
 import { Button } from '@/components/ui/button';
@@ -24,7 +25,9 @@ export type OrderFormProps = {
 		}[];
 	};
 	commodities: string[];
-	submitFn: (data: OrderFormSchema) => Promise<unknown>;
+	submitFn: (
+		data: OrderFormSchema
+	) => Promise<{ error: boolean; message: string }>;
 };
 
 const orderSchema = z.object({
@@ -52,8 +55,15 @@ const OrderForm = ({
 	});
 
 	const onSubmit = async (values: OrderFormSchema) => {
-		await submitFn(values);
+		const result = await submitFn(values);
+		if (result.error) {
+			toast.error(result.message);
+			return;
+		}
+		toast.success(result.message);
+		form.reset();
 	};
+
 	console.log(form.formState.errors?.note?.message);
 	return (
 		<div className="flex p-4">
