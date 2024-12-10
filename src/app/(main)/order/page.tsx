@@ -1,5 +1,5 @@
 import { Providers } from '@/app/providers';
-import CreateOrderForm from '@/components/orders/create-order-form';
+import CreateOrderForm from '@/components/form/orders/create-order-form';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 
 const Page = async () => {

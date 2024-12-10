@@ -7,10 +7,10 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 import { FormTextField } from '@/components/form/form-text-field';
 import { Button } from '@/components/ui/button';
-import OrderElementHeader from '@/components/orders/order-element-header';
+import OrderElementHeader from '@/components/form/orders/order-element-header';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
-} from '@/components/orders/order-element-form-row';
+} from '@/components/form/orders/order-element-form-row';
 
 export type OrderFormProps = {
 	defaultValues: {
@@ -52,7 +52,6 @@ const OrderForm = ({
 	});
 
 	const onSubmit = async (values: OrderFormSchema) => {
-		console.log('data', values);
 		await submitFn(values);
 	};
 	console.log(form.formState.errors?.note?.message);
