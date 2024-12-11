@@ -7,8 +7,8 @@ import {
 } from 'react-hook-form';
 
 import TrashButton from '@/components/TrashButton';
-import { FormTextField } from '@/components/Form/FormTextField';
-import { Select } from '@/components/Form/Select';
+import { FormTextField } from '@/components/form/form-text-field';
+import { Select } from '@/components/form/select';
 
 export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),

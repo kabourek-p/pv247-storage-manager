@@ -4,30 +4,38 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { toast } from 'sonner';
 
 import { FormTextField } from '@/components/form/form-text-field';
 import { Button } from '@/components/ui/button';
-import OrderElementHeader from '@/components/orders/OrderElementHeader';
+import OrderElementHeader from '@/components/form/orders/order-element-header';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
-} from '@/components/orders/OrderElementFormRow';
+} from '@/components/form/orders/order-element-form-row';
+
+export type OrderFormDefaultData = {
+	id?: number;
+	note: string;
+	orders: {
+		id: number | undefined;
+		commodity: string;
+		note: string;
+		numUnits: number;
+		unitQuantity: number;
+		unitPrice: number;
+	}[];
+};
 
 export type OrderFormProps = {
-	defaultValues: {
-		note: string;
-		orders: {
-			commodity: string;
-			note?: string;
-			numUnits: number;
-			quantity: number;
-			unitPrice: number;
-		}[];
-	};
+	defaultValues: OrderFormDefaultData;
 	commodities: string[];
-	submitFn: (data: OrderFormSchema) => Promise<unknown>;
+	submitFn: (
+		data: OrderFormSchema
+	) => Promise<{ error: boolean; message: string }>;
 };
 
 const orderSchema = z.object({
+	id: z.coerce.number().optional(),
 	note: z.string().min(3, 'Name must be at least 3 characters'),
 	orders: z.array(OrderElementTableRowSchema)
 });
@@ -42,6 +50,7 @@ const OrderForm = ({
 	const form = useForm<OrderFormSchema>({
 		resolver: zodResolver(orderSchema),
 		defaultValues: {
+			id: defaultValues.id,
 			note: defaultValues.note,
 			orders: defaultValues.orders
 		}
@@ -52,9 +61,15 @@ const OrderForm = ({
 	});
 
 	const onSubmit = async (values: OrderFormSchema) => {
-		console.log('data', values);
-		await submitFn(values);
+		const result = await submitFn(values);
+		if (result.error) {
+			toast.error(result.message);
+			return;
+		}
+		toast.success(result.message);
+		form.reset();
 	};
+
 	console.log(form.formState.errors?.note?.message);
 	return (
 		<div className="flex p-4">
@@ -77,8 +92,15 @@ const OrderForm = ({
 								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
 							/>
+							<span className="hidden">
+								<FormTextField
+									name="id"
+									label="Id"
+									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
+								/>
+							</span>
 						</div>
-						<div className="absolute bottom-0 right-0">
+						<div className="bottom-0 right-0">
 							<Button
 								className="mb-2 w-40 bg-primary-dark"
 								type="button"
@@ -87,7 +109,7 @@ const OrderForm = ({
 										commodity: '',
 										note: '',
 										numUnits: 0,
-										quantity: 0,
+										unitQuantity: 0,
 										unitPrice: 0
 									})
 								}
