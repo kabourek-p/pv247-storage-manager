@@ -9,7 +9,13 @@ const CreateRestockForm = (props: { commodities: string[] }) => (
 			defaultValues={{
 				note: '',
 				restocks: [
-					{ commodity: '', quantity: 0, unitPrice: 0, supplierName: '0', invoiceNumber: '' }
+					{
+						commodity: '',
+						quantity: 0,
+						unitPrice: 0,
+						supplierName: '0',
+						invoiceNumber: ''
+					}
 				]
 			}}
 			submitFn={createRestockServerAction}

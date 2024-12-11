@@ -1,12 +1,9 @@
 'use server';
-import { $Enums } from '@prisma/client';
 
 import generateRandomString from '@/server/utils';
 import { type RestockFormSchema } from '@/components/restocks/restock-form';
 
 import prisma from '../lib/prisma';
-
-import ProcessingType = $Enums.ProcessingType;
 
 export const getRestocks = async () =>
 	prisma.order.findMany({
@@ -36,7 +33,7 @@ export const createRestock = async (restock: RestockFormSchema) => {
 			supplierName: o.supplierName ?? undefined,
 			invoiceNumber: o.invoiceNumber ?? undefined,
 			authorId: users[users.length - 1].id,
-			date: new Date(),
-		  }))
+			date: new Date()
+		}))
 	});
 };
