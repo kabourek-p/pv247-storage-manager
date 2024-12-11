@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 import type { OrderFormSchema } from '@/components/form/orders/order-form';
 import { createOrder, editOrder, getOrder, getOrders } from '@/server/orders';
@@ -27,10 +28,7 @@ export const createOrderServerAction = async (order: OrderFormSchema) => {
 	return { error: false, message: 'Order successfully created!' };
 };
 
-export const editOrderServerAction = async (
-	order: OrderFormSchema
-) => {
-	console.log(order);
+export const editOrderServerAction = async (order: OrderFormSchema) => {
 	try {
 		await editOrder(order.id ?? -1, order);
 	} catch (e) {
@@ -48,8 +46,7 @@ export const editOrderServerAction = async (
 	}
 
 	revalidatePath('/orders');
-
-	return { error: false, message: 'Order successfully edited!' };
+	redirect(`/orders`);
 };
 
 export const getOrderRows = async (): Promise<OrderRow[]> => {

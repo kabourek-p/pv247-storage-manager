@@ -25,6 +25,7 @@ const CreateOrderForm = (props: { commodities: string[] }) => {
 					note: '',
 					orders: [
 						{
+							id: undefined,
 							commodity: '',
 							unitQuantity: 0,
 							unitPrice: 0,
