@@ -30,11 +30,12 @@ export const createOrderServerAction = async (order: OrderFormSchema) => {
 
 export const getOrderRows = async (): Promise<OrderRow[]> => {
 	const orders = await getOrders();
+	console.log(orders);
 	return orders.map(o => {
 		const numberOfElements = o.orderElements.length;
 		const totalPrice = o.orderElements
-			.map(e => e.unitPrice.e * e.numberOfUnits.e)
-			.reduce((a, c) => a + c, 0);
+			.map(e => +e.unitPrice * +e.numberOfUnits)
+			.reduce((sum, current) => sum + current, 0);
 		return {
 			id: o.id,
 			note: o.note,
