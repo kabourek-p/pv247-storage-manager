@@ -23,11 +23,71 @@ export const createOrder = async (order: OrderFormSchema) => {
 					},
 					processingNote: o.note,
 					processingType: ProcessingType.STRAIGHT,
-					unitLength: 0,
+					unitLength: o.unitQuantity,
 					numberOfUnits: o.numUnits,
 					unitPrice: o.unitPrice,
 					ticketNumber: undefined,
 					stockDispatches: undefined
+				}))
+			}
+		}
+	});
+};
+
+export const editOrder = async (
+	orderId: number,
+	updatedOrder: OrderFormSchema
+) => {
+	const existingOrder = await prisma.order.findUnique({
+		where: { id: orderId },
+		include: { orderElements: true }
+	});
+
+	if (!existingOrder) {
+		throw new Error('Order not found');
+	}
+
+	return prisma.order.update({
+		where: { id: orderId },
+		data: {
+			note: updatedOrder.note,
+			// author: {
+			// 	connect: { id: updatedOrder }
+			// },
+			orderElements: {
+				deleteMany: {
+					id: {
+						notIn: updatedOrder.orders
+							.map(o => (o.id ? o.id : -1))
+							.filter(Boolean)
+					}
+				},
+				upsert: updatedOrder.orders.map(o => ({
+					where: { id: o.id ?? -1 },
+					create: {
+						commodity: {
+							connect: { name: o.commodity }
+						},
+						processingNote: o.note,
+						processingType: ProcessingType.STRAIGHT,
+						unitLength: o.unitQuantity,
+						numberOfUnits: o.numUnits,
+						unitPrice: o.unitPrice,
+						ticketNumber: undefined,
+						stockDispatches: undefined
+					},
+					update: {
+						commodity: {
+							connect: { name: o.commodity }
+						},
+						processingNote: o.note,
+						processingType: ProcessingType.STRAIGHT,
+						unitLength: o.unitQuantity,
+						numberOfUnits: o.numUnits,
+						unitPrice: o.unitPrice,
+						ticketNumber: undefined,
+						stockDispatches: undefined
+					}
 				}))
 			}
 		}
@@ -42,10 +102,16 @@ export const getOrders = async () =>
 		}
 	});
 
-export const getOrderElements = async (id: number) =>
-	prisma.orderElement.findMany({
+export const getOrder = async (id: number) =>
+	prisma.order.findUnique({
 		where: {
-			orderId: id
+			id
 		},
-		include: { commodity: true }
+		include: {
+			orderElements: {
+				include: {
+					commodity: true
+				}
+			}
+		}
 	});

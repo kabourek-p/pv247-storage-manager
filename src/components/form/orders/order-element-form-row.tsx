@@ -12,10 +12,13 @@ import { Select } from '@/components/form/select';
 
 export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
-	quantity: z.coerce.number().positive('Quantity must be a positive number'),
+	unitQuantity: z.coerce
+		.number()
+		.positive('Quantity per unit must be a positive number'),
 	unitPrice: z.coerce.number().positive('Unit price must be a positive number'),
 	numUnits: z.coerce.number().positive('Units must be a positive number'),
-	note: z.string().optional()
+	note: z.string().optional(),
+	id: z.coerce.number().optional()
 });
 
 type OrderElementTableRowErrorSchema =
@@ -23,10 +26,10 @@ type OrderElementTableRowErrorSchema =
 			FieldError,
 			FieldErrorsImpl<{
 				commodity: string;
-				quantity: number;
 				unitPrice: number;
 				numUnits: number;
 				note: string;
+				unitQuantity: number;
 			}>
 	  >
 	| undefined;
@@ -49,11 +52,13 @@ const OrderElementFormRow = (props: {
 				error={props.errors?.commodity?.message}
 			/>
 		</td>
-
-		<td className="border border-gray-300 px-4 py-2" data-label="Quantity">
+		<td className="hidden border border-gray-300 px-4 py-2" data-label="Id">
+			<FormTextField name={`orders[${props.index}].id`} />
+		</td>
+		<td className="border border-gray-300 px-4 py-2" data-label="Unit Quantity">
 			<FormTextField
-				name={`orders[${props.index}].quantity`}
-				error={props.errors?.quantity?.message}
+				name={`orders[${props.index}].unitQuantity`}
+				error={props.errors?.unitQuantity?.message}
 			/>
 		</td>
 

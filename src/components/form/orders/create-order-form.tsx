@@ -24,7 +24,13 @@ const CreateOrderForm = (props: { commodities: string[] }) => {
 				defaultValues={{
 					note: '',
 					orders: [
-						{ commodity: '', quantity: 0, unitPrice: 0, numUnits: 0, note: '' }
+						{
+							commodity: '',
+							unitQuantity: 0,
+							unitPrice: 0,
+							numUnits: 0,
+							note: ''
+						}
 					]
 				}}
 				submitFn={createOrderServerAction}

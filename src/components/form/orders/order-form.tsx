@@ -13,17 +13,21 @@ import OrderElementFormRow, {
 	OrderElementTableRowSchema
 } from '@/components/form/orders/order-element-form-row';
 
-export type OrderFormProps = {
-	defaultValues: {
+export type OrderFormDefaultData = {
+	id?: number;
+	note: string;
+	orders: {
+		id: number | undefined;
+		commodity: string;
 		note: string;
-		orders: {
-			commodity: string;
-			note?: string;
-			numUnits: number;
-			quantity: number;
-			unitPrice: number;
-		}[];
-	};
+		numUnits: number;
+		unitQuantity: number;
+		unitPrice: number;
+	}[];
+};
+
+export type OrderFormProps = {
+	defaultValues: OrderFormDefaultData;
 	commodities: string[];
 	submitFn: (
 		data: OrderFormSchema
@@ -31,6 +35,7 @@ export type OrderFormProps = {
 };
 
 const orderSchema = z.object({
+	id: z.coerce.number().optional(),
 	note: z.string().min(3, 'Name must be at least 3 characters'),
 	orders: z.array(OrderElementTableRowSchema)
 });
@@ -45,6 +50,7 @@ const OrderForm = ({
 	const form = useForm<OrderFormSchema>({
 		resolver: zodResolver(orderSchema),
 		defaultValues: {
+			id: defaultValues.id,
 			note: defaultValues.note,
 			orders: defaultValues.orders
 		}
@@ -86,6 +92,13 @@ const OrderForm = ({
 								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
 							/>
+							<span className="hidden">
+								<FormTextField
+									name="id"
+									label="Id"
+									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
+								/>
+							</span>
 						</div>
 						<div className="bottom-0 right-0">
 							<Button
@@ -96,7 +109,7 @@ const OrderForm = ({
 										commodity: '',
 										note: '',
 										numUnits: 0,
-										quantity: 0,
+										unitQuantity: 0,
 										unitPrice: 0
 									})
 								}
