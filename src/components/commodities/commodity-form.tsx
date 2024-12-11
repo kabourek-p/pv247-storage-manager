@@ -4,10 +4,10 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import type { Unit } from '@prisma/client';
 
 import { FormTextField } from '@/components/Form/FormTextField';
 import { Button } from '@/components/ui/button';
-import { Unit } from '@prisma/client';
 
 export type CommodityFormProps = {
 	defaultValues: {
@@ -19,20 +19,17 @@ export type CommodityFormProps = {
 
 const commoditySchema = z.object({
 	name: z.string().min(3, 'Name must be at least 3 characters'),
-	unit: z.enum(["KG", "MM", "PIECE"])
+	unit: z.enum(['KG', 'MM', 'PIECE'])
 });
 
 export type CommodityFormSchema = z.infer<typeof commoditySchema>;
 
-const CommodityForm = ({
-	defaultValues,
-	submitFn
-}: CommodityFormProps) => {
+const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 	const form = useForm<CommodityFormSchema>({
 		resolver: zodResolver(commoditySchema),
 		defaultValues: {
 			name: defaultValues.name,
-			unit: defaultValues.unit as CommodityFormSchema['unit'],
+			unit: defaultValues.unit as CommodityFormSchema['unit']
 		}
 	});
 
@@ -54,7 +51,7 @@ const CommodityForm = ({
 							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.name
 									? 'border-red-600'
-								: 'border-gray-300'
+									: 'border-gray-300'
 							}`}
 						>
 							<FormTextField
@@ -69,14 +66,17 @@ const CommodityForm = ({
 							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.unit
 									? 'border-red-600'
-								: 'border-gray-300'
+									: 'border-gray-300'
 							}`}
 						>
-							<label htmlFor="unit" className="block text-sm font-medium text-gray-700">
+							<label
+								htmlFor="unit"
+								className="block text-sm font-medium text-gray-700"
+							>
 								Unit
 							</label>
 							<select
-								{...form.register("unit")}
+								{...form.register('unit')}
 								id="unit"
 								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
 							>

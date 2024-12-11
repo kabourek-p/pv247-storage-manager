@@ -6,10 +6,11 @@ import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Button } from '@/components/ui/button';
-import RestockElementHeader from './restock-element-header';
 import RestockElementRow, {
 	RestockElementTableRowSchema
 } from '@/components/restocks/restock-element-row';
+
+import RestockElementHeader from './restock-element-header';
 
 export type RestockFormProps = {
 	defaultValues: {
