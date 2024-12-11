@@ -5,6 +5,10 @@ import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
 
 export const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
+		accessorKey: 'id',
+		header: 'id'
+	},
+	{
 		accessorKey: 'note',
 		header: 'Identifier'
 	},
@@ -18,7 +22,17 @@ export const orderColumns: ColumnDef<OrderRow, string>[] = [
 	},
 	{
 		accessorKey: 'totalPrice',
-		header: 'Total Price'
+		header: 'Total Price',
+		cell: ({ row }) => {
+			const amount = parseFloat(row.getValue('totalPrice'));
+
+			const formatted = new Intl.NumberFormat('cs-CZ', {
+				style: 'currency',
+				currency: 'CZK'
+			}).format(amount);
+
+			return <div className="font-medium">{formatted}</div>;
+		}
 	},
 	{
 		accessorKey: 'authorName',
@@ -37,14 +51,24 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 	},
 	{
 		accessorKey: 'unitPrice',
-		header: 'Price per Unit'
-	},
-	{
-		accessorKey: 'note',
-		header: 'Identifier'
+		header: 'Price per Unit',
+		cell: ({ row }) => {
+			const amount = parseFloat(row.getValue('unitPrice'));
+
+			const formatted = new Intl.NumberFormat('cs-CZ', {
+				style: 'currency',
+				currency: 'CZK'
+			}).format(amount);
+
+			return <div className="font-medium">{formatted}</div>;
+		}
 	},
 	{
 		accessorKey: 'processingNote',
 		header: 'Note'
+	},
+	{
+		accessorKey: 'unitLength',
+		header: 'Lenght of Unit'
 	}
 ];

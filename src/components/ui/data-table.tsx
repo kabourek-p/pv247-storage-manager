@@ -47,11 +47,13 @@ const DataTable = <TData, TValue>({
 		getFilteredRowModel: getFilteredRowModel(),
 		state: {
 			columnFilters
+		},
+		initialState: {
+			columnVisibility: { id: false }
 		}
 	});
 
 	const handleRowClick = rowClickHandler ? rowClickHandler : (_: string) => {};
-
 	return (
 		<div>
 			{filter && (
@@ -93,7 +95,7 @@ const DataTable = <TData, TValue>({
 								<TableRow
 									key={row.id}
 									data-state={row.getIsSelected() && 'selected'}
-									onClick={() => handleRowClick(row.id)}
+									onClick={() => handleRowClick(row.getValue('id'))}
 								>
 									{row.getVisibleCells().map(cell => (
 										<TableCell
