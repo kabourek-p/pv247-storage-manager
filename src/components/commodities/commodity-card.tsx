@@ -14,11 +14,15 @@ const CommodityCard: React.FC<CommodityCardProps> = ({ name, quantity, unit, uni
   const formattedUnitPrice = unitPrice instanceof Decimal ? unitPrice.toString() : unitPrice;
 
   return (
-    <div className="bg-[#EFD5BE] p-10 w-64 h-64 flex items-start justify-start text-2xl font-medium text-black rounded-lg border border-black">
-      <div>{name}</div>
-      <div>{formattedQuantity}</div>
-      <div>{unit}</div>
-      <div>{formattedUnitPrice}</div>
+    <div className="bg-[#EFD5BE] p-6 w-64 h-64 flex flex-col justify-between items-center text-black rounded-lg border border-black">
+      <div className="text-lg font-semibold self-start">{name}</div>
+
+      <div className="flex items-center justify-center w-full flex-grow">
+        <div className="text-4xl font-bold">{formattedQuantity}</div>
+        <div className="text-xl font-medium ml-2">{unit}</div>
+      </div>
+
+      <div className="mt-4 text-xl font-normal text-gray-700 self-start">{formattedUnitPrice} Czk</div>
     </div>
   );
 };
