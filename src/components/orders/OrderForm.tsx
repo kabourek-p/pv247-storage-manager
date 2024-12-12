@@ -65,10 +65,11 @@ const OrderForm = ({
 				>
 					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
 						<div
-							className={`rounded border px-4 py-2 ${form.formState.errors?.note
+							className={`rounded border px-4 py-2 ${
+								form.formState.errors?.note
 									? 'border-red-600'
 									: 'border-gray-300'
-								}`}
+							}`}
 						>
 							<FormTextField
 								name="note"
@@ -79,7 +80,7 @@ const OrderForm = ({
 						</div>
 						<div className="absolute bottom-0 right-0">
 							<Button
-								className="bg-primary-dark mb-2 w-40"
+								className="mb-2 w-40 bg-primary-dark"
 								type="button"
 								onClick={() =>
 									append({
@@ -112,7 +113,7 @@ const OrderForm = ({
 						</tbody>
 					</table>
 
-					<Button className="bg-secondary-dark m-4" type="submit">
+					<Button className="m-4 bg-secondary-dark" type="submit">
 						Submit
 					</Button>
 				</form>

@@ -20,15 +20,15 @@ export const OrderElementTableRowSchema = z.object({
 
 type OrderElementTableRowErrorSchema =
 	| Merge<
-		FieldError,
-		FieldErrorsImpl<{
-			commodity: string;
-			quantity: number;
-			unitPrice: number;
-			numUnits: number;
-			note: string;
-		}>
-	>
+			FieldError,
+			FieldErrorsImpl<{
+				commodity: string;
+				quantity: number;
+				unitPrice: number;
+				numUnits: number;
+				note: string;
+			}>
+	  >
 	| undefined;
 
 const OrderElementFormRow = (props: {

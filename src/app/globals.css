@@ -3,14 +3,14 @@
 @tailwind utilities;
 
 :root {
-    --background: #ffffff;
-    --foreground: #171717;
-    --primary: #1e4173;
-    --primary-light: #a2b6d1;
-    --primary-dark: #0f2c4b;
-    --secondary: #c2834c;
-    --secondary-light: #efd5be;
-    --secondary-dark: #8e5f2d;
+	--background: #ffffff;
+	--foreground: #171717;
+	--primary: #1e4173;
+	--primary-light: #a2b6d1;
+	--primary-dark: #0f2c4b;
+	--secondary: #c2834c;
+	--secondary-light: #efd5be;
+	--secondary-dark: #8e5f2d;
 }
 
 /* TODO dark mode? */
@@ -20,51 +20,51 @@
 } */
 
 body {
-    color: var(--foreground);
-    background: var(--background);
-    font-family: Arial, Helvetica, sans-serif;
+	color: var(--foreground);
+	background: var(--background);
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 @media (max-width: 1350px) {
-    table {
-        width: 100%;
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
+	table {
+		width: 100%;
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
 
-    tbody,
-    tr,
-    td {
-        display: block;
-        width: 100%;
-    }
+	tbody,
+	tr,
+	td {
+		display: block;
+		width: 100%;
+	}
 
-    td {
-        text-align: right;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-    }
+	td {
+		text-align: right;
+		padding: 8px;
+		border-bottom: 1px solid #ddd;
+	}
 
-    td:before {
-        content: attr(data-label);
-        font-weight: bold;
-        padding-right: 8px;
-    }
+	td:before {
+		content: attr(data-label);
+		font-weight: bold;
+		padding-right: 8px;
+	}
 
-    tr:nth-child(odd) {
-        background-color: #f9fafb;
-    }
+	tr:nth-child(odd) {
+		background-color: #f9fafb;
+	}
 
-    tr:nth-child(even) {
-        background-color: #EFD5BE;
-    }
+	tr:nth-child(even) {
+		background-color: #efd5be;
+	}
 
-    tr {
-        border-bottom: 2px solid #333;
-    }
+	tr {
+		border-bottom: 2px solid #333;
+	}
 
-    th {
-        display: none;
-    }
+	th {
+		display: none;
+	}
 }
