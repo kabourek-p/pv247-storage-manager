@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { LoginForm } from '@/modules/user/components/login-form';
 
 const SignInPage = () => {
-	const [setProviders] = useState<any>(null);
+	const [setProviders] = useState<any>(null); // eslint-disable-line
 	const session = useSession();
 	console.log(session);
 
@@ -17,7 +17,7 @@ const SignInPage = () => {
 			setProviders(res);
 		};
 		fetchProviders();
-	}, []);
+	}, [setProviders]);
 
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-center bg-gray-100">

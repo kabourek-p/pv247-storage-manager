@@ -6,8 +6,8 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Unit } from '@prisma/client';
 
-import { FormTextField } from '@/components/Form/FormTextField';
 import { Button } from '@/components/ui/button';
+import { FormTextField } from '@/components/form/form-text-field';
 
 export type CommodityFormProps = {
 	defaultValues: {

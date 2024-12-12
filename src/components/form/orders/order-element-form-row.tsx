@@ -6,36 +6,39 @@ import {
 	type Merge
 } from 'react-hook-form';
 
-import TrashButton from '@/components/TrashButton';
+import TrashButton from '@/components/trash-button';
 import { FormTextField } from '@/components/form/form-text-field';
 import { Select } from '@/components/form/select';
 
-export const RestockElementTableRowSchema = z.object({
+export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
-	quantity: z.coerce.number().positive('Quantity must be a positive number'),
+	unitQuantity: z.coerce
+		.number()
+		.positive('Quantity per unit must be a positive number'),
 	unitPrice: z.coerce.number().positive('Unit price must be a positive number'),
-	supplierName: z.string().optional(),
-	invoiceNumber: z.string().optional()
+	numUnits: z.coerce.number().positive('Units must be a positive number'),
+	note: z.string().optional(),
+	id: z.coerce.number().optional()
 });
 
-type RestockElementTableRowErrorSchema =
+type OrderElementTableRowErrorSchema =
 	| Merge<
 			FieldError,
 			FieldErrorsImpl<{
 				commodity: string;
-				quantity: number;
 				unitPrice: number;
-				supplierName: string;
-				invoiceNumber: string;
+				numUnits: number;
+				note: string;
+				unitQuantity: number;
 			}>
 	  >
 	| undefined;
 
-const RestockElementRow = (props: {
+const OrderElementFormRow = (props: {
 	onClick: () => void;
 	index: number;
 	commodities: string[];
-	errors?: RestockElementTableRowErrorSchema;
+	errors?: OrderElementTableRowErrorSchema;
 }) => (
 	<tr className="hover:bg-gray-100">
 		<td className="justify-center border border-gray-300 p-1">
@@ -49,11 +52,13 @@ const RestockElementRow = (props: {
 				error={props.errors?.commodity?.message}
 			/>
 		</td>
-
-		<td className="border border-gray-300 px-4 py-2" data-label="Quantity">
+		<td className="hidden border border-gray-300 px-4 py-2" data-label="Id">
+			<FormTextField name={`orders[${props.index}].id`} />
+		</td>
+		<td className="border border-gray-300 px-4 py-2" data-label="Unit Quantity">
 			<FormTextField
-				name={`orders[${props.index}].quantity`}
-				error={props.errors?.quantity?.message}
+				name={`orders[${props.index}].unitQuantity`}
+				error={props.errors?.unitQuantity?.message}
 			/>
 		</td>
 
@@ -73,16 +78,16 @@ const RestockElementRow = (props: {
 		>
 			<FormTextField
 				name={`orders[${props.index}].numUnits`}
-				error={props.errors?.supplierName?.message}
+				error={props.errors?.numUnits?.message}
 			/>
 		</td>
 
 		<td className="border border-gray-300 px-4 py-2" data-label="Note">
 			<FormTextField
 				name={`orders[${props.index}].note`}
-				error={props.errors?.invoiceNumber?.message}
+				error={props.errors?.note?.message}
 			/>
 		</td>
 	</tr>
 );
-export default RestockElementRow;
+export default OrderElementFormRow;
