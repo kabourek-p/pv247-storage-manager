@@ -72,7 +72,7 @@ const OrderForm = ({
 
 	console.log(form.formState.errors?.note?.message);
 	return (
-		<div className="flex p-4">
+		<div className="flex px-4">
 			<FormProvider {...form}>
 				<form
 					className="w-full space-x-2"
@@ -122,7 +122,7 @@ const OrderForm = ({
 					<table className="w-full table-auto border-collapse border border-gray-300">
 						<OrderElementHeader />
 
-						<tbody className="divide-y divide-gray-200">
+						<tbody className="">
 							{fields.map((field, index) => (
 								<OrderElementFormRow
 									commodities={commodities}

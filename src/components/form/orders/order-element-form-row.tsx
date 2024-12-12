@@ -41,21 +41,21 @@ const OrderElementFormRow = (props: {
 	errors?: OrderElementTableRowErrorSchema;
 }) => (
 	<tr className="hover:bg-gray-100">
-		<td className="justify-center border border-gray-300 p-1">
+		<td className="border border-gray-300 text-center">
 			<TrashButton type="button" onClick={props.onClick} />
 		</td>
 
-		<td className="border border-gray-300 px-4 py-2" data-label="Commodity">
+		<td className="border border-gray-300 py-2" data-label="Commodity">
 			<Select
 				options={props.commodities}
 				name={`orders[${props.index}].commodity`}
 				error={props.errors?.commodity?.message}
 			/>
 		</td>
-		<td className="hidden border border-gray-300 px-4 py-2" data-label="Id">
+		<td className="hidden border border-gray-300 py-4" data-label="Id">
 			<FormTextField name={`orders[${props.index}].id`} />
 		</td>
-		<td className="border border-gray-300 px-4 py-2" data-label="Unit Quantity">
+		<td className="border border-gray-300 py-2" data-label="Unit Quantity">
 			<FormTextField
 				name={`orders[${props.index}].unitQuantity`}
 				error={props.errors?.unitQuantity?.message}
@@ -63,7 +63,7 @@ const OrderElementFormRow = (props: {
 		</td>
 
 		<td
-			className="border border-gray-300 px-4 py-2"
+			className="border border-gray-300 py-2"
 			data-label="Price per unit"
 		>
 			<FormTextField
@@ -73,7 +73,7 @@ const OrderElementFormRow = (props: {
 		</td>
 
 		<td
-			className="border border-gray-300 px-4 py-2"
+			className="border border-gray-300 py-2"
 			data-label="Number of Units"
 		>
 			<FormTextField
@@ -82,7 +82,7 @@ const OrderElementFormRow = (props: {
 			/>
 		</td>
 
-		<td className="border border-gray-300 px-4 py-2" data-label="Note">
+		<td className="border border-gray-300 py-2" data-label="Note">
 			<FormTextField
 				name={`orders[${props.index}].note`}
 				error={props.errors?.note?.message}
