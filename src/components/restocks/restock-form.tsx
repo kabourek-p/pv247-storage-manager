@@ -4,6 +4,7 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import RestockElementRow, {
@@ -11,7 +12,6 @@ import RestockElementRow, {
 } from '@/components/restocks/restock-element-row';
 
 import RestockElementHeader from './restock-element-header';
-import { redirect } from 'next/navigation';
 
 export type RestockFormProps = {
 	defaultValues: {
