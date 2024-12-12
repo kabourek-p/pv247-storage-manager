@@ -1,8 +1,14 @@
 import { z } from 'zod';
 
 export const loginFormSchema = z.object({
-	username: z.string().min(1, { message: 'Username is required' }),
-	password: z.string().min(1, { message: 'Password is required' })
+	email: z
+		.string({ required_error: 'Email is required' })
+		.min(1, 'Email is required')
+		.email('Invalid email'),
+	password: z
+		.string({ required_error: 'Password is required' })
+		.min(1, 'Password is required')
+		.max(32, 'Password must be less than 32 characters')
 });
 
 export type LoginFormSchema = z.infer<typeof loginFormSchema>;

@@ -1,34 +1,18 @@
 import { useMutation } from '@tanstack/react-query';
-
-import { useLoggedInUser } from '@/context/logged-in-user';
-
-import { userSchema } from '../../schema';
+import { signIn } from 'next-auth/react';
 
 import { type LoginFormSchema } from './schema';
 
-export const useLoginMutation = () => {
-	const { setUser } = useLoggedInUser();
-
-	return useMutation({
+export const useLoginMutation = () =>
+	useMutation({
 		mutationFn: async (data: LoginFormSchema) => {
-			const response = await fetch('/api/login', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify(data)
+			const response = await signIn('credentials', {
+				...data,
+				redirect: false
 			});
-
-			const json = await response.json();
-
-			if (!response.ok) {
-				throw new Error(json.error);
+			if (response?.error) {
+				throw new Error(response?.error);
 			}
-
-			return userSchema.parse(json);
-		},
-		onSuccess: user => {
-			setUser(user);
+			return response;
 		}
 	});
-};

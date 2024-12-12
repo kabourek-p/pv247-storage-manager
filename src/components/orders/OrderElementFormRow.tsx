@@ -7,8 +7,8 @@ import {
 } from 'react-hook-form';
 
 import TrashButton from '@/components/TrashButton';
-import { FormTextField } from '@/components/Form/FormTextField';
-import { Select } from '@/components/Form/Select';
+import { FormTextField } from '@/components/form/FormTextField';
+import { Select } from '@/components/form/Select';
 
 export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
@@ -20,15 +20,15 @@ export const OrderElementTableRowSchema = z.object({
 
 type OrderElementTableRowErrorSchema =
 	| Merge<
-			FieldError,
-			FieldErrorsImpl<{
-				commodity: string;
-				quantity: number;
-				unitPrice: number;
-				numUnits: number;
-				note: string;
-			}>
-	  >
+		FieldError,
+		FieldErrorsImpl<{
+			commodity: string;
+			quantity: number;
+			unitPrice: number;
+			numUnits: number;
+			note: string;
+		}>
+	>
 	| undefined;
 
 const OrderElementFormRow = (props: {

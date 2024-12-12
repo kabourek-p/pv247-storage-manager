@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
-import { FormTextField } from '@/components/Form/FormTextField';
+import { FormTextField } from '@/components/form/FormTextField';
 import { Button } from '@/components/ui/button';
 import OrderElementHeader from '@/components/orders/OrderElementHeader';
 import OrderElementFormRow, {
@@ -65,11 +65,10 @@ const OrderForm = ({
 				>
 					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
 						<div
-							className={`rounded border px-4 py-2 ${
-								form.formState.errors?.note
+							className={`rounded border px-4 py-2 ${form.formState.errors?.note
 									? 'border-red-600'
 									: 'border-gray-300'
-							}`}
+								}`}
 						>
 							<FormTextField
 								name="note"
@@ -80,7 +79,7 @@ const OrderForm = ({
 						</div>
 						<div className="absolute bottom-0 right-0">
 							<Button
-								className="mb-2 w-40 bg-primary-dark"
+								className="bg-primary-dark mb-2 w-40"
 								type="button"
 								onClick={() =>
 									append({
@@ -113,7 +112,7 @@ const OrderForm = ({
 						</tbody>
 					</table>
 
-					<Button className="m-4 bg-secondary-dark" type="submit">
+					<Button className="bg-secondary-dark m-4" type="submit">
 						Submit
 					</Button>
 				</form>
