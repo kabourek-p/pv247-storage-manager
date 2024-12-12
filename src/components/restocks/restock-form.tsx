@@ -11,6 +11,7 @@ import RestockElementRow, {
 } from '@/components/restocks/restock-element-row';
 
 import RestockElementHeader from './restock-element-header';
+import { redirect } from 'next/navigation';
 
 export type RestockFormProps = {
 	defaultValues: {
@@ -52,6 +53,7 @@ const RestockForm = ({
 	const onSubmit = async (values: RestockFormSchema) => {
 		console.log('data', values);
 		await submitFn(values);
+		redirect('/restocks');
 	};
 	return (
 		<div className="flex p-4">

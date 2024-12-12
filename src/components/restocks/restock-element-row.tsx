@@ -14,8 +14,8 @@ export const RestockElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
 	quantity: z.coerce.number().positive('Quantity must be a positive number'),
 	unitPrice: z.coerce.number().positive('Unit price must be a positive number'),
-	supplierName: z.string().optional(),
-	invoiceNumber: z.string().optional()
+	supplierName: z.string().min(1, 'Supplier name is required'),
+	invoiceNumber: z.string().min(1, 'Invoice number is required')
 });
 
 type RestockElementTableRowErrorSchema =
@@ -45,14 +45,14 @@ const RestockElementRow = (props: {
 		<td className="border border-gray-300 px-4 py-2" data-label="Commodity">
 			<Select
 				options={props.commodities}
-				name={`orders[${props.index}].commodity`}
+				name={`restocks[${props.index}].commodity`}
 				error={props.errors?.commodity?.message}
 			/>
 		</td>
 
 		<td className="border border-gray-300 px-4 py-2" data-label="Quantity">
 			<FormTextField
-				name={`orders[${props.index}].quantity`}
+				name={`restocks[${props.index}].quantity`}
 				error={props.errors?.quantity?.message}
 			/>
 		</td>
@@ -62,7 +62,7 @@ const RestockElementRow = (props: {
 			data-label="Price per unit"
 		>
 			<FormTextField
-				name={`orders[${props.index}].unitPrice`}
+				name={`restocks[${props.index}].unitPrice`}
 				error={props.errors?.unitPrice?.message}
 			/>
 		</td>
@@ -72,14 +72,14 @@ const RestockElementRow = (props: {
 			data-label="Number of Units"
 		>
 			<FormTextField
-				name={`orders[${props.index}].numUnits`}
+				name={`restocks[${props.index}].supplierName`}
 				error={props.errors?.supplierName?.message}
 			/>
 		</td>
 
 		<td className="border border-gray-300 px-4 py-2" data-label="Note">
 			<FormTextField
-				name={`orders[${props.index}].note`}
+				name={`restocks[${props.index}].invoiceNumber`}
 				error={props.errors?.invoiceNumber?.message}
 			/>
 		</td>
