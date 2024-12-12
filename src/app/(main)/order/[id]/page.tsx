@@ -4,6 +4,7 @@ import DataTable from '@/components/ui/data-table';
 import { orderElementColumns } from '@/components/orders/order-table-columns';
 import { getOrderData, getOrderElementRows } from '@/server-actions/orders';
 import EditOrderButton from '@/components/orders/edit-order-button';
+import LockOrderButton from '@/components/orders/lock-order-button';
 
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 	const { id } = await params;
@@ -14,8 +15,9 @@ const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 			<div>
 				<h2 className="text-4xl">Details of order: {order?.note}</h2>
 			</div>
-			<div>
+			<div className="flex space-x-3">
 				<EditOrderButton id={id} />
+				<LockOrderButton id={id} />
 			</div>
 			<DataTable data={data} columns={orderElementColumns} filter={false} />
 		</div>

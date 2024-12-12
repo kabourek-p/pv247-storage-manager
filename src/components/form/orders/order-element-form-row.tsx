@@ -62,20 +62,14 @@ const OrderElementFormRow = (props: {
 			/>
 		</td>
 
-		<td
-			className="border border-gray-300 py-2"
-			data-label="Price per unit"
-		>
+		<td className="border border-gray-300 py-2" data-label="Price per unit">
 			<FormTextField
 				name={`orders[${props.index}].unitPrice`}
 				error={props.errors?.unitPrice?.message}
 			/>
 		</td>
 
-		<td
-			className="border border-gray-300 py-2"
-			data-label="Number of Units"
-		>
+		<td className="border border-gray-300 py-2" data-label="Number of Units">
 			<FormTextField
 				name={`orders[${props.index}].numUnits`}
 				error={props.errors?.numUnits?.message}

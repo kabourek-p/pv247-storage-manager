@@ -4,7 +4,17 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import type { OrderFormSchema } from '@/components/form/orders/order-form';
-import { createOrder, editOrder, getOrder, getOrders } from '@/server/orders';
+import {
+	createOrder,
+	editOrder,
+	getOrder,
+	getOrders,
+	getRestockData
+} from '@/server/orders';
+import {
+	createStockDispatches,
+	type StockDispatch
+} from '@/server/stock-dispatch';
 
 export const createOrderServerAction = async (order: OrderFormSchema) => {
 	try {
@@ -105,6 +115,38 @@ export const getOrderData = async (
 			unitPrice: e.unitPrice.toNumber()
 		}))
 	};
+};
+
+export const lockOrderServerAction = async (id: number) => {
+	console.log(id);
+	const order = await getOrder(id);
+	const orderElements = order ? order.orderElements : [];
+	let newDispatches: StockDispatch[] = [];
+	for (const e of orderElements) {
+		console.log(e);
+		let leftToProcess = e.unitLength.toNumber() * e.numberOfUnits.toNumber();
+		const restocks = await getRestockData(e.commodity.name);
+		for (const restock of restocks) {
+			console.log(restock);
+			const available = restock.quantity - restock.taken;
+			const taken = available >= leftToProcess ? leftToProcess : available;
+			leftToProcess = leftToProcess - taken;
+			console.log(`Taken: ${taken}`);
+			const newDispatch = {
+				orderElementId: e.id,
+				quantity: taken,
+				restockId: restock.id
+			};
+			newDispatches = [newDispatch, ...newDispatches];
+			if (leftToProcess === 0) {
+				break;
+			}
+		}
+		if (leftToProcess !== 0) {
+			throw Error('Insufficient commodity in stock to satisfy order!');
+		}
+	}
+	await createStockDispatches(newDispatches);
 };
 
 export type OrderRow = {
