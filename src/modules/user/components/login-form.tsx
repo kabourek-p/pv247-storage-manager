@@ -1,41 +1,46 @@
+'use client';
+
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 import { FormInput } from '@/components/form/form-input';
 import { SubmitButton } from '@/components/form/submit-button';
 
-import { loginFormSchema, type LoginFormSchema } from './schema';
-import { useLoginMutation } from './hooks';
+import { useLoginMutation } from '../hooks';
+import { loginFormSchema, type LoginFormSchema } from '../schema';
 
 export const LoginForm = () => {
 	const mutation = useLoginMutation();
+	const router = useRouter();
 
 	const form = useForm<LoginFormSchema>({
 		resolver: zodResolver(loginFormSchema)
 	});
 
-	const onSubmit = (values: LoginFormSchema) =>
+	const onSubmit = (values: LoginFormSchema) => {
 		mutation.mutate(values, {
-			onSuccess: user => {
-				toast.success(`Logged in as ${user.email}`);
+			onSuccess: () => {
+				toast.success(`Logged in successfully!`);
+				router.push('/');
 			},
-			onError: error => {
-				toast.error(error.message);
+			onError: () => {
+				toast.error('Invalid credentials');
 			}
 		});
+	};
 
 	return (
 		<FormProvider {...form}>
 			<form
 				onSubmit={form.handleSubmit(onSubmit)}
-				className="flex w-full flex-col gap-y-4 md:w-1/2 lg:w-1/3"
+				className="flex w-full flex-col gap-4"
 			>
-				<FormInput label="Username" name="username" />
+				<FormInput label="Email" name="email" />
 				<FormInput label="Password" type="password" name="password" />
-
-				<div className="mt-2">
-					<SubmitButton isLoading={mutation.isPending}>Log In </SubmitButton>
+				<div className="my-2">
+					<SubmitButton>Log In</SubmitButton>
 				</div>
 			</form>
 		</FormProvider>

@@ -80,7 +80,7 @@ export const getOrderRows = async (): Promise<OrderRow[]> => {
 			}).format(new Date(o.date)),
 			numberOfElements,
 			totalPrice,
-			authorName: `${o.author.name} ${o.author.surname}`
+			authorName: `${o.author.firstName} ${o.author.lastName}`
 		};
 	});
 };
