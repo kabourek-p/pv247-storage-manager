@@ -17,7 +17,7 @@ const SignInPage = async () => {
 			<div className="w-full max-w-sm rounded-lg bg-white p-6 sm:shadow-md">
 				<div className="flex flex-col items-center">
 					<Image
-						src="/static/img/logo.png"
+						src="/static/img/logo-new.png"
 						width={150}
 						height={150}
 						alt="Logo"

@@ -21,7 +21,7 @@ const MainLayout = async ({
 				<div className="self-center">
 					<Image
 						className="rounded-md"
-						src="/static/img/logo.png"
+						src="/static/img/logo-white-orange.png"
 						width={60}
 						height={60}
 						alt="logo"
