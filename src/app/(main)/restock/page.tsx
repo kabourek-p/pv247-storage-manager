@@ -1,17 +1,19 @@
-import { Providers } from '@/app/providers';
 import CreateRestockForm from '@/components/restocks/create-restock-form';
+import { Card } from '@/components/ui/card';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 
-const Page = async () => {
+const RestockPage = async () => {
 	const commodities = await getAvailableCommodities();
 	return (
-		<Providers>
-			<h2 className="text-4xl">Register new restock</h2>
-			<CreateRestockForm
-				commodities={commodities.map(commodity => commodity.name)}
-			/>
-		</Providers>
+		<div className="p-4">
+			<Card>
+				<h2 className="text-4xl">Register new restock</h2>
+				<CreateRestockForm
+					commodities={commodities.map(commodity => commodity.name)}
+				/>
+			</Card>
+		</div>
 	);
 };
 
-export default Page;
+export default RestockPage;

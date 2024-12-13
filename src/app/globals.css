@@ -6,7 +6,7 @@
 	--background: #ffffff;
 	--foreground: #171717;
 	--primary: #1e4173;
-	--primary-light: #a2b6d1;
+	--primary-light: #accdee;
 	--primary-dark: #0f2c4b;
 	--secondary: #c2834c;
 	--secondary-light: #efd5be;
@@ -26,12 +26,12 @@ body {
 }
 
 @media (max-width: 1152px) {
-    table {
-        width: 100%;
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
-    }
+	table {
+		width: 100%;
+		display: block;
+		overflow-x: auto;
+		white-space: nowrap;
+	}
 
 	tbody,
 	tr,
@@ -40,11 +40,11 @@ body {
 		width: 100%;
 	}
 
-    td {
-        text-align: left;
-        padding: 8px;
-        border-bottom: 1px solid #ddd;
-    }
+	td {
+		text-align: left;
+		padding: 8px;
+		border-bottom: 1px solid #ddd;
+	}
 
 	td:before {
 		content: attr(data-label);
@@ -64,7 +64,7 @@ body {
 		border-bottom: 2px solid #333;
 	}
 
-    th {
-        display: none;
-    }
+	th {
+		display: none;
+	}
 }

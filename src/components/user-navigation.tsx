@@ -5,7 +5,7 @@ import { Button } from './ui/button';
 
 const UserNavigation = () => (
 	<div className="self-center">
-		<Button className="" onClick={() => signOut()}>
+		<Button colorType="secondary" onClick={() => signOut()}>
 			Log out
 		</Button>
 	</div>
