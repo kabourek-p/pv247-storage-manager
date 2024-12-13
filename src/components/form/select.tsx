@@ -25,7 +25,7 @@ export const Select = ({
 	return (
 		<div className="flex flex-col space-x-2">
 			{label && (
-				<label className="p-2" htmlFor={name}>
+				<label className="py-2" htmlFor={name}>
 					{label}
 				</label>
 			)}

@@ -2,17 +2,16 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
-import { auth } from '@/lib/auth';
 import { OtherLoginOptions } from '@/components/login/other-login-options';
 import { LoginSignupRedirect } from '@/components/login/login-signup-redirect';
 import { LoginForm } from '@/modules/user/components/login-form';
+import { auth } from '@/lib/auth';
 
 const SignInPage = async () => {
 	const session = await auth();
 	if (session?.user) {
 		return redirect('/');
 	}
-
 	return (
 		<main className="flex min-h-screen flex-col items-center justify-center bg-white sm:bg-gray-100">
 			<div className="w-full max-w-sm rounded-lg bg-white p-6 sm:shadow-md">
@@ -42,5 +41,4 @@ const SignInPage = async () => {
 		</main>
 	);
 };
-
 export default SignInPage;

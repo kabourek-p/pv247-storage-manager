@@ -9,9 +9,9 @@ const TrashButton = ({
 }: PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>) => (
 	<Button
 		{...props}
-		className={`flex h-6 w-6 justify-center rounded bg-red-800 ${className}`}
+		className={`flexjustify-center rounded bg-red-800 ${className}`}
 	>
-		<FaTrash className="h-4 w-4" />
+		<FaTrash />
 	</Button>
 );
 
