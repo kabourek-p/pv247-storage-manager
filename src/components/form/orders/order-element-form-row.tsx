@@ -46,7 +46,10 @@ const OrderElementFormRow = (props: {
 			<TrashButton type="button" onClick={props.onClick} />
 		</TableCell>
 
-		<TableCell className="border border-gray-300 py-2" data-label="Commodity">
+		<TableCell
+			className="w-2/6 border border-gray-300 py-2"
+			data-label="Commodity"
+		>
 			<Select
 				options={props.commodities}
 				name={`orders[${props.index}].commodity`}
@@ -86,7 +89,7 @@ const OrderElementFormRow = (props: {
 			/>
 		</TableCell>
 
-		<TableCell className="border border-gray-300 py-2" data-label="Note">
+		<TableCell className="w-2/8 border border-gray-300 py-2" data-label="Note">
 			<FormTextField
 				name={`orders[${props.index}].note`}
 				error={props.errors?.note?.message}
