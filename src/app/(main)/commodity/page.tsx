@@ -1,11 +1,13 @@
-import { Providers } from '@/app/providers';
 import CreateCommodityForm from '@/components/commodities/create-commodity-form';
+import { Card } from '@/components/ui/card';
 
-const Page = async () => (
-	<Providers>
+const CommodityPage = async () => (
+	<div className="p-4">
 		<h2 className="text-4xl">Create new commodity</h2>
-		<CreateCommodityForm />
-	</Providers>
+		<Card>
+			<CreateCommodityForm />
+		</Card>
+	</div>
 );
 
-export default Page;
+export default CommodityPage;

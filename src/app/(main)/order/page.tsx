@@ -1,17 +1,16 @@
-import { Providers } from '@/app/providers';
 import CreateOrderForm from '@/components/form/orders/create-order-form';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 
-const Page = async () => {
+const OrderPage = async () => {
 	const commodities = await getAvailableCommodities();
 	return (
-		<Providers>
-			<h2 className="text-4xl">Create new order</h2>
+		<div className="p-4">
+			<h2 className="mb-4 text-4xl">Create new order</h2>
 			<CreateOrderForm
 				commodities={commodities.map(commodity => commodity.name)}
 			/>
-		</Providers>
+		</div>
 	);
 };
 
-export default Page;
+export default OrderPage;

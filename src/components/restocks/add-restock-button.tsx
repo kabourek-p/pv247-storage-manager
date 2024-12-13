@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 const AddRestockButton = () => (
 	<div>
 		<Button
-			className="mb-2 w-40 bg-primary-dark"
+			className="mb-2 w-40"
 			type="button"
 			onClick={() => redirect('/restock')}
 		>

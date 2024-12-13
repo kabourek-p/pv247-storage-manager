@@ -16,7 +16,7 @@ export const Navigation = () => {
 
 	return (
 		<nav className="">
-			<ul className="container flex gap-x-6 py-4">
+			<ul className="container flex gap-x-6 py-4 text-gray-200">
 				{Object.entries(urlMapping).map(([url, caption]) => (
 					<NavItem
 						key={url}

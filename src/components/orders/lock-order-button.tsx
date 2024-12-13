@@ -10,9 +10,10 @@ const LockOrderButton = ({ order }: { order: OrderData }) => (
 		<Button
 			className={`mb-2 w-40 ${
 				order?.invoice !== null
-					? 'cursor-not-allowed bg-secondary-light hover:bg-secondary-light'
-					: 'cursor-pointer bg-secondary-dark hover:bg-secondary-light'
+					? 'cursor-not-allowed bg-secondary-light hover:bg-secondary-light active:scale-100'
+					: 'cursor-pointer'
 			}`}
+			colorType="secondary"
 			type="button"
 			disabled={order?.invoice !== null}
 			onClick={() => lockOrderServerAction(order.id)}

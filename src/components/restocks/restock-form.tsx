@@ -65,7 +65,7 @@ const RestockForm = ({
 					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
 						<div className="absolute bottom-0 right-0">
 							<Button
-								className="mb-2 w-40 bg-primary-dark"
+								className="mb-2 w-40"
 								type="button"
 								onClick={() =>
 									append({
@@ -77,7 +77,7 @@ const RestockForm = ({
 									})
 								}
 							>
-								Add field
+								Add item
 							</Button>
 						</div>
 					</div>
@@ -98,7 +98,7 @@ const RestockForm = ({
 						</tbody>
 					</table>
 
-					<Button className="m-4 bg-secondary-dark" type="submit">
+					<Button colorType="secondary" className="m-4" type="submit">
 						Submit
 					</Button>
 				</form>

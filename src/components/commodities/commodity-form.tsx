@@ -94,7 +94,7 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 						</div>
 					</div>
 
-					<Button className="m-4 bg-secondary-dark" type="submit">
+					<Button colorType="secondary" className="m-4" type="submit">
 						Submit
 					</Button>
 				</form>

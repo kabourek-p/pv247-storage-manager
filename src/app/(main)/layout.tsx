@@ -16,10 +16,16 @@ const MainLayout = async ({
 	}
 	return (
 		<>
-			<header className="flex justify-between bg-primary-light px-4 shadow-md">
+			<header className="flex justify-between bg-primary-dark px-4 shadow-md">
 				{/* TODO mobile version */}
 				<div className="self-center">
-					<Image src="/static/img/logo.png" width={60} height={60} alt="logo" />
+					<Image
+						className="rounded-md"
+						src="/static/img/logo.png"
+						width={60}
+						height={60}
+						alt="logo"
+					/>
 				</div>
 				<Navigation />
 				<UserNavigation />

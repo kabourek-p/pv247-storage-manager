@@ -1,11 +1,14 @@
 'use server';
 
-import { Providers } from '@/app/providers';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 import EditOrderForm from '@/components/form/orders/edit-order-form';
 import { getOrderData } from '@/server-actions/orders';
 
-const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
+const OrderEditPage = async ({
+	params
+}: {
+	params: Promise<{ id: number }>;
+}) => {
 	const { id } = await params;
 	const commodities = await getAvailableCommodities();
 	const orderData = await getOrderData(+id);
@@ -13,14 +16,14 @@ const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 		throw new Error();
 	}
 	return (
-		<Providers>
+		<div className="p-4">
 			<h2 className="text-4xl">Edit order</h2>
 			<EditOrderForm
 				defaultValues={orderData}
 				commodities={commodities.map(commodity => commodity.name)}
 			/>
-		</Providers>
+		</div>
 	);
 };
 
-export default Page;
+export default OrderEditPage;

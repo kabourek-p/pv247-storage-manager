@@ -102,7 +102,7 @@ const OrderForm = ({
 						</div>
 						<div className="bottom-0 right-0">
 							<Button
-								className="mb-2 w-40 bg-primary-dark"
+								className="mb-2 w-40"
 								type="button"
 								onClick={() =>
 									append({
@@ -114,7 +114,7 @@ const OrderForm = ({
 									})
 								}
 							>
-								Add field
+								Add item
 							</Button>
 						</div>
 					</div>
@@ -135,7 +135,7 @@ const OrderForm = ({
 						</tbody>
 					</table>
 
-					<Button className="m-4 bg-secondary-dark" type="submit">
+					<Button colorType="secondary" className="m-4" type="submit">
 						Submit
 					</Button>
 				</form>

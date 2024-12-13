@@ -11,8 +11,8 @@ const EditOrderButton = ({ order }: { order: OrderData | undefined }) => (
 		<Button
 			className={`mb-2 w-40 ${
 				order?.invoice !== null
-					? 'cursor-not-allowed bg-primary-light hover:bg-primary-light'
-					: 'cursor-pointer bg-primary-dark hover:bg-primary-light'
+					? 'cursor-not-allowed bg-primary-light hover:bg-primary-light active:scale-100'
+					: 'cursor-pointer'
 			}`}
 			type="button"
 			disabled={order?.invoice !== null}
