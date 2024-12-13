@@ -108,6 +108,7 @@ export const getOrder = async (id: number) =>
 			id: +id
 		},
 		include: {
+			invoices: true,
 			orderElements: {
 				include: {
 					commodity: true,
