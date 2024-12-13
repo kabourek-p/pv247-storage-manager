@@ -1,20 +1,28 @@
 import React from 'react';
 
+import { TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
 const OrderElementHeader = () => (
-	<thead className="bg-primary-light font-bold">
-		<tr>
-			<th className="1/22 border border-gray-300 bg-white px-4 py-2" />
-			<th className="w-fit border border-gray-300 px-4 py-2">Commodity</th>
-			<th className="w-fit border border-gray-300 px-4 py-2">
+	<TableHeader className="bg-primary-light font-bold">
+		<TableRow>
+			<TableHead className="1/22b border-gray-300 px-4 py-2" />
+			<TableHead className="w-fit border-l border-r px-4 py-2">
+				Commodity
+			</TableHead>
+			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2">
 				Quantity Per Unit
-			</th>
-			<th className="w-fit border border-gray-300 px-4 py-2">Unit Price</th>
-			<th className="w-fit border border-gray-300 px-4 py-2">
+			</TableHead>
+			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2">
+				Unit Price
+			</TableHead>
+			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2">
 				Number of Units
-			</th>
-			<th className="w-1/4 border border-gray-300 px-4 py-2">Note</th>
-		</tr>
-	</thead>
+			</TableHead>
+			<TableHead className="w-1/4 border-l border-gray-300 px-4 py-2">
+				Note
+			</TableHead>
+		</TableRow>
+	</TableHeader>
 );
 
 export default OrderElementHeader;

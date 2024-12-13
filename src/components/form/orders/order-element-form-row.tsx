@@ -9,6 +9,7 @@ import {
 import TrashButton from '@/components/trash-button';
 import { FormTextField } from '@/components/form/form-text-field';
 import { Select } from '@/components/form/select';
+import { TableCell, TableRow } from '@/components/ui/table';
 
 export const OrderElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
@@ -40,48 +41,57 @@ const OrderElementFormRow = (props: {
 	commodities: string[];
 	errors?: OrderElementTableRowErrorSchema;
 }) => (
-	<tr className="hover:bg-gray-100">
-		<td className="border border-gray-300 text-center">
+	<TableRow className="hover:bg-gray-100">
+		<TableCell className="border border-gray-300 text-center">
 			<TrashButton type="button" onClick={props.onClick} />
-		</td>
+		</TableCell>
 
-		<td className="border border-gray-300 py-2" data-label="Commodity">
+		<TableCell className="border border-gray-300 py-2" data-label="Commodity">
 			<Select
 				options={props.commodities}
 				name={`orders[${props.index}].commodity`}
 				error={props.errors?.commodity?.message}
 			/>
-		</td>
-		<td className="hidden border border-gray-300 py-4" data-label="Id">
+		</TableCell>
+		<TableCell className="hidden" data-label="Id">
 			<FormTextField name={`orders[${props.index}].id`} />
-		</td>
-		<td className="border border-gray-300 py-2" data-label="Unit Quantity">
+		</TableCell>
+		<TableCell
+			className="border border-gray-300 py-2"
+			data-label="Unit Quantity"
+		>
 			<FormTextField
 				name={`orders[${props.index}].unitQuantity`}
 				error={props.errors?.unitQuantity?.message}
 			/>
-		</td>
+		</TableCell>
 
-		<td className="border border-gray-300 py-2" data-label="Price per unit">
+		<TableCell
+			className="border border-gray-300 py-2"
+			data-label="Price per unit"
+		>
 			<FormTextField
 				name={`orders[${props.index}].unitPrice`}
 				error={props.errors?.unitPrice?.message}
 			/>
-		</td>
+		</TableCell>
 
-		<td className="border border-gray-300 py-2" data-label="Number of Units">
+		<TableCell
+			className="border border-gray-300 py-2"
+			data-label="Number of Units"
+		>
 			<FormTextField
 				name={`orders[${props.index}].numUnits`}
 				error={props.errors?.numUnits?.message}
 			/>
-		</td>
+		</TableCell>
 
-		<td className="border border-gray-300 py-2" data-label="Note">
+		<TableCell className="border border-gray-300 py-2" data-label="Note">
 			<FormTextField
 				name={`orders[${props.index}].note`}
 				error={props.errors?.note?.message}
 			/>
-		</td>
-	</tr>
+		</TableCell>
+	</TableRow>
 );
 export default OrderElementFormRow;

@@ -12,6 +12,7 @@ import OrderElementHeader from '@/components/form/orders/order-element-header';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
 } from '@/components/form/orders/order-element-form-row';
+import { Table, TableBody } from '@/components/ui/table';
 
 export type OrderFormDefaultData = {
 	id?: number;
@@ -114,26 +115,27 @@ const OrderForm = ({
 									})
 								}
 							>
-								Add item
+								Add row
 							</Button>
 						</div>
 					</div>
+					<div className="overflow-hidden rounded-md border">
+						<Table className="w-full table-auto border-collapse border border-gray-300">
+							<OrderElementHeader />
 
-					<table className="w-full table-auto border-collapse border border-gray-300">
-						<OrderElementHeader />
-
-						<tbody className="">
-							{fields.map((field, index) => (
-								<OrderElementFormRow
-									commodities={commodities}
-									key={field.id}
-									onClick={() => remove(index)}
-									index={index}
-									errors={form.formState.errors?.orders?.[index]}
-								/>
-							))}
-						</tbody>
-					</table>
+							<TableBody>
+								{fields.map((field, index) => (
+									<OrderElementFormRow
+										commodities={commodities}
+										key={field.id}
+										onClick={() => remove(index)}
+										index={index}
+										errors={form.formState.errors?.orders?.[index]}
+									/>
+								))}
+							</TableBody>
+						</Table>
+					</div>
 
 					<Button colorType="secondary" className="m-4" type="submit">
 						Submit
