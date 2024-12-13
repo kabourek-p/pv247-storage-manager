@@ -4,7 +4,18 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import type { OrderFormSchema } from '@/components/form/orders/order-form';
-import { createOrder, editOrder, getOrder, getOrders } from '@/server/orders';
+import {
+	createOrder,
+	editOrder,
+	getOrder,
+	getOrders,
+	getRestockData
+} from '@/server/orders';
+import {
+	createStockDispatches,
+	type StockDispatch
+} from '@/server/stock-dispatch';
+import { createInvoice } from '@/server/invoice';
 
 export const createOrderServerAction = async (order: OrderFormSchema) => {
 	try {
@@ -46,6 +57,8 @@ export const editOrderServerAction = async (order: OrderFormSchema) => {
 	}
 
 	revalidatePath('/orders');
+	revalidatePath(`/order/${order.id}`);
+	revalidatePath(`/order/${order.id}/edit`);
 	redirect(`/orders`);
 };
 
@@ -92,10 +105,21 @@ export const getOrderData = async (
 ): Promise<OrderData | undefined> => {
 	const order = await getOrder(id);
 	if (!order) return undefined;
-
+	const invoice = order.invoices;
 	return {
 		id: order.id,
 		note: order.note ? order.note : '',
+		invoice: !invoice
+			? null
+			: {
+					invoiceNumber: invoice.invoiceNumber,
+					date: new Intl.DateTimeFormat('cs-CZ', {
+						day: '2-digit',
+						//month: 'long',
+						month: '2-digit',
+						year: 'numeric'
+					}).format(new Date(invoice.date))
+				},
 		orders: order.orderElements.map(e => ({
 			id: e.id,
 			commodity: e.commodity.name,
@@ -106,6 +130,43 @@ export const getOrderData = async (
 		}))
 	};
 };
+
+export const lockOrderServerAction = async (id: number) => {
+	const order = await getOrder(id);
+	if (order === null) {
+		throw new Error('Order not found!');
+	}
+	const orderElements = order ? order.orderElements : [];
+	let newDispatches: StockDispatch[] = [];
+	for (const e of orderElements) {
+		let leftToProcess = e.unitLength.toNumber() * e.numberOfUnits.toNumber();
+		const restocks = await getRestockData(e.commodity.name);
+		for (const restock of restocks) {
+			const available = restock.quantity - restock.taken;
+			const taken = available >= leftToProcess ? leftToProcess : available;
+			leftToProcess = leftToProcess - taken;
+			const newDispatch = {
+				orderElementId: e.id,
+				quantity: taken,
+				restockId: restock.id
+			};
+			newDispatches = [newDispatch, ...newDispatches];
+			if (leftToProcess === 0) {
+				break;
+			}
+		}
+		if (leftToProcess !== 0) {
+			throw Error('Insufficient commodity in stock to satisfy order!');
+		}
+	}
+	await createStockDispatches(newDispatches);
+	await createInvoice(generateInvoiceNumber(order.id), order.id);
+
+	revalidatePath('/orders');
+	revalidatePath(`/order/${order.id}`);
+};
+
+const generateInvoiceNumber = (orderId: number) => `INV-${orderId.toString()}`;
 
 export type OrderRow = {
 	id: number;
@@ -128,6 +189,10 @@ export type OrderElementRow = {
 export type OrderData = {
 	id: number;
 	note: string;
+	invoice: {
+		invoiceNumber: string;
+		date: string;
+	} | null;
 	orders: {
 		id: number;
 		commodity: string;

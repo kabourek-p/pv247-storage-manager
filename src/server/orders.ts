@@ -105,13 +105,34 @@ export const getOrders = async () =>
 export const getOrder = async (id: number) =>
 	prisma.order.findUnique({
 		where: {
-			id
+			id: +id
 		},
 		include: {
+			invoices: true,
 			orderElements: {
 				include: {
-					commodity: true
+					commodity: true,
+					stockDispatches: true
 				}
 			}
 		}
 	});
+
+export const getRestockData = async (commodity: string) =>
+	prisma.$queryRaw<
+		RestockData[]
+	>`SELECT r.id, r.date, r.quantity, SUM(sd."quantity") AS taken, c.name
+									FROM "Restock" AS r LEFT JOIN "StockDispatch" AS sd
+									ON sd."restockId" = r."id"
+									LEFT JOIN "Commodity" AS c
+									ON c."name" = r."commodityId"
+									GROUP BY r."id", c.name
+									HAVING SUM(sd."quantity") IS NULL OR SUM(sd."quantity") < r."quantity" AND c."name" = ${commodity}
+									ORDER BY r."date"`;
+
+export type RestockData = {
+	id: number;
+	quantity: number;
+	taken: number;
+	name: string;
+};
