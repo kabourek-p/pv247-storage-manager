@@ -39,7 +39,7 @@ model Restock {
   commodityId     String
   commodity       Commodity       @relation(fields: [commodityId], references: [name])
   quantity        Decimal
-  supllierName    String?
+  supplierName    String?
   invoiceNumber   String?
   unitPrice       Decimal
   authorId        Int

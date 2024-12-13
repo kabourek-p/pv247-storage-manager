@@ -4,6 +4,7 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { redirect } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import RestockElementRow, {
@@ -52,6 +53,7 @@ const RestockForm = ({
 	const onSubmit = async (values: RestockFormSchema) => {
 		console.log('data', values);
 		await submitFn(values);
+		redirect('/restocks');
 	};
 	return (
 		<div className="flex p-4">
