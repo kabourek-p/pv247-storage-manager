@@ -23,5 +23,4 @@ const EditOrderButton = ({ order }: { order: OrderData | undefined }) => (
 	</div>
 );
 
-
 export default EditOrderButton;
