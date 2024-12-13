@@ -7,10 +7,7 @@ const TrashButton = ({
 	className,
 	...props
 }: PropsWithChildren<React.ButtonHTMLAttributes<HTMLButtonElement>>) => (
-	<Button
-		{...props}
-		className={`flexjustify-center rounded bg-red-800 ${className}`}
-	>
+	<Button {...props} className={`h-9 bg-red-800 px-2.5 ${className}`}>
 		<FaTrash />
 	</Button>
 );
