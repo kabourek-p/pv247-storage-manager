@@ -1,7 +1,9 @@
 import { useMutation } from '@tanstack/react-query';
 import { signIn } from 'next-auth/react';
 
-import { type LoginFormSchema } from './schema';
+import { createUser } from '@/server/users';
+
+import { type RegisterFormSchema, type LoginFormSchema } from './schema';
 
 export const useLoginMutation = () =>
 	useMutation({
@@ -14,5 +16,14 @@ export const useLoginMutation = () =>
 				throw new Error(response?.error);
 			}
 			return response;
+		}
+	});
+
+export const useRegisterMutation = () =>
+	useMutation({
+		mutationFn: async (data: RegisterFormSchema) => {
+			console.log('was here', data);
+			const user = await createUser(data);
+			return user;
 		}
 	});

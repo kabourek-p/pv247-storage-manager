@@ -8,25 +8,25 @@ import { useRouter } from 'next/navigation';
 import { FormInput } from '@/components/form/form-input';
 import { SubmitButton } from '@/components/form/submit-button';
 
-import { loginFormSchema, type LoginFormSchema } from './schema';
-import { useLoginMutation } from './hooks';
+import { registerFormSchema, type RegisterFormSchema } from '../schema';
+import { useRegisterMutation } from '../hooks';
 
-export const LoginForm = () => {
-	const mutation = useLoginMutation();
+export const RegisterForm = () => {
+	const mutation = useRegisterMutation();
 	const router = useRouter();
 
-	const form = useForm<LoginFormSchema>({
-		resolver: zodResolver(loginFormSchema)
+	const form = useForm<RegisterFormSchema>({
+		resolver: zodResolver(registerFormSchema)
 	});
 
-	const onSubmit = (values: LoginFormSchema) => {
+	const onSubmit = (values: RegisterFormSchema) => {
 		mutation.mutate(values, {
 			onSuccess: () => {
-				toast.success(`Logged in successfully!`);
+				toast.success('Your account has been created');
 				router.push('/');
 			},
-			onError: () => {
-				toast.error('Invalid credentials');
+			onError: error => {
+				toast.error(error.message);
 			}
 		});
 	};
@@ -39,9 +39,13 @@ export const LoginForm = () => {
 			>
 				<FormInput label="Email" name="email" />
 				<FormInput label="Password" type="password" name="password" />
-
-				<div className="mt-2">
-					<SubmitButton>Log In </SubmitButton>
+				<FormInput
+					label="Retype Password"
+					type="password"
+					name="retypePassword"
+				/>
+				<div className="my-2">
+					<SubmitButton>Register</SubmitButton>
 				</div>
 			</form>
 		</FormProvider>

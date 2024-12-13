@@ -1,13 +1,11 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { auth } from '@/lib/auth';
-import { OtherLoginOptions } from '@/components/login/other-login-options';
 import { LoginSignupRedirect } from '@/components/login/login-signup-redirect';
-import { LoginForm } from '@/modules/user/components/login-form';
+import { RegisterForm } from '@/modules/user/components/register-form';
 
-const SignInPage = async () => {
+const SignUpPage = async () => {
 	const session = await auth();
 	if (session?.user) {
 		return redirect('/');
@@ -23,19 +21,10 @@ const SignInPage = async () => {
 						height={150}
 						alt="Logo"
 					/>
-					<h1 className="my-6 self-center text-2xl">Login</h1>
-					<LoginForm />
-					<div className="my-2 self-end">
-						<Link
-							href="forgot-password"
-							className="text-sm text-secondary hover:underline"
-						>
-							Forgot password?
-						</Link>
-					</div>
-					<OtherLoginOptions />
-					<LoginSignupRedirect redirectTo="signup">
-						Don&apos;t have and account?
+					<h1 className="my-6 self-center text-2xl">Register</h1>
+					<RegisterForm />
+					<LoginSignupRedirect redirectTo="signin">
+						Already have an account?
 					</LoginSignupRedirect>
 				</div>
 			</div>
@@ -43,4 +32,4 @@ const SignInPage = async () => {
 	);
 };
 
-export default SignInPage;
+export default SignUpPage;

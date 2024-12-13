@@ -5,8 +5,8 @@ import { PrismaAdapter } from '@auth/prisma-adapter';
 import Credentials from 'next-auth/providers/credentials';
 
 import prisma from '@/lib/prisma';
-import { loginFormSchema } from '@/modules/user/components/login-form/schema';
 import { getUser } from '@/server/users';
+import { loginFormSchema } from '@/modules/user/schema';
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
 	adapter: PrismaAdapter(prisma),
