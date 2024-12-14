@@ -31,7 +31,11 @@ const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 						on {order.invoice.date.toString()}
 					</span>
 				)}
-				<DataTable data={data} columns={orderElementColumns} filter={false} />
+				<DataTable
+					data={data}
+					columns={orderElementColumns}
+					filter={undefined}
+				/>
 			</Card>
 		</div>
 	);

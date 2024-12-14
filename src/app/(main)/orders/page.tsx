@@ -26,7 +26,7 @@ const Page = async () => {
 					data={data}
 					columns={orderColumns}
 					rowClickHandler={handleRowClick}
-					filter
+					filter="note"
 				/>
 			</Card>
 		</div>

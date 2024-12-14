@@ -1,7 +1,7 @@
 'use server';
 
 import generateRandomString from '@/server/utils';
-import { type CommodityFormSchema } from '@/components/commodities/commodity-form';
+import { type CommodityFormSchema } from '@/components/form/commodities/commodity-form';
 
 import prisma from '../lib/prisma';
 

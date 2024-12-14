@@ -27,7 +27,7 @@ type DataTableProps<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
 	rowClickHandler?: (id: string) => void;
-	filter?: boolean;
+	filter?: string;
 };
 
 const DataTable = <TData, TValue>({
@@ -61,9 +61,9 @@ const DataTable = <TData, TValue>({
 				<div className="flex items-center pb-4">
 					<Input
 						placeholder="Filter by identifier..."
-						value={(table.getColumn('note')?.getFilterValue() as string) ?? ''}
+						value={(table.getColumn(filter)?.getFilterValue() as string) ?? ''}
 						onChange={event =>
-							table.getColumn('note')?.setFilterValue(event.target.value)
+							table.getColumn(filter)?.setFilterValue(event.target.value)
 						}
 						className="max-w-sm"
 					/>
