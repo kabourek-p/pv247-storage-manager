@@ -43,7 +43,7 @@ export const getRestockRows = async (
 		unitPrice: r.unitPrice.toString(),
 		supplierName: r.supplierName,
 		invoiceNumber: r.invoiceNumber,
-		authorName: `${r.author.name}`
+		authorName: r.author.name
 	}));
 };
 

@@ -85,7 +85,7 @@ export const getOrderRows = async (
 			}).format(new Date(o.date)),
 			numberOfElements,
 			totalPrice,
-			authorName: `${o.author.name}`,
+			authorName: o.author.name!,
 			closed: o.invoices !== null
 		};
 	});
