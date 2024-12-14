@@ -150,7 +150,7 @@ const OrderForm = (params: {
 						<Table className="w-full table-auto border-collapse border border-gray-300">
 							<OrderElementHeader />
 
-							<TableBody>
+							<TableBody className="w-full">
 								{fields.map((field, index) => (
 									<OrderElementFormRow
 										disabledDelete={fields.length <= 1}

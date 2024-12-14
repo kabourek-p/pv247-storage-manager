@@ -70,7 +70,7 @@ const DataTable = <TData, TValue>({
 				</div>
 			)}
 			<div className="overflow-hidden rounded-md border shadow">
-				<Table className="w-full">
+				<Table className="w-full table-auto border-collapse border border-gray-300">
 					<TableHeader className="hidden text-center md:table-header-group">
 						{table.getHeaderGroups().map(headerGroup => (
 							<TableRow key={headerGroup.id}>
@@ -95,7 +95,8 @@ const DataTable = <TData, TValue>({
 							table.getRowModel().rows.map(row => (
 								<TableRow
 									className={cn(
-										'w-full odd:bg-gray-100 even:bg-secondary even:text-white',
+										'w-full odd:bg-gray-100 even:bg-secondary hover:odd:bg-gray-200 hover:even:bg-secondary-dark',
+										'even:text-white md:hover:even:bg-gray-200',
 										'even:text-black md:border-b-2 md:odd:bg-white md:even:bg-white'
 									)}
 									key={row.id}
@@ -105,7 +106,7 @@ const DataTable = <TData, TValue>({
 									{row.getVisibleCells().map(cell => (
 										<TableCell
 											className={cn(
-												`relative block border-b border-gray-300 px-2 py-1 text-left`,
+												`relative block h-10 border-b border-gray-300 px-2 py-1 text-left`,
 												`before:pr-2 before:font-bold before:content-[attr(data-label)]`,
 												`md:table-cell md:text-center md:before:content-none`,
 												`${filter ? 'cursor-pointer' : ''}`
