@@ -54,7 +54,6 @@ const DataTable = <TData, TValue>({
 		}
 	});
 
-	const handleRowClick = rowClickHandler ? rowClickHandler : (_: string) => {};
 	return (
 		<div>
 			{filter && (
@@ -101,7 +100,11 @@ const DataTable = <TData, TValue>({
 									)}
 									key={row.id}
 									data-state={row.getIsSelected() && 'selected'}
-									onClick={() => handleRowClick(row.getValue('id'))}
+									onClick={
+										rowClickHandler
+											? () => rowClickHandler(row.getValue('id'))
+											: undefined
+									}
 								>
 									{row.getVisibleCells().map(cell => (
 										<TableCell
