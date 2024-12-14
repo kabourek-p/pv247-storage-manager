@@ -13,6 +13,11 @@ enum ProcessingType {
   STRAIGHT
 }
 
+enum UserRole {
+  ADMIN
+  USER
+}
+
 enum Unit {
   KG
   MM
@@ -131,12 +136,11 @@ model VerificationToken {
 model User {
   id            String    @id @default(uuid())
   email         String    @unique
-  name          String?
+  name          String
+  role          String    @default("USER")
   password      String?
   emailVerified DateTime?
   image         String?
-  firstName     String?
-  lastName      String?
   accounts      Account[]
   sessions      Session[]
 

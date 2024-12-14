@@ -1,34 +1,41 @@
-'use client';
-
-import { usePathname } from 'next/navigation';
-
 import { cn } from '@/lib/cn';
 
 import { NavItem } from './navigation-item';
+import { UserNavigation } from './user-navigation';
 
-const urlMapping = {
-	'/': 'Dashboard',
-	'/orders': 'Orders',
-	'/restocks': 'Restocks',
-	'/commodities': 'Commodities'
+type NavigationProps = {
+	pathname: string;
+	urlMapping: Record<string, string>;
+	platform: 'desktop' | 'mobile';
 };
 
-export const Navigation = () => {
-	const pathname = usePathname();
+export const Navigation = ({
+	pathname,
+	urlMapping,
+	platform
+}: NavigationProps) => (
+	<nav
+		className={cn(
+			'hidden md:block',
+			platform === 'mobile' && 'block md:hidden'
+		)}
+	>
+		<ul className="flex flex-col items-end gap-4 space-y-1 px-4 py-4 text-xl text-gray-200 sm:px-2 md:flex-row md:items-start md:gap-8 md:space-y-0 md:px-0 md:text-base lg:gap-12">
+			{Object.entries(urlMapping).map(([url, caption]) => (
+				<NavItem
+					key={url}
+					href={url}
+					caption={caption}
+					active={pathname === url && platform === 'desktop'}
+					className={cn(pathname === url && 'text-white')}
+				/>
+			))}
 
-	return (
-		<nav className="hidden md:block">
-			<ul className="container hidden gap-x-6 py-4 text-gray-200 md:flex lg:gap-x-12">
-				{Object.entries(urlMapping).map(([url, caption]) => (
-					<NavItem
-						key={url}
-						href={url}
-						caption={caption}
-						active={pathname === url}
-						className={cn(pathname === url && 'text-white')}
-					/>
-				))}
-			</ul>
-		</nav>
-	);
-};
+			{platform === 'mobile' && (
+				<li>
+					<UserNavigation />
+				</li>
+			)}
+		</ul>
+	</nav>
+);

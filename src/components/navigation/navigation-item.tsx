@@ -22,7 +22,7 @@ export const NavItem = ({
 	>
 		<Link {...props}>{caption}</Link>
 		{active && (
-			<span className="absolute -bottom-[1.12rem] left-0 -mx-4 h-[0.2rem] w-[calc(100%_+_2rem)] rounded-full bg-gray-200" />
+			<span className="absolute -bottom-5 left-0 -mx-4 h-[0.2rem] w-[calc(100%_+_2rem)] rounded-full bg-gray-200" />
 		)}
 	</li>
 );
