@@ -138,6 +138,11 @@ const DataTable = <TData, TValue>({
 			<div className="flex items-center justify-end space-x-2 py-4">
 				<Button
 					colorType="secondary"
+					className={
+						!table.getCanPreviousPage()
+							? 'bg-secondary-light hover:bg-secondary-light'
+							: ''
+					}
 					onClick={() => table.previousPage()}
 					disabled={!table.getCanPreviousPage()}
 				>
@@ -145,6 +150,11 @@ const DataTable = <TData, TValue>({
 				</Button>
 				<Button
 					colorType="secondary"
+					className={
+						!table.getCanNextPage()
+							? 'bg-secondary-light hover:bg-secondary-light'
+							: ''
+					}
 					onClick={() => table.nextPage()}
 					disabled={!table.getCanNextPage()}
 				>
