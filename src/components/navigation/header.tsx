@@ -4,12 +4,8 @@ import { usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { MdMenu } from 'react-icons/md';
 import { FaXmark } from 'react-icons/fa6';
-import { signOut } from 'next-auth/react';
 
-import { cn } from '@/lib/cn';
-
-import { NavItem } from './navigation-item';
-import UserNavigation from './user-navigation';
+import { UserNavigation } from './user-navigation';
 import { Navigation } from './navigation';
 
 const urlMapping = {
