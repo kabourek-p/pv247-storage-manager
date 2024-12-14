@@ -22,7 +22,6 @@ export const useLoginMutation = () =>
 export const useRegisterMutation = () =>
 	useMutation({
 		mutationFn: async (data: RegisterFormSchema) => {
-			console.log('was here', data);
 			const user = await createUser(data);
 			return user;
 		}

@@ -6,9 +6,10 @@ import {
 	type Merge
 } from 'react-hook-form';
 
-import TrashButton from '@/components/trash-button';
 import { FormTextField } from '@/components/form/form-text-field';
 import { Select } from '@/components/form/select';
+
+import TrashButton from '../trash-button';
 
 export const RestockElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
