@@ -6,15 +6,13 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 
 const AddCommodityButton = () => (
-	<div>
-		<Button
-			className="mb-2 w-40"
-			type="button"
-			onClick={() => redirect('/commodity')}
-		>
-			+ New commodity
-		</Button>
-	</div>
+	<Button
+		className="mb-2 w-40"
+		type="button"
+		onClick={() => redirect('/commodity')}
+	>
+		+ New commodity
+	</Button>
 );
 
 export default AddCommodityButton;

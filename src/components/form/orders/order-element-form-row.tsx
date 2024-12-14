@@ -61,7 +61,7 @@ const OrderElementFormRow = (props: {
 			className={cn(
 				`relative block border-b border-gray-300 px-2 py-1 text-left md:max-w-12`,
 				`before:pr-2 before:font-bold before:content-[attr(data-label)]`,
-				`md:table-cell md:text-center md:before:content-none`
+				`text-center md:table-cell md:text-center md:before:content-none`
 			)}
 		>
 			<TrashButton

@@ -1,5 +1,6 @@
 'use client';
 import { type ColumnDef } from '@tanstack/react-table';
+import { FaCheck, FaHourglass, FaSpinner } from 'react-icons/fa';
 
 import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
 import { cn } from '@/lib/cn';
@@ -41,16 +42,7 @@ export const orderColumns: ColumnDef<OrderRow, string>[] = [
 		cell: ({ row }) => {
 			const closed = row.getValue('closed');
 
-			return (
-				<span
-					className={cn(
-						'rounded-md p-1 font-medium text-white',
-						closed ? 'bg-gray-400' : 'bg-primary'
-					)}
-				>
-					{closed ? 'CLOSED' : 'OPEN'}
-				</span>
-			);
+			return <span>{closed ? 'CLOSED' : 'OPEN'}</span>;
 		}
 	},
 	{

@@ -83,13 +83,13 @@ const OrderForm = (params: {
 	};
 
 	return (
-		<div className="flex px-4">
+		<div className="flex justify-center">
 			<FormProvider {...form}>
 				<form
-					className="w-full space-x-2"
+					className="w-11/12 justify-center space-x-2 md:w-full"
 					onSubmit={form.handleSubmit(() => {})}
 				>
-					<div className="relative m-2 mb-4 flex w-full flex-col items-start justify-between space-y-4">
+					<div className="relative m-2 mb-4 flex flex-col items-start justify-between space-y-4 md:w-full">
 						<div
 							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.note
@@ -100,7 +100,7 @@ const OrderForm = (params: {
 							<FormTextField
 								name="note"
 								label="Order Identifier"
-								className="m-4 w-64 rounded-lg bg-slate-50 p-4 py-1.5 shadow"
+								className="mt-4 w-11/12 rounded-lg bg-slate-50 p-4 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
 							/>
 							<span className="hidden">
@@ -119,12 +119,12 @@ const OrderForm = (params: {
 							</span>
 						</div>
 					</div>
-					<div className="relative flex w-full flex-col items-start justify-between space-y-4">
-						<div className="mb-4 lg:absolute lg:bottom-0 lg:right-3">
+					<div className="relative flex flex-col items-start justify-between space-y-4">
+						<div className="mb-4 flex w-full flex-col justify-end gap-2 sm:flex-row md:w-3/4 lg:absolute lg:bottom-0 lg:right-0">
 							{params.allowSaveNext && (
 								<Button
 									colorType="secondary"
-									className="mr-4"
+									className="mt-2 w-full sm:w-48"
 									onClick={form.handleSubmit(onSubmitAndNext)}
 								>
 									Save and continue
@@ -132,14 +132,14 @@ const OrderForm = (params: {
 							)}
 							<Button
 								colorType="secondary"
-								className="mr-4"
+								className="mt-2 w-full sm:w-36"
 								onClick={form.handleSubmit(onSubmit)}
 							>
 								Save
 							</Button>
 
 							<Button
-								className="mt-2 w-40"
+								className="mt-2 w-full sm:w-36"
 								type="button"
 								onClick={() =>
 									append({
@@ -156,10 +156,10 @@ const OrderForm = (params: {
 						</div>
 					</div>
 					<div className="overflow-hidden rounded-md border shadow">
-						<Table className="w-full table-auto border-collapse border border-gray-300">
+						<Table className="table-auto border-collapse border border-gray-300 md:w-full">
 							<OrderElementHeader />
 
-							<TableBody className="w-full">
+							<TableBody className="md:w-full">
 								{fields.map((field, index) => (
 									<OrderElementFormRow
 										disabledDelete={fields.length <= 1}

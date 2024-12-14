@@ -16,10 +16,12 @@ const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 	}
 
 	return (
-		<div className="grid min-h-screen grid-rows-[20px_1fr_20px] gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
-			<Card>
+		<div className="flex min-h-screen grid-rows-[20px_1fr_20px] flex-col gap-16 bg-white p-8 pt-20 text-center font-[family-name:var(--font-geist-sans)] sm:bg-gray-100 sm:p-20 sm:text-left">
+			<Card className="pb-10">
 				<div>
-					<h2 className="p-4 text-4xl">Details of order: {order?.note}</h2>
+					<h2 className="py-4 text-4xl sm:p-4">
+						Details of order: {order?.note}
+					</h2>
 				</div>
 				<div className="flex space-x-3 p-4 pt-0">
 					<EditOrderButton order={order} />

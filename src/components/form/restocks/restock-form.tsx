@@ -68,10 +68,10 @@ const RestockForm = ({
 	};
 
 	return (
-		<div className="flex items-start justify-center p-4">
+		<div className="flex items-start justify-center">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-10 shadow-lg"
+					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-5 shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<Select

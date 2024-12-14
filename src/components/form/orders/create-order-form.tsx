@@ -26,7 +26,7 @@ const CreateOrderForm = (props: {
 	});
 
 	return (
-		<div>
+		<div className="sm: content-center sm:p-2">
 			<OrderForm
 				redirectPath="/orders"
 				defaultValues={{

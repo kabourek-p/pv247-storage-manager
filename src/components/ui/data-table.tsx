@@ -91,10 +91,10 @@ const DataTable = <TData, TValue>({
 					</TableHeader>
 					<TableBody className="w-full">
 						{table.getRowModel().rows?.length ? (
-							table.getRowModel().rows.map(row => (
+							table.getRowModel().rows.map((row, index) => (
 								<TableRow
 									className={cn(
-										'w-full odd:bg-gray-100 even:bg-secondary hover:odd:bg-gray-200 hover:even:bg-secondary-dark',
+										'w-full odd:bg-gray-100 even:bg-secondary-light hover:odd:bg-gray-200 hover:even:bg-secondary',
 										'even:text-white md:hover:even:bg-gray-200',
 										'even:text-black md:border-b-2 md:odd:bg-white md:even:bg-white'
 									)}
