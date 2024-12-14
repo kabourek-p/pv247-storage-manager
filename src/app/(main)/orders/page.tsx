@@ -4,9 +4,12 @@ import AddOrderButton from '@/components/orders/add-order-button';
 import { getOrderRows } from '@/server-actions/orders';
 import { Card } from '@/components/ui/card';
 import OrderTable from '@/components/orders/order-table';
+import authUser from '@/lib/auth';
 
 const Page = async () => {
-	const data = await getOrderRows();
+	const user = await authUser();
+
+	const data = await getOrderRows(user.id);
 	return (
 		<div className="flex min-h-screen grid-rows-[20px_1fr_20px] flex-col gap-16 bg-white p-8 pt-20 text-center font-[family-name:var(--font-geist-sans)] sm:bg-gray-100 sm:p-20 sm:text-left">
 			<Card className="pb-10">

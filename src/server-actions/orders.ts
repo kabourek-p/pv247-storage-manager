@@ -65,8 +65,10 @@ export const editOrderServerAction = async (order: OrderFormSchema) => {
 	};
 };
 
-export const getOrderRows = async (): Promise<OrderRow[]> => {
-	const orders = await getOrders();
+export const getOrderRows = async (
+	authorId: string | null
+): Promise<OrderRow[]> => {
+	const orders = await getOrders(authorId);
 	return orders.map(o => {
 		const numberOfElements = o.orderElements.length;
 		const totalPrice = o.orderElements

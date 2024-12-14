@@ -91,13 +91,14 @@ export const editOrder = async (
 	});
 };
 
-export const getOrders = async () =>
+export const getOrders = async (authorId: string | null) =>
 	prisma.order.findMany({
 		include: {
 			orderElements: true,
 			author: true,
 			invoices: true
 		},
+		where: authorId ? { authorId } : undefined,
 		orderBy: {
 			invoices: {
 				invoiceNumber: 'desc'
