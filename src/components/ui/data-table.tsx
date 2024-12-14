@@ -57,7 +57,7 @@ const DataTable = <TData, TValue>({
 	return (
 		<div>
 			{filter && (
-				<div className="flex items-center py-4">
+				<div className="flex items-center pb-4">
 					<Input
 						placeholder="Filter by identifier..."
 						value={(table.getColumn('note')?.getFilterValue() as string) ?? ''}
@@ -68,7 +68,7 @@ const DataTable = <TData, TValue>({
 					/>
 				</div>
 			)}
-			<div className="rounded-md border">
+			<div className="overflow-hidden rounded-md border shadow">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map(headerGroup => (

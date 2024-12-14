@@ -104,7 +104,6 @@ const OrderForm = ({
 					</div>
 					<div className="relative flex w-full flex-col items-start justify-between space-y-4">
 						<div className="mb-4 lg:absolute lg:bottom-0 lg:right-3">
-
 							<Button colorType="secondary" className="mr-4" type="submit">
 								Submit
 							</Button>
@@ -126,7 +125,7 @@ const OrderForm = ({
 							</Button>
 						</div>
 					</div>
-					<div className="overflow-hidden rounded-md border">
+					<div className="overflow-hidden rounded-md border shadow">
 						<Table className="w-full table-auto border-collapse border border-gray-300">
 							<OrderElementHeader />
 
