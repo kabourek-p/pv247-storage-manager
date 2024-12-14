@@ -1,4 +1,4 @@
-import CreateCommodityForm from '@/components/commodities/create-commodity-form';
+import CreateCommodityForm from '@/components/form/commodities/create-commodity-form';
 import { Card } from '@/components/ui/card';
 
 const CommodityPage = async () => (
