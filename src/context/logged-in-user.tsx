@@ -27,8 +27,11 @@ const useLoggedInUser = () => {
 	return context;
 };
 
-const LoggedInUserProvider = ({ children }: PropsWithChildren) => {
-	const [user, setUser] = useState<User | null>(null);
+const LoggedInUserProvider = ({
+	defaultValue,
+	children
+}: PropsWithChildren & { defaultValue: User }) => {
+	const [user, setUser] = useState<User | null>(defaultValue);
 
 	return (
 		<LoggedInUserContext.Provider value={{ user, setUser }}>

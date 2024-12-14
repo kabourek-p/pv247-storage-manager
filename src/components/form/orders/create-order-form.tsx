@@ -11,8 +11,7 @@ const CreateOrderForm = (props: {
 	loggedInUser: User;
 	commodities: string[];
 }) => {
-	const { user, setUser } = useLoggedInUser();
-	setUser(props.loggedInUser);
+	const { user } = useLoggedInUser();
 
 	useEffect(() => {
 		const handleBeforeUnload = (event: BeforeUnloadEvent) => {

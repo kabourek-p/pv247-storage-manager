@@ -4,6 +4,8 @@ import { redirect } from 'next/navigation';
 import { Navigation } from '@/components/navigation';
 import UserNavigation from '@/components/user-navigation';
 import { auth } from '@/lib/auth';
+import { getUser } from '@/server/users';
+import { LoggedInUserProvider } from '@/context/logged-in-user';
 
 const MainLayout = async ({
 	children
@@ -14,8 +16,14 @@ const MainLayout = async ({
 	if (!session?.user) {
 		return redirect('/auth/signin');
 	}
+
+	const user = await getUser(session.user.email ?? '');
+	if (!user) {
+		throw new Error('User was not found!');
+	}
+
 	return (
-		<>
+		<LoggedInUserProvider defaultValue={user}>
 			<header className="flex justify-between bg-primary-dark px-4 shadow-md">
 				{/* TODO mobile version */}
 				<div className="self-center">
@@ -31,7 +39,7 @@ const MainLayout = async ({
 				<UserNavigation />
 			</header>
 			<main>{children}</main>
-		</>
+		</LoggedInUserProvider>
 	);
 };
 
