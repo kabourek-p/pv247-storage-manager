@@ -13,22 +13,20 @@ export const createRestockServerAction = async (restock: RestockFormSchema) => {
 
 export const getRestockRows = async (): Promise<RestockRow[]> => {
 	const restocks = await getRestocks();
-	return restocks.map(r => {
-		return {
-			date: new Intl.DateTimeFormat('cs-CZ', {
-				day: '2-digit',
-				month: '2-digit',
-				year: 'numeric'
-			}).format(new Date(r.date)),
-			commodity: r.commodityId,
-			quantity: r.quantity.toString(),
-			unit: r.commodity.unit,
-			unitPrice: r.unitPrice.toString(),
-			supplierName: r.supplierName,
-			invoiceNumber: r.invoiceNumber,
-			authorName: `${r.author.name}`
-		};
-	});
+	return restocks.map(r => ({
+		date: new Intl.DateTimeFormat('cs-CZ', {
+			day: '2-digit',
+			month: '2-digit',
+			year: 'numeric'
+		}).format(new Date(r.date)),
+		commodity: r.commodityId,
+		quantity: r.quantity.toString(),
+		unit: r.commodity.unit,
+		unitPrice: r.unitPrice.toString(),
+		supplierName: r.supplierName,
+		invoiceNumber: r.invoiceNumber,
+		authorName: `${r.author.name}`
+	}));
 };
 
 export type RestockRow = {

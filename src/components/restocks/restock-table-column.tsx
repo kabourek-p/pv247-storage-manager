@@ -1,7 +1,7 @@
 'use client';
 import { type ColumnDef } from '@tanstack/react-table';
 
-import { RestockRow } from '@/server-actions/restocks';
+import type { RestockRow } from '@/server-actions/restocks';
 
 export const restockColumns: ColumnDef<RestockRow, string>[] = [
 	{
@@ -12,11 +12,11 @@ export const restockColumns: ColumnDef<RestockRow, string>[] = [
 		accessorKey: 'commodity',
 		header: 'Commodity'
 	},
-    {
+	{
 		accessorKey: 'quantity',
 		header: 'Quantity'
 	},
-    {
+	{
 		accessorKey: 'unit',
 		header: 'Unit'
 	},
