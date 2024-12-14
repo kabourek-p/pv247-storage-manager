@@ -50,7 +50,7 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 
 	console.log(form.formState.errors?.name?.message);
 	return (
-		<div className="flex min-h-screen items-start justify-center p-4">
+		<div className="flex items-start justify-center p-4">
 			<FormProvider {...form}>
 				<form
 					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-10 shadow-lg"
