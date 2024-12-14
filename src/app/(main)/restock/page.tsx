@@ -7,7 +7,7 @@ const RestockPage = async () => {
 	return (
 		<div className="flex items-start justify-center p-4">
 			<Card>
-				<h2 className="text-4xl font-bold text-center mb-6">Register new restock</h2>
+				<h2 className="mb-6 text-center text-4xl">Register new restock</h2>
 				<CreateRestockForm
 					commodities={commodities.map(commodity => commodity.name)}
 				/>

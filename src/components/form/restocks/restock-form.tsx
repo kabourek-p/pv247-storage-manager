@@ -24,12 +24,12 @@ export type RestockFormProps = {
 
 export const restockSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),
-	quantity: z
-		.coerce.number()
+	quantity: z.coerce
+		.number()
 		.positive('Quantity must be a positive number')
 		.max(1000000, 'Quantity must be less than or equal to 1,000,000'), // Maximum 1,000,000
-	unitPrice: z
-		.coerce.number()
+	unitPrice: z.coerce
+		.number()
 		.positive('Unit price must be a positive number')
 		.max(1000000, 'Unit price must be less than or equal to 1,000,000'), // Maximum 1,000,000
 	supplierName: z.string().min(1, 'Supplier name is required'),
@@ -61,42 +61,42 @@ const RestockForm = ({
 	};
 
 	return (
-		<div className="flex items-start justify-center min-h-screen p-4">
+		<div className="flex min-h-screen items-start justify-center p-4">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-xl space-y-4 bg-white p-10 rounded-lg shadow-lg"
+					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-10 shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<Select
 						options={commodities}
 						label="Commodity"
-						name={`commodity`}
+						name="commodity"
 						error={form.formState.errors?.commodity?.message}
 					/>
 
 					<FormTextField
-						name={`quantity`}
+						name="quantity"
 						label="Quantity"
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.quantity?.message}
 					/>
 
 					<FormTextField
-						name={`unitPrice`}
+						name="unitPrice"
 						label="Unit price"
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.unitPrice?.message}
 					/>
 
 					<FormTextField
-						name={`supplierName`}
+						name="supplierName"
 						label="Supplier name"
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.supplierName?.message}
 					/>
 
 					<FormTextField
-						name={`invoiceNumber`}
+						name="invoiceNumber"
 						label="Invoice number"
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.invoiceNumber?.message}

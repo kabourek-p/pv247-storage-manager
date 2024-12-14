@@ -3,8 +3,8 @@ import { Card } from '@/components/ui/card';
 
 const CommodityPage = async () => (
 	<div className="flex items-start justify-center p-4">
-			<Card>
-				<h2 className="text-4xl text-center mb-6">Create new commodity</h2>
+		<Card>
+			<h2 className="mb-6 text-center text-4xl">Create new commodity</h2>
 			<CreateCommodityForm />
 		</Card>
 	</div>

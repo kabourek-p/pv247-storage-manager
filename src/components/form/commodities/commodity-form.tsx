@@ -43,10 +43,10 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 	console.log(form.formState.errors?.name?.message);
 
 	return (
-		<div className="flex items-start justify-center min-h-screen p-4">
+		<div className="flex min-h-screen items-start justify-center p-4">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-xl space-y-4 bg-white p-10 rounded-lg shadow-lg"
+					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-10 shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<FormTextField
@@ -57,9 +57,9 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 					/>
 
 					<Select
-						options={["KG", "PIECE", "MM"]}
+						options={['KG', 'PIECE', 'MM']}
 						label="Commodity"
-						name={`commodity`}
+						name="commodity"
 						error={form.formState.errors?.unit?.message}
 					/>
 
