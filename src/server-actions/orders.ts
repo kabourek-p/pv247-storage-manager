@@ -83,7 +83,8 @@ export const getOrderRows = async (): Promise<OrderRow[]> => {
 			}).format(new Date(o.date)),
 			numberOfElements,
 			totalPrice,
-			authorName: `${o.author.firstName} ${o.author.lastName}`
+			authorName: `${o.author.name}`,
+			closed: o.invoices !== null
 		};
 	});
 };
@@ -186,6 +187,7 @@ export type OrderRow = {
 	numberOfElements: number;
 	totalPrice: number;
 	authorName: string;
+	closed: boolean;
 };
 
 export type OrderElementRow = {

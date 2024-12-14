@@ -2,12 +2,9 @@
 import { type ColumnDef } from '@tanstack/react-table';
 
 import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
+import { cn } from '@/lib/cn';
 
 export const orderColumns: ColumnDef<OrderRow, string>[] = [
-	{
-		accessorKey: 'id',
-		header: 'id'
-	},
 	{
 		accessorKey: 'note',
 		header: 'Identifier'
@@ -31,12 +28,34 @@ export const orderColumns: ColumnDef<OrderRow, string>[] = [
 				currency: 'CZK'
 			}).format(amount);
 
-			return <div className="font-medium">{formatted}</div>;
+			return <span className="font-medium">{formatted}</span>;
 		}
 	},
 	{
 		accessorKey: 'authorName',
 		header: 'Author'
+	},
+	{
+		accessorKey: 'closed',
+		header: 'Status',
+		cell: ({ row }) => {
+			const closed = row.getValue('closed');
+
+			return (
+				<span
+					className={cn(
+						'rounded-md p-1 font-medium text-white',
+						closed ? 'bg-gray-400' : 'bg-primary'
+					)}
+				>
+					{closed ? 'CLOSED' : 'OPEN'}
+				</span>
+			);
+		}
+	},
+	{
+		accessorKey: 'id',
+		header: 'id'
 	}
 ];
 

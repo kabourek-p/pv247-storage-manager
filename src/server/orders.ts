@@ -98,7 +98,13 @@ export const getOrders = async () =>
 	prisma.order.findMany({
 		include: {
 			orderElements: true,
-			author: true
+			author: true,
+			invoices: true
+		},
+		orderBy: {
+			invoices: {
+				invoiceNumber: 'desc'
+			}
 		}
 	});
 
