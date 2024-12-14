@@ -6,16 +6,13 @@ import { redirect } from 'next/navigation';
 import DataTable from '@/components/ui/data-table';
 import { getOrderColumns } from '@/components/orders/order-table-columns';
 import { useLoggedInUser } from '@/context/logged-in-user';
-
-type OrderTableProps<TData> = {
-	data: TData[];
-};
+import { type OrderRow } from '@/server-actions/orders';
 
 const handleRowClick = async (id: string) => {
 	redirect(`/order/${id}`);
 };
 
-const OrderTable = ({ data }: OrderTableProps<TData>) => {
+const OrderTable = ({ data }: { data: OrderRow[] }) => {
 	const { user } = useLoggedInUser();
 	return (
 		<DataTable

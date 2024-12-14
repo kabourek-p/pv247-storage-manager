@@ -1,5 +1,4 @@
 import React from 'react';
-import type { Decimal } from '@prisma/client/runtime/library';
 import type { Unit } from '@prisma/client';
 
 import CommodityCard from '@/components/commodities/commodity-card';
