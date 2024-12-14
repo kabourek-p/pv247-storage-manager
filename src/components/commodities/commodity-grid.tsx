@@ -14,7 +14,7 @@ type CommodityGridProps = {
 };
 
 const CommodityGrid: React.FC<CommodityGridProps> = ({ commodities }) => (
-	<div className="flex flex-wrap gap-4">
+	<div className="flex flex-wrap gap-10">
 		{commodities.map(commodity => (
 			<CommodityCard
 				key={commodity.name}

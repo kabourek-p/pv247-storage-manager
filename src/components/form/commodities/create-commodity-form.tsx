@@ -1,6 +1,6 @@
 'use client';
 
-import CommodityForm from '@/components/commodities/commodity-form';
+import CommodityForm from '@/components/form/commodities/commodity-form';
 import { createCommodityServerAction } from '@/server-actions/commodities';
 
 const CreateCommodityForm = () => (
