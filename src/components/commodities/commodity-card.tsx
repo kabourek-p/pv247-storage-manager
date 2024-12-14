@@ -24,7 +24,7 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 		unit === 'PIECE' && Number(formattedQuantity) > 1 ? `${unit}S` : unit;
 
 	return (
-		<div className="flex h-64 w-56 flex-col items-center justify-between rounded-lg border border-black bg-secondary-light p-4 text-black shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl">
+		<div className="flex h-64 w-56 flex-col items-center justify-between rounded-lg border border-black bg-gradient-to-b from-secondary-light to-secondary-dark p-4 text-black shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl">
 			<div className="self-start text-lg font-semibold text-gray-800">
 				{name}
 			</div>
@@ -38,7 +38,7 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 				</div>
 			</div>
 
-			<div className="mt-3 self-start text-xl font-normal text-gray-700">
+			<div className="mt-3 self-start text-xl font-normal text-gray-800">
 				{formattedUnitPrice} CZK
 			</div>
 		</div>
