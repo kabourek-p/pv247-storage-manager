@@ -9,6 +9,7 @@ import { redirect } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { FormTextField } from '@/components/form/form-text-field';
+import { Select } from '@/components/form/select';
 
 export type CommodityFormProps = {
 	defaultValues: {
@@ -42,59 +43,27 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 	console.log(form.formState.errors?.name?.message);
 
 	return (
-		<div className="flex h-screen items-start justify-center pt-24 p-4">
+		<div className="flex items-start justify-center min-h-screen p-4">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-md space-x-2"
+					className="w-full max-w-xl space-y-4 bg-white p-10 rounded-lg shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
-					<div className="relative flex w-full flex-col items-start justify-between space-y-4">
-						<div
-							className={`rounded border px-4 py-2 ${
-								form.formState.errors?.name
-									? 'border-red-600'
-									: 'border-gray-300'
-							}`}
-						>
-							<FormTextField
-								name="name"
-								label="Commodity name"
-								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
-								error={form.formState.errors?.name?.message}
-							/>
-						</div>
+					<FormTextField
+						name="name"
+						label="Commodity name"
+						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
+						error={form.formState.errors?.name?.message}
+					/>
 
-						<div
-							className={`rounded border px-4 py-2 ${
-								form.formState.errors?.unit
-									? 'border-red-600'
-									: 'border-gray-300'
-							}`}
-						>
-							<label
-								htmlFor="unit"
-								className="block font-medium text-gray-700 m-4"
-							>
-								Unit
-							</label>
-							<select
-								{...form.register('unit')}
-								id="unit"
-								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
-							>
-								<option value="KG">Kilogram (KG)</option>
-								<option value="MM">Millimeter (MM)</option>
-								<option value="PIECE">Piece</option>
-							</select>
-							{form.formState.errors?.unit && (
-								<p className="mt-2 text-sm text-red-600">
-									{form.formState.errors.unit.message}
-								</p>
-							)}
-						</div>
-					</div>
+					<Select
+						options={["KG", "PIECE", "MM"]}
+						label="Commodity"
+						name={`commodity`}
+						error={form.formState.errors?.unit?.message}
+					/>
 
-					<Button colorType="secondary" className="m-4" type="submit">
+					<Button colorType="secondary" className="mt-4" type="submit">
 						Submit
 					</Button>
 				</form>
