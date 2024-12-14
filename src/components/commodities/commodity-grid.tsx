@@ -7,9 +7,9 @@ import CommodityCard from '@/components/commodities/commodity-card';
 type CommodityGridProps = {
 	commodities: {
 		name: string;
-		quantity: Decimal | number;
+		quantity: number;
 		unit: Unit;
-		unitPrice: Decimal | number;
+		unitPrice: number;
 	}[];
 };
 

@@ -126,7 +126,7 @@ export const getOrder = async (id: number) =>
 export const getRestockData = async (commodity: string) =>
 	prisma.$queryRaw<
 		RestockData[]
-	>`SELECT r.id, r.date, r.quantity, SUM(sd."quantity") AS taken, c.name
+	>`SELECT r.id, r.date, r.quantity, r."unitPrice", SUM(sd."quantity") AS taken, c.name
 									FROM "Restock" AS r LEFT JOIN "StockDispatch" AS sd
 									ON sd."restockId" = r."id"
 									LEFT JOIN "Commodity" AS c
@@ -137,7 +137,9 @@ export const getRestockData = async (commodity: string) =>
 
 export type RestockData = {
 	id: number;
+	date: Date;
 	quantity: number;
+	unitPrice: number;
 	taken: number;
 	name: string;
 };
