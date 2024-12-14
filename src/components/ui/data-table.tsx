@@ -91,7 +91,7 @@ const DataTable = <TData, TValue>({
 					</TableHeader>
 					<TableBody className="w-full">
 						{table.getRowModel().rows?.length ? (
-							table.getRowModel().rows.map((row, index) => (
+							table.getRowModel().rows.map(row => (
 								<TableRow
 									className={cn(
 										'w-full odd:bg-gray-100 even:bg-secondary-light hover:odd:bg-gray-200 hover:even:bg-secondary',

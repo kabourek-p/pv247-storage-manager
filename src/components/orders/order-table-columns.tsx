@@ -1,10 +1,7 @@
 'use client';
 import { type ColumnDef } from '@tanstack/react-table';
-import { FaCheck, FaHourglass, FaSpinner } from 'react-icons/fa';
 
 import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
-import { cn } from '@/lib/cn';
-
 export const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
 		accessorKey: 'note',
