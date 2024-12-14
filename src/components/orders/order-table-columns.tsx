@@ -2,7 +2,11 @@
 import { type ColumnDef } from '@tanstack/react-table';
 
 import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
-export const orderColumns: ColumnDef<OrderRow, string>[] = [
+
+export const getOrderColumns = (admin: boolean) =>
+	admin ? orderColumns : orderColumns.filter(col => col.header !== 'Author');
+
+const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
 		accessorKey: 'note',
 		header: 'Identifier'
