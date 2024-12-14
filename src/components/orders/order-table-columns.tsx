@@ -42,6 +42,10 @@ export const orderColumns: ColumnDef<OrderRow, string>[] = [
 
 export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 	{
+		accessorKey: 'id',
+		header: 'id'
+	},
+	{
 		accessorKey: 'commodity',
 		header: 'Commodity'
 	},
