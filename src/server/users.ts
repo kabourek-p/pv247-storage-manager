@@ -2,18 +2,9 @@
 
 import { hash } from 'bcryptjs';
 
-import generateRandomString from '@/server/utils';
 import { type RegisterFormSchema } from '@/modules/user/schema';
 
 import prisma from '../lib/prisma';
-
-export const createRandomUser = async () =>
-	prisma.user.create({
-		data: {
-			password: generateRandomString(8),
-			email: `${generateRandomString(8)}@seznam.cz`
-		}
-	});
 
 export const getUser = async (email: string) =>
 	prisma.user.findUnique({
