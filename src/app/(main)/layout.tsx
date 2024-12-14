@@ -35,9 +35,9 @@ const MainLayout = async ({
 						alt="logo"
 					/>
 				</div>
-				<MobileNavigation/>
-				<Navigation/>
-				<UserNavigation/>
+				<MobileNavigation />
+				<Navigation />
+				<UserNavigation />
 			</header>
 			<main>{children}</main>
 		</LoggedInUserProvider>
