@@ -83,15 +83,31 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 				currency: 'CZK'
 			}).format(amount);
 
-			return <div className="font-medium">{formatted}</div>;
+			return <span className="font-medium">{formatted}</span>;
 		}
 	},
 	{
-		accessorKey: 'processingNote',
-		header: 'Note'
+		accessorKey: 'totalPrice',
+		header: 'TotalPrice',
+		cell: ({ row }) => {
+			const amount =
+				parseFloat(row.getValue('unitPrice')) *
+				parseFloat(row.getValue('numberOfUnits'));
+
+			const formatted = new Intl.NumberFormat('cs-CZ', {
+				style: 'currency',
+				currency: 'CZK'
+			}).format(amount);
+
+			return <span className="font-medium">{formatted}</span>;
+		}
 	},
 	{
 		accessorKey: 'unitLength',
 		header: 'Lenght of Unit'
+	},
+	{
+		accessorKey: 'processingNote',
+		header: 'Note'
 	}
 ];
