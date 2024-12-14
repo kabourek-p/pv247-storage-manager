@@ -140,7 +140,7 @@ const DataTable = <TData, TValue>({
 					colorType="secondary"
 					className={
 						!table.getCanPreviousPage()
-							? 'bg-secondary-light hover:bg-secondary-light'
+							? 'cursor-not-allowed bg-secondary-light hover:bg-secondary-light'
 							: ''
 					}
 					onClick={() => table.previousPage()}
@@ -152,7 +152,7 @@ const DataTable = <TData, TValue>({
 					colorType="secondary"
 					className={
 						!table.getCanNextPage()
-							? 'bg-secondary-light hover:bg-secondary-light'
+							? 'cursor-not-allowed bg-secondary-light hover:bg-secondary-light'
 							: ''
 					}
 					onClick={() => table.nextPage()}

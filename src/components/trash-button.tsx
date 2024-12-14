@@ -13,7 +13,7 @@ const TrashButton = ({
 		className={cn(
 			`h-9 px-2.5 ${className}`,
 			props.disabled
-				? 'bg-gray-200 px-2.5 hover:bg-gray-200'
+				? 'cursor-not-allowed bg-gray-200 px-2.5 hover:bg-gray-200'
 				: 'bg-red-800 hover:bg-red-950'
 		)}
 	>

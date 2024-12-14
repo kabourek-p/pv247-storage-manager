@@ -88,7 +88,7 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 	},
 	{
 		accessorKey: 'totalPrice',
-		header: 'TotalPrice',
+		header: 'Total Price',
 		cell: ({ row }) => {
 			const amount =
 				parseFloat(row.getValue('unitPrice')) *
