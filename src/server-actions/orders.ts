@@ -134,7 +134,10 @@ export const getOrderData = async (
 export const lockOrderServerAction = async (id: number) => {
 	const order = await getOrder(id);
 	if (order === null) {
-		throw new Error('Order not found!');
+		return {
+			error: true,
+			message: 'Order not found!'
+		};
 	}
 	const orderElements = order ? order.orderElements : [];
 	let newDispatches: StockDispatch[] = [];
@@ -156,7 +159,10 @@ export const lockOrderServerAction = async (id: number) => {
 			}
 		}
 		if (leftToProcess !== 0) {
-			throw Error('Insufficient commodity in stock to satisfy order!');
+			return {
+				error: true,
+				message: `Insufficient commodity "${e.commodity.name}" in stock!`
+			};
 		}
 	}
 	await createStockDispatches(newDispatches);
@@ -164,6 +170,8 @@ export const lockOrderServerAction = async (id: number) => {
 
 	revalidatePath('/orders');
 	revalidatePath(`/order/${order.id}`);
+
+	return { error: false, message: 'Order successfully locked!' };
 };
 
 const generateInvoiceNumber = (orderId: number) => `INV-${orderId.toString()}`;
