@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { redirect } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { FormTextField } from '@/components/form/form-text-field';
@@ -19,7 +20,9 @@ export type RestockFormProps = {
 		invoiceNumber: string;
 	};
 	commodities: string[];
-	submitFn: (data: RestockFormSchema) => Promise<unknown>;
+	submitFn: (
+		data: RestockFormSchema
+	) => Promise<{ error: boolean; message: string }>;
 };
 
 export const restockSchema = z.object({
@@ -55,8 +58,12 @@ const RestockForm = ({
 	});
 
 	const onSubmit = async (values: RestockFormSchema) => {
-		console.log('data', values);
-		await submitFn(values);
+		const result = await submitFn(values);
+		if (result.error) {
+			toast.error(result.message);
+			return;
+		}
+		toast.success(result.message);
 		redirect('/restocks');
 	};
 

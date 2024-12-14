@@ -6,6 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Unit } from '@prisma/client';
 import { redirect } from 'next/navigation';
+import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
 import { FormTextField } from '@/components/form/form-text-field';
@@ -16,7 +17,9 @@ export type CommodityFormProps = {
 		name: string;
 		unit: keyof typeof Unit;
 	};
-	submitFn: (data: CommodityFormSchema) => Promise<unknown>;
+	submitFn: (
+		data: CommodityFormSchema
+	) => Promise<{ error: boolean; message: string }>;
 };
 
 const commoditySchema = z.object({
@@ -36,12 +39,16 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 	});
 
 	const onSubmit = async (values: CommodityFormSchema) => {
-		console.log('data', values);
-		await submitFn(values);
+		const result = await submitFn(values);
+		if (result.error) {
+			toast.error(result.message);
+			return;
+		}
+		toast.success(result.message);
 		redirect('/commodities');
 	};
-	console.log(form.formState.errors?.name?.message);
 
+	console.log(form.formState.errors?.name?.message);
 	return (
 		<div className="flex min-h-screen items-start justify-center p-4">
 			<FormProvider {...form}>
