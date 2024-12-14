@@ -11,6 +11,7 @@ type RestockTableProps<TData> = {
 };
 
 const RestockTable = ({ data }: RestockTableProps<TData>) => {
+	//TODO
 	const { user } = useLoggedInUser();
 	return (
 		<DataTable

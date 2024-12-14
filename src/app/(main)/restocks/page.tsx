@@ -4,9 +4,12 @@ import AddRestockButton from '@/components/restocks/add-restock-button';
 import { getRestockRows } from '@/server-actions/restocks';
 import { Card } from '@/components/ui/card';
 import RestockTable from '@/components/restocks/restocks-table';
+import authUser from '@/lib/auth';
 
 const Restocks = async () => {
-	const data = await getRestockRows();
+	const user = await authUser();
+	//TODO  admin send null
+	const data = await getRestockRows(user.id);
 
 	return (
 		<div className="flex min-h-screen grid-rows-[20px_1fr_20px] flex-col gap-16 bg-white p-8 pt-20 text-center font-[family-name:var(--font-geist-sans)] sm:bg-gray-100 sm:p-20 sm:text-left">

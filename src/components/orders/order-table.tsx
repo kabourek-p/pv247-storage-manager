@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import type { ColumnDef } from '@tanstack/react-table';
 import { redirect } from 'next/navigation';
 
 import DataTable from '@/components/ui/data-table';
@@ -17,6 +16,7 @@ const handleRowClick = async (id: string) => {
 };
 
 const OrderTable = ({ data }: OrderTableProps<TData>) => {
+	//TODO
 	const { user } = useLoggedInUser();
 	return (
 		<DataTable
