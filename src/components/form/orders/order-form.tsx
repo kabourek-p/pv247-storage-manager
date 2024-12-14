@@ -5,6 +5,7 @@ import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
+import { redirect } from 'next/navigation';
 
 import { FormTextField } from '@/components/form/form-text-field';
 import { Button } from '@/components/ui/button';
@@ -12,10 +13,12 @@ import OrderElementHeader from '@/components/form/orders/order-element-header';
 import OrderElementFormRow, {
 	OrderElementTableRowSchema
 } from '@/components/form/orders/order-element-form-row';
+import { Table, TableBody } from '@/components/ui/table';
 
 export type OrderFormDefaultData = {
 	id?: number;
 	note: string;
+	authorId: string;
 	orders: {
 		id: number | undefined;
 		commodity: string;
@@ -26,33 +29,31 @@ export type OrderFormDefaultData = {
 	}[];
 };
 
-export type OrderFormProps = {
-	defaultValues: OrderFormDefaultData;
-	commodities: string[];
-	submitFn: (
-		data: OrderFormSchema
-	) => Promise<{ error: boolean; message: string }>;
-};
-
 const orderSchema = z.object({
 	id: z.coerce.number().optional(),
 	note: z.string().min(3, 'Name must be at least 3 characters'),
+	authorId: z.string(),
 	orders: z.array(OrderElementTableRowSchema)
 });
 
 export type OrderFormSchema = z.infer<typeof orderSchema>;
 
-const OrderForm = ({
-	defaultValues,
-	submitFn,
-	commodities
-}: OrderFormProps) => {
+const OrderForm = (params: {
+	defaultValues: OrderFormDefaultData;
+	commodities: string[];
+	redirectPath: string;
+	allowSaveNext: boolean;
+	submitFn: (
+		data: OrderFormSchema
+	) => Promise<{ error: boolean; message: string }>;
+}) => {
 	const form = useForm<OrderFormSchema>({
 		resolver: zodResolver(orderSchema),
 		defaultValues: {
-			id: defaultValues.id,
-			note: defaultValues.note,
-			orders: defaultValues.orders
+			id: params.defaultValues.id,
+			note: params.defaultValues.note,
+			orders: params.defaultValues.orders,
+			authorId: params.defaultValues.authorId
 		}
 	});
 	const { fields, append, remove } = useFieldArray({
@@ -61,7 +62,18 @@ const OrderForm = ({
 	});
 
 	const onSubmit = async (values: OrderFormSchema) => {
-		const result = await submitFn(values);
+		const result = await params.submitFn(values);
+		if (result.error) {
+			toast.error(result.message);
+			return;
+		}
+		toast.success(result.message);
+		form.reset();
+		redirect(params.redirectPath);
+	};
+
+	const onSubmitAndNext = async (values: OrderFormSchema) => {
+		const result = await params.submitFn(values);
 		if (result.error) {
 			toast.error(result.message);
 			return;
@@ -70,15 +82,14 @@ const OrderForm = ({
 		form.reset();
 	};
 
-	console.log(form.formState.errors?.note?.message);
 	return (
-		<div className="flex px-4">
+		<div className="flex justify-center">
 			<FormProvider {...form}>
 				<form
-					className="w-full space-x-2"
-					onSubmit={form.handleSubmit(onSubmit)}
+					className="w-11/12 justify-center space-x-2 md:w-full"
+					onSubmit={form.handleSubmit(() => {})}
 				>
-					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
+					<div className="relative m-2 mb-4 flex flex-col items-start justify-between space-y-4 md:w-full">
 						<div
 							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.note
@@ -89,7 +100,7 @@ const OrderForm = ({
 							<FormTextField
 								name="note"
 								label="Order Identifier"
-								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
+								className="mt-4 w-11/12 rounded-lg bg-slate-50 p-4 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
 							/>
 							<span className="hidden">
@@ -99,10 +110,36 @@ const OrderForm = ({
 									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
 								/>
 							</span>
+							<span className="hidden">
+								<FormTextField
+									name="authorId"
+									label="authorId"
+									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
+								/>
+							</span>
 						</div>
-						<div className="bottom-0 right-0">
+					</div>
+					<div className="relative flex flex-col items-start justify-between space-y-4">
+						<div className="mb-4 flex w-full flex-col justify-end gap-2 sm:flex-row md:w-3/4 lg:absolute lg:bottom-0 lg:right-0">
+							{params.allowSaveNext && (
+								<Button
+									colorType="secondary"
+									className="mt-2 w-full sm:w-48"
+									onClick={form.handleSubmit(onSubmitAndNext)}
+								>
+									Save and continue
+								</Button>
+							)}
 							<Button
-								className="mb-2 w-40"
+								colorType="secondary"
+								className="mt-2 w-full sm:w-36"
+								onClick={form.handleSubmit(onSubmit)}
+							>
+								Save
+							</Button>
+
+							<Button
+								className="mt-2 w-full sm:w-36"
 								type="button"
 								onClick={() =>
 									append({
@@ -118,26 +155,24 @@ const OrderForm = ({
 							</Button>
 						</div>
 					</div>
+					<div className="overflow-hidden rounded-md border shadow">
+						<Table className="table-auto border-collapse border border-gray-300 md:w-full">
+							<OrderElementHeader />
 
-					<table className="w-full table-auto border-collapse border border-gray-300">
-						<OrderElementHeader />
-
-						<tbody className="">
-							{fields.map((field, index) => (
-								<OrderElementFormRow
-									commodities={commodities}
-									key={field.id}
-									onClick={() => remove(index)}
-									index={index}
-									errors={form.formState.errors?.orders?.[index]}
-								/>
-							))}
-						</tbody>
-					</table>
-
-					<Button colorType="secondary" className="m-4" type="submit">
-						Submit
-					</Button>
+							<TableBody className="md:w-full">
+								{fields.map((field, index) => (
+									<OrderElementFormRow
+										disabledDelete={fields.length <= 1}
+										commodities={params.commodities}
+										key={field.id}
+										onClick={() => remove(index)}
+										index={index}
+										errors={form.formState.errors?.orders?.[index]}
+									/>
+								))}
+							</TableBody>
+						</Table>
+					</div>
 				</form>
 			</FormProvider>
 		</div>

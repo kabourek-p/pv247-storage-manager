@@ -9,7 +9,7 @@ import { type OrderData } from '@/server-actions/orders';
 const EditOrderButton = ({ order }: { order: OrderData | undefined }) => (
 	<div>
 		<Button
-			className={`mb-2 w-40 ${
+			className={`mb-2 w-28 sm:w-40 ${
 				order?.invoice !== null
 					? 'cursor-not-allowed bg-primary-light hover:bg-primary-light active:scale-100'
 					: 'cursor-pointer'

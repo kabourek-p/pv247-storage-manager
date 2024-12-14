@@ -3,11 +3,10 @@ import { type ColumnDef } from '@tanstack/react-table';
 
 import { type OrderElementRow, type OrderRow } from '@/server-actions/orders';
 
-export const orderColumns: ColumnDef<OrderRow, string>[] = [
-	{
-		accessorKey: 'id',
-		header: 'id'
-	},
+export const getOrderColumns = (admin: boolean) =>
+	admin ? orderColumns : orderColumns.filter(col => col.header !== 'Author');
+
+const orderColumns: ColumnDef<OrderRow, string>[] = [
 	{
 		accessorKey: 'note',
 		header: 'Identifier'
@@ -31,16 +30,33 @@ export const orderColumns: ColumnDef<OrderRow, string>[] = [
 				currency: 'CZK'
 			}).format(amount);
 
-			return <div className="font-medium">{formatted}</div>;
+			return <span className="font-medium">{formatted}</span>;
 		}
 	},
 	{
 		accessorKey: 'authorName',
 		header: 'Author'
+	},
+	{
+		accessorKey: 'closed',
+		header: 'Status',
+		cell: ({ row }) => {
+			const closed = row.getValue('closed');
+
+			return <span>{closed ? 'CLOSED' : 'OPEN'}</span>;
+		}
+	},
+	{
+		accessorKey: 'id',
+		header: 'id'
 	}
 ];
 
 export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
+	{
+		accessorKey: 'id',
+		header: 'id'
+	},
 	{
 		accessorKey: 'commodity',
 		header: 'Commodity'
@@ -60,15 +76,31 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 				currency: 'CZK'
 			}).format(amount);
 
-			return <div className="font-medium">{formatted}</div>;
+			return <span className="font-medium">{formatted}</span>;
 		}
 	},
 	{
-		accessorKey: 'processingNote',
-		header: 'Note'
+		accessorKey: 'totalPrice',
+		header: 'Total Price',
+		cell: ({ row }) => {
+			const amount =
+				parseFloat(row.getValue('unitPrice')) *
+				parseFloat(row.getValue('numberOfUnits'));
+
+			const formatted = new Intl.NumberFormat('cs-CZ', {
+				style: 'currency',
+				currency: 'CZK'
+			}).format(amount);
+
+			return <span className="font-medium">{formatted}</span>;
+		}
 	},
 	{
 		accessorKey: 'unitLength',
 		header: 'Lenght of Unit'
+	},
+	{
+		accessorKey: 'processingNote',
+		header: 'Note'
 	}
 ];

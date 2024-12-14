@@ -3,7 +3,12 @@ import { type ColumnDef } from '@tanstack/react-table';
 
 import type { RestockRow } from '@/server-actions/restocks';
 
-export const restockColumns: ColumnDef<RestockRow, string>[] = [
+export const getRestockColumns = (admin: boolean) =>
+	admin
+		? restockColumns
+		: restockColumns.filter(col => col.header !== 'Author');
+
+const restockColumns: ColumnDef<RestockRow, string>[] = [
 	{
 		accessorKey: 'date',
 		header: 'Date of Creation'

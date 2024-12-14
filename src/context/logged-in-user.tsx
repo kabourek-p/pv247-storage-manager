@@ -6,8 +6,7 @@ import {
 	useState,
 	useContext
 } from 'react';
-
-import { type User } from '../modules/user/schema';
+import { type User } from '@prisma/client';
 
 type LoggedInUserContextType = {
 	user: User | null;
@@ -28,8 +27,11 @@ const useLoggedInUser = () => {
 	return context;
 };
 
-const LoggedInUserProvider = ({ children }: PropsWithChildren) => {
-	const [user, setUser] = useState<User | null>(null);
+const LoggedInUserProvider = ({
+	defaultValue,
+	children
+}: PropsWithChildren & { defaultValue: User }) => {
+	const [user, setUser] = useState<User | null>(defaultValue);
 
 	return (
 		<LoggedInUserContext.Provider value={{ user, setUser }}>

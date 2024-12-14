@@ -27,8 +27,10 @@ export const createRestockServerAction = async (restock: RestockFormSchema) => {
 	return { error: false, message: 'Restock successfully registered!' };
 };
 
-export const getRestockRows = async (): Promise<RestockRow[]> => {
-	const restocks = await getRestocks();
+export const getRestockRows = async (
+	authorId: string | null
+): Promise<RestockRow[]> => {
+	const restocks = await getRestocks(authorId);
 	return restocks.map(r => ({
 		date: new Intl.DateTimeFormat('cs-CZ', {
 			day: '2-digit',

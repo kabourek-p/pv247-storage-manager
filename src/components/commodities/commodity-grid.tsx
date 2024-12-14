@@ -1,5 +1,4 @@
 import React from 'react';
-import type { Decimal } from '@prisma/client/runtime/library';
 import type { Unit } from '@prisma/client';
 
 import CommodityCard from '@/components/commodities/commodity-card';
@@ -7,14 +6,14 @@ import CommodityCard from '@/components/commodities/commodity-card';
 type CommodityGridProps = {
 	commodities: {
 		name: string;
-		quantity: Decimal | number;
+		quantity: number;
 		unit: Unit;
-		unitPrice: Decimal | number;
+		unitPrice: number;
 	}[];
 };
 
 const CommodityGrid: React.FC<CommodityGridProps> = ({ commodities }) => (
-	<div className="flex flex-wrap gap-10">
+	<div className="flex flex-wrap justify-center gap-10 sm:justify-start">
 		{commodities.map(commodity => (
 			<CommodityCard
 				key={commodity.name}

@@ -18,6 +18,7 @@ export type RestockFormProps = {
 		unitPrice: number;
 		supplierName: string;
 		invoiceNumber: string;
+		authorId: string;
 	};
 	commodities: string[];
 	submitFn: (
@@ -36,7 +37,8 @@ export const restockSchema = z.object({
 		.positive('Unit price must be a positive number')
 		.max(1000000, 'Unit price must be less than or equal to 1,000,000'), // Maximum 1,000,000
 	supplierName: z.string().min(1, 'Supplier name is required'),
-	invoiceNumber: z.string().min(1, 'Invoice number is required')
+	invoiceNumber: z.string().min(1, 'Invoice number is required'),
+	authorId: z.string()
 });
 
 export type RestockFormSchema = z.infer<typeof restockSchema>;
@@ -53,7 +55,8 @@ const RestockForm = ({
 			quantity: defaultValues.quantity,
 			unitPrice: defaultValues.unitPrice,
 			supplierName: defaultValues.supplierName,
-			invoiceNumber: defaultValues.invoiceNumber
+			invoiceNumber: defaultValues.invoiceNumber,
+			authorId: defaultValues.authorId
 		}
 	});
 
@@ -68,10 +71,10 @@ const RestockForm = ({
 	};
 
 	return (
-		<div className="flex min-h-screen items-start justify-center p-4">
+		<div className="flex items-start justify-center">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-10 shadow-lg"
+					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-5 shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<Select
@@ -108,7 +111,9 @@ const RestockForm = ({
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.invoiceNumber?.message}
 					/>
-
+					<span className="hidden">
+						<FormTextField name="authorId" label="authorId" />
+					</span>
 					<Button colorType="secondary" className="mt-4" type="submit">
 						Submit
 					</Button>

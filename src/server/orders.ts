@@ -7,13 +7,11 @@ import prisma from '../lib/prisma';
 
 import ProcessingType = $Enums.ProcessingType;
 
-export const createOrder = async (order: OrderFormSchema) => {
-	const users = await prisma.user.findMany();
-
-	return prisma.order.create({
+export const createOrder = async (order: OrderFormSchema) =>
+	prisma.order.create({
 		data: {
 			author: {
-				connect: { id: users[users.length - 1].id }
+				connect: { id: order.authorId }
 			},
 			note: order.note,
 			orderElements: {
@@ -32,7 +30,6 @@ export const createOrder = async (order: OrderFormSchema) => {
 			}
 		}
 	});
-};
 
 export const editOrder = async (
 	orderId: number,
@@ -94,11 +91,18 @@ export const editOrder = async (
 	});
 };
 
-export const getOrders = async () =>
+export const getOrders = async (authorId: string | null) =>
 	prisma.order.findMany({
 		include: {
 			orderElements: true,
-			author: true
+			author: true,
+			invoices: true
+		},
+		where: authorId ? { authorId } : undefined,
+		orderBy: {
+			invoices: {
+				invoiceNumber: 'desc'
+			}
 		}
 	});
 
@@ -109,6 +113,7 @@ export const getOrder = async (id: number) =>
 		},
 		include: {
 			invoices: true,
+			author: true,
 			orderElements: {
 				include: {
 					commodity: true,
@@ -121,7 +126,7 @@ export const getOrder = async (id: number) =>
 export const getRestockData = async (commodity: string) =>
 	prisma.$queryRaw<
 		RestockData[]
-	>`SELECT r.id, r.date, r.quantity, SUM(sd."quantity") AS taken, c.name
+	>`SELECT r.id, r.date, r.quantity, r."unitPrice", SUM(sd."quantity") AS taken, c.name
 									FROM "Restock" AS r LEFT JOIN "StockDispatch" AS sd
 									ON sd."restockId" = r."id"
 									LEFT JOIN "Commodity" AS c
@@ -132,7 +137,9 @@ export const getRestockData = async (commodity: string) =>
 
 export type RestockData = {
 	id: number;
+	date: Date;
 	quantity: number;
+	unitPrice: number;
 	taken: number;
 	name: string;
 };

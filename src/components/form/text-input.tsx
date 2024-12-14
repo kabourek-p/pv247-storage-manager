@@ -9,7 +9,7 @@ export const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
 		<div className="flex flex-col">
 			<input
 				ref={ref}
-				className={`w-12/12 mx-1.5 rounded-lg border-2 bg-slate-50 py-1.5 shadow ${
+				className={`mx-1.5 w-11/12 rounded-lg border-2 bg-slate-50 p-1.5 shadow ${
 					error ? 'border-red-600' : 'border-gray-300'
 				}`}
 				{...inputProps}
