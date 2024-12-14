@@ -113,6 +113,7 @@ export const getOrderData = async (
 	return {
 		id: order.id,
 		note: order.note ? order.note : '',
+		authorId: order.authorId,
 		invoice: !invoice
 			? null
 			: {
@@ -202,6 +203,7 @@ export type OrderElementRow = {
 export type OrderData = {
 	id: number;
 	note: string;
+	authorId: string;
 	invoice: {
 		invoiceNumber: string;
 		date: string;

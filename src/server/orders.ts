@@ -7,13 +7,11 @@ import prisma from '../lib/prisma';
 
 import ProcessingType = $Enums.ProcessingType;
 
-export const createOrder = async (order: OrderFormSchema) => {
-	const users = await prisma.user.findMany();
-
-	return prisma.order.create({
+export const createOrder = async (order: OrderFormSchema) =>
+	prisma.order.create({
 		data: {
 			author: {
-				connect: { id: users[users.length - 1].id }
+				connect: { id: order.authorId }
 			},
 			note: order.note,
 			orderElements: {
@@ -32,7 +30,6 @@ export const createOrder = async (order: OrderFormSchema) => {
 			}
 		}
 	});
-};
 
 export const editOrder = async (
 	orderId: number,
@@ -115,6 +112,7 @@ export const getOrder = async (id: number) =>
 		},
 		include: {
 			invoices: true,
+			author: true,
 			orderElements: {
 				include: {
 					commodity: true,

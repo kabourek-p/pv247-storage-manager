@@ -1,11 +1,19 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { type User } from '@prisma/client';
 
 import OrderForm from '@/components/form/orders/order-form';
 import { createOrderServerAction } from '@/server-actions/orders';
+import { useLoggedInUser } from '@/context/logged-in-user';
 
-const CreateOrderForm = (props: { commodities: string[] }) => {
+const CreateOrderForm = (props: {
+	loggedInUser: User;
+	commodities: string[];
+}) => {
+	const { user, setUser } = useLoggedInUser();
+	setUser(props.loggedInUser);
+
 	useEffect(() => {
 		const handleBeforeUnload = (event: BeforeUnloadEvent) => {
 			event.preventDefault();
@@ -16,7 +24,7 @@ const CreateOrderForm = (props: { commodities: string[] }) => {
 		return () => {
 			window.removeEventListener('beforeunload', handleBeforeUnload);
 		};
-	}, []);
+	});
 
 	return (
 		<div>
@@ -24,6 +32,7 @@ const CreateOrderForm = (props: { commodities: string[] }) => {
 				redirectPath="/orders"
 				defaultValues={{
 					note: '',
+					authorId: user?.id ?? '',
 					orders: [
 						{
 							id: undefined,

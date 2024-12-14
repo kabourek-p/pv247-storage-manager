@@ -6,8 +6,7 @@ import {
 	useState,
 	useContext
 } from 'react';
-
-import { type User } from '../modules/user/schema';
+import { type User } from '@prisma/client';
 
 type LoggedInUserContextType = {
 	user: User | null;

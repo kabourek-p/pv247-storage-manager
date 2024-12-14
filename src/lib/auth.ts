@@ -3,6 +3,7 @@ import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import Credentials from 'next-auth/providers/credentials';
+import { redirect } from 'next/navigation';
 
 import prisma from '@/lib/prisma';
 import { getUser } from '@/server/users';
@@ -57,3 +58,17 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
 		signIn: '/auth/signin'
 	}
 });
+
+const authUser = async () => {
+	const session = await auth();
+	if (!session?.user) {
+		return redirect('/auth/signin');
+	}
+	const user = await getUser(session.user.email ?? '');
+	if (!user) {
+		throw new Error('User was not found!');
+	}
+	return user;
+};
+
+export default authUser;

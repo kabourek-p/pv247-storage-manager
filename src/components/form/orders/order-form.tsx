@@ -18,6 +18,7 @@ import { Table, TableBody } from '@/components/ui/table';
 export type OrderFormDefaultData = {
 	id?: number;
 	note: string;
+	authorId: string;
 	orders: {
 		id: number | undefined;
 		commodity: string;
@@ -31,6 +32,7 @@ export type OrderFormDefaultData = {
 const orderSchema = z.object({
 	id: z.coerce.number().optional(),
 	note: z.string().min(3, 'Name must be at least 3 characters'),
+	authorId: z.string(),
 	orders: z.array(OrderElementTableRowSchema)
 });
 
@@ -50,7 +52,8 @@ const OrderForm = (params: {
 		defaultValues: {
 			id: params.defaultValues.id,
 			note: params.defaultValues.note,
-			orders: params.defaultValues.orders
+			orders: params.defaultValues.orders,
+			authorId: params.defaultValues.authorId
 		}
 	});
 	const { fields, append, remove } = useFieldArray({
@@ -64,7 +67,6 @@ const OrderForm = (params: {
 			toast.error(result.message);
 			return;
 		}
-		console.log('got here');
 		toast.success(result.message);
 		form.reset();
 		redirect(params.redirectPath);
@@ -105,6 +107,13 @@ const OrderForm = (params: {
 								<FormTextField
 									name="id"
 									label="Id"
+									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
+								/>
+							</span>
+							<span className="hidden">
+								<FormTextField
+									name="authorId"
+									label="authorId"
 									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
 								/>
 							</span>
