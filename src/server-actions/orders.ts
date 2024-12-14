@@ -1,7 +1,6 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 import type { OrderFormSchema } from '@/components/form/orders/order-form';
 import {
@@ -59,7 +58,11 @@ export const editOrderServerAction = async (order: OrderFormSchema) => {
 	revalidatePath('/orders');
 	revalidatePath(`/order/${order.id}`);
 	revalidatePath(`/order/${order.id}/edit`);
-	redirect(`/orders`);
+
+	return {
+		error: false,
+		message: 'Order successfully updated!'
+	};
 };
 
 export const getOrderRows = async (): Promise<OrderRow[]> => {

@@ -26,6 +26,8 @@ const EditOrderForm = (props: {
 	return (
 		<div>
 			<OrderForm
+				redirectPath="/orders"
+				allowSaveNext={false}
 				defaultValues={props.defaultValues}
 				submitFn={editOrderServerAction}
 				commodities={props.commodities}

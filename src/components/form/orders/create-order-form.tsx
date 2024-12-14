@@ -21,6 +21,7 @@ const CreateOrderForm = (props: { commodities: string[] }) => {
 	return (
 		<div>
 			<OrderForm
+				redirectPath="/orders"
 				defaultValues={{
 					note: '',
 					orders: [
@@ -36,6 +37,7 @@ const CreateOrderForm = (props: { commodities: string[] }) => {
 				}}
 				submitFn={createOrderServerAction}
 				commodities={props.commodities}
+				allowSaveNext
 			/>
 		</div>
 	);
