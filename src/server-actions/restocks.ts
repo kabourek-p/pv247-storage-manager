@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 
-import type { RestockFormSchema } from '@/components/restocks/restock-form';
+import type { RestockFormSchema } from '@/components/form/restocks/restock-form';
 import { createRestock } from '@/server/restocks';
 
 export const createRestockServerAction = async (restock: RestockFormSchema) => {
