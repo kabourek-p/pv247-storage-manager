@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/cn';
 
 type DataTableProps<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[];
@@ -69,14 +70,14 @@ const DataTable = <TData, TValue>({
 				</div>
 			)}
 			<div className="overflow-hidden rounded-md border shadow">
-				<Table>
-					<TableHeader>
+				<Table className="w-full">
+					<TableHeader className="hidden text-center md:table-header-group">
 						{table.getHeaderGroups().map(headerGroup => (
 							<TableRow key={headerGroup.id}>
 								{headerGroup.headers.map(header => (
 									<TableHead
 										key={header.id}
-										className="bg-primary-light text-primary-dark"
+										className="bg-primary-light text-center text-primary-dark"
 									>
 										{header.isPlaceholder
 											? null
@@ -89,17 +90,26 @@ const DataTable = <TData, TValue>({
 							</TableRow>
 						))}
 					</TableHeader>
-					<TableBody>
+					<TableBody className="w-full">
 						{table.getRowModel().rows?.length ? (
 							table.getRowModel().rows.map(row => (
 								<TableRow
+									className={cn(
+										'w-full odd:bg-gray-100 even:bg-secondary even:text-white',
+										'even:text-black md:border-b-2 md:odd:bg-white md:even:bg-white'
+									)}
 									key={row.id}
 									data-state={row.getIsSelected() && 'selected'}
 									onClick={() => handleRowClick(row.getValue('id'))}
 								>
 									{row.getVisibleCells().map(cell => (
 										<TableCell
-											className={`${filter ? 'cursor-pointer' : ''}`}
+											className={cn(
+												`relative block border-b border-gray-300 px-2 py-1 text-left`,
+												`before:pr-2 before:font-bold before:content-[attr(data-label)]`,
+												`md:table-cell md:text-center md:before:content-none`,
+												`${filter ? 'cursor-pointer' : ''}`
+											)}
 											key={cell.id}
 											data-label={`${cell.column.columnDef.header}:`}
 										>
