@@ -6,9 +6,25 @@ import type { RestockFormSchema } from '@/components/form/restocks/restock-form'
 import { createRestock, getRestocks } from '@/server/restocks';
 
 export const createRestockServerAction = async (restock: RestockFormSchema) => {
-	await createRestock(restock);
+	try {
+		await createRestock(restock);
+	} catch (e) {
+		if (typeof e === 'string') {
+			return {
+				error: true,
+				message: e.toUpperCase()
+			};
+		} else if (e instanceof Error) {
+			return {
+				error: true,
+				message: e.message
+			};
+		}
+	}
 
 	revalidatePath('/restocks');
+
+	return { error: false, message: 'Restock successfully registered!' };
 };
 
 export const getRestockRows = async (): Promise<RestockRow[]> => {
