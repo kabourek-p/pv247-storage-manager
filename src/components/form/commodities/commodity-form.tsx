@@ -42,13 +42,13 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 	console.log(form.formState.errors?.name?.message);
 
 	return (
-		<div className="flex p-4">
+		<div className="flex h-screen items-start justify-center pt-24 p-4">
 			<FormProvider {...form}>
 				<form
-					className="w-full space-x-2"
+					className="w-full max-w-md space-x-2"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
-					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
+					<div className="relative flex w-full flex-col items-start justify-between space-y-4">
 						<div
 							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.name
@@ -73,7 +73,7 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 						>
 							<label
 								htmlFor="unit"
-								className="block text-sm font-medium text-gray-700"
+								className="block font-medium text-gray-700 m-4"
 							>
 								Unit
 							</label>
