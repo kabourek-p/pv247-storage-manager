@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
 
 import { OtherLoginOptions } from '@/components/login/other-login-options';
@@ -24,14 +23,6 @@ const SignInPage = async () => {
 					/>
 					<h1 className="my-6 self-center text-2xl">Login</h1>
 					<LoginForm />
-					<div className="my-2 self-end">
-						<Link
-							href="forgot-password"
-							className="text-sm text-secondary hover:underline"
-						>
-							Forgot password?
-						</Link>
-					</div>
 					<OtherLoginOptions />
 					<LoginSignupRedirect redirectTo="signup">
 						Don&apos;t have and account?

@@ -25,6 +25,7 @@ export type LoginFormSchema = z.infer<typeof loginFormSchema>;
 
 export const registerFormSchema = z
 	.object({
+		name: z.string().min(1, 'Full Name is required'),
 		email: z.string().min(1, 'Email is required').email('Invalid email'),
 		password: z
 			.string()
@@ -37,7 +38,7 @@ export const registerFormSchema = z
 	})
 	.refine(data => data.password === data.retypePassword, {
 		message: 'Passwords must match',
-		path: ['retypePassword'] // Specifies where the error should appear
+		path: ['retypePassword']
 	});
 
-export type RegisterFormSchema = z.infer<typeof loginFormSchema>;
+export type RegisterFormSchema = z.infer<typeof registerFormSchema>;

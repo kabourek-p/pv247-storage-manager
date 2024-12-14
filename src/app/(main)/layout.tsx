@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
 
-import { Navigation } from '@/components/navigation';
-import UserNavigation from '@/components/user-navigation';
+import { Navigation } from '@/components/navigation/navigation';
+import UserNavigation from '@/components/navigation/user-navigation';
 import { auth } from '@/lib/auth';
+import MobileNavigation from '@/components/navigation/mobile-navigation';
 import { getUser } from '@/server/users';
 import { LoggedInUserProvider } from '@/context/logged-in-user';
 
@@ -24,17 +25,17 @@ const MainLayout = async ({
 
 	return (
 		<LoggedInUserProvider defaultValue={user}>
-			<header className="flex justify-between bg-primary-dark px-4 shadow-md">
-				{/* TODO mobile version */}
+			<header className="fixed z-50 flex min-h-[3.75rem] w-full justify-between bg-primary-dark pl-4 shadow-md">
 				<div className="self-center">
 					<Image
 						className="rounded-md"
 						src="/static/img/logo-white-orange.png"
-						width={60}
-						height={60}
+						width={50}
+						height={50}
 						alt="logo"
 					/>
 				</div>
+				<MobileNavigation />
 				<Navigation />
 				<UserNavigation />
 			</header>
