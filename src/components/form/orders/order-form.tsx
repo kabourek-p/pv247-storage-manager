@@ -90,7 +90,7 @@ const OrderForm = ({
 							<FormTextField
 								name="note"
 								label="Order Identifier"
-								className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
+								className="m-4 w-64 rounded-lg bg-slate-50 p-4 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
 							/>
 							<span className="hidden">
