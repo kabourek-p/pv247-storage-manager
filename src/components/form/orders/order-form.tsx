@@ -79,7 +79,7 @@ const OrderForm = ({
 					className="w-full space-x-2"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
-					<div className="relative mx-2 flex w-full flex-col items-start justify-between space-y-4">
+					<div className="relative m-2 mb-4 flex w-full flex-col items-start justify-between space-y-4">
 						<div
 							className={`rounded border px-4 py-2 ${
 								form.formState.errors?.note
@@ -101,9 +101,16 @@ const OrderForm = ({
 								/>
 							</span>
 						</div>
-						<div className="bottom-0 right-0">
+					</div>
+					<div className="relative flex w-full flex-col items-start justify-between space-y-4">
+						<div className="mb-4 lg:absolute lg:bottom-0 lg:right-3">
+
+							<Button colorType="secondary" className="mr-4" type="submit">
+								Submit
+							</Button>
+
 							<Button
-								className="mb-2 w-40"
+								className="w-40"
 								type="button"
 								onClick={() =>
 									append({
@@ -115,7 +122,7 @@ const OrderForm = ({
 									})
 								}
 							>
-								Add row
+								Add item
 							</Button>
 						</div>
 					</div>
@@ -136,10 +143,6 @@ const OrderForm = ({
 							</TableBody>
 						</Table>
 					</div>
-
-					<Button colorType="secondary" className="m-4" type="submit">
-						Submit
-					</Button>
 				</form>
 			</FormProvider>
 		</div>
