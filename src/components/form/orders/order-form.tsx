@@ -132,6 +132,7 @@ const OrderForm = ({
 							<TableBody>
 								{fields.map((field, index) => (
 									<OrderElementFormRow
+										disabledDelete={fields.length <= 1}
 										commodities={commodities}
 										key={field.id}
 										onClick={() => remove(index)}

@@ -40,10 +40,15 @@ const OrderElementFormRow = (props: {
 	index: number;
 	commodities: string[];
 	errors?: OrderElementTableRowErrorSchema;
+	disabledDelete: boolean;
 }) => (
 	<TableRow className="hover:bg-gray-100">
 		<TableCell className="border border-gray-300 text-center lg:w-12">
-			<TrashButton type="button" onClick={props.onClick} />
+			<TrashButton
+				disabled={props.disabledDelete}
+				type="button"
+				onClick={props.onClick}
+			/>
 		</TableCell>
 
 		<TableCell
@@ -89,7 +94,10 @@ const OrderElementFormRow = (props: {
 			/>
 		</TableCell>
 
-		<TableCell className="w-2/8 border border-gray-300 py-2 lg:w-3/12" data-label="Note">
+		<TableCell
+			className="w-2/8 border border-gray-300 py-2 lg:w-3/12"
+			data-label="Note"
+		>
 			<FormTextField
 				name={`orders[${props.index}].note`}
 				error={props.errors?.note?.message}
