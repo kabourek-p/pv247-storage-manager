@@ -16,12 +16,11 @@ const handleRowClick = async (id: string) => {
 };
 
 const OrderTable = ({ data }: OrderTableProps<TData>) => {
-	//TODO
 	const { user } = useLoggedInUser();
 	return (
 		<DataTable
 			data={data}
-			columns={getOrderColumns(false)}
+			columns={getOrderColumns(user?.role === 'ADMIN')}
 			rowClickHandler={handleRowClick}
 			filter="note"
 		/>

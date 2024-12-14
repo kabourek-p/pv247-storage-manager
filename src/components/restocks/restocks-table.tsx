@@ -11,12 +11,11 @@ type RestockTableProps<TData> = {
 };
 
 const RestockTable = ({ data }: RestockTableProps<TData>) => {
-	//TODO
 	const { user } = useLoggedInUser();
 	return (
 		<DataTable
 			data={data}
-			columns={getRestockColumns(false)}
+			columns={getRestockColumns(user?.role === 'ADMIN')}
 			filter="commodity"
 		/>
 	);
