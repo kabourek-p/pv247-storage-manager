@@ -24,7 +24,7 @@ const Restocks = async () => {
 					data={data}
 					columns={restockColumns}
 					rowClickHandler={handleRowClick}
-					filter
+					filter="commodity"
 				/>
 			</Card>
 		</div>
