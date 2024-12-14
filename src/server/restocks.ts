@@ -5,7 +5,7 @@ import { type RestockFormSchema } from '@/components/form/restocks/restock-form'
 import prisma from '../lib/prisma';
 
 export const getRestocks = async () =>
-	prisma.order.findMany({
+	prisma.restock.findMany({
 		include: {
 			author: true
 		}
