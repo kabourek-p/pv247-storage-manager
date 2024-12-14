@@ -32,6 +32,7 @@ export const createUser = async (data: RegisterFormSchema) => {
 
 	return prisma.user.create({
 		data: {
+			name: data.name,
 			email: data.email,
 			password: passwordHash
 		}

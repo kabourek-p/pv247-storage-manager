@@ -37,6 +37,7 @@ export const RegisterForm = () => {
 				onSubmit={form.handleSubmit(onSubmit)}
 				className="flex w-full flex-col gap-4"
 			>
+				<FormInput label="Full Name" name="name" />
 				<FormInput label="Email" name="email" />
 				<FormInput label="Password" type="password" name="password" />
 				<FormInput
