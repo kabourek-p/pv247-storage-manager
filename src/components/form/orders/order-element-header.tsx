@@ -18,9 +18,7 @@ const OrderElementHeader = () => (
 			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2">
 				Number of Units
 			</TableHead>
-			<TableHead className="border-l border-gray-300 px-4 py-2">
-				Note
-			</TableHead>
+			<TableHead className="border-l border-gray-300 px-4 py-2">Note</TableHead>
 		</TableRow>
 	</TableHeader>
 );
