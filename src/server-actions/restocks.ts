@@ -41,7 +41,7 @@ export const getRestockRows = async (): Promise<RestockRow[]> => {
 		unitPrice: r.unitPrice.toString(),
 		supplierName: r.supplierName,
 		invoiceNumber: r.invoiceNumber,
-		authorName: `${r.author.name}`
+		authorName: r.author.name
 	}));
 };
 
