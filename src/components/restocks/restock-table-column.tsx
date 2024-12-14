@@ -12,6 +12,14 @@ export const restockColumns: ColumnDef<RestockRow, string>[] = [
 		accessorKey: 'commodity',
 		header: 'Commodity'
 	},
+    {
+		accessorKey: 'quantity',
+		header: 'Quantity'
+	},
+    {
+		accessorKey: 'unit',
+		header: 'Unit'
+	},
 	{
 		accessorKey: 'unitPrice',
 		header: 'Unit Price'

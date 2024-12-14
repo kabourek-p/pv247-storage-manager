@@ -4,7 +4,6 @@ import { revalidatePath } from 'next/cache';
 
 import type { RestockFormSchema } from '@/components/form/restocks/restock-form';
 import { createRestock, getRestocks } from '@/server/restocks';
-import { Decimal } from '@prisma/client/runtime/library';
 
 export const createRestockServerAction = async (restock: RestockFormSchema) => {
 	await createRestock(restock);
@@ -23,6 +22,7 @@ export const getRestockRows = async (): Promise<RestockRow[]> => {
 			}).format(new Date(r.date)),
 			commodity: r.commodityId,
 			quantity: r.quantity.toString(),
+			unit: r.commodity.unit,
 			unitPrice: r.unitPrice.toString(),
 			supplierName: r.supplierName,
 			invoiceNumber: r.invoiceNumber,
@@ -35,6 +35,7 @@ export type RestockRow = {
 	date: string;
 	commodity: string;
 	quantity: string;
+	unit: string;
 	unitPrice: string;
 	supplierName: string | null;
 	invoiceNumber: string | null;

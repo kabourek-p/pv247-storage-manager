@@ -7,7 +7,8 @@ import prisma from '../lib/prisma';
 export const getRestocks = async () =>
 	prisma.restock.findMany({
 		include: {
-			author: true
+			author: true,
+			commodity: true
 		}
 	});
 
