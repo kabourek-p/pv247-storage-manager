@@ -111,9 +111,9 @@ const RestockForm = ({
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.invoiceNumber?.message}
 					/>
-
-					<FormTextField name="authorId" label="authorId" className="hidden" />
-
+					<span className="hidden">
+						<FormTextField name="authorId" label="authorId" />
+					</span>
 					<Button colorType="secondary" className="mt-4" type="submit">
 						Submit
 					</Button>
