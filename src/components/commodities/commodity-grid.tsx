@@ -1,5 +1,6 @@
+"use client"
+
 import React from 'react';
-import type { Unit } from '@prisma/client';
 
 import CommodityCard from '@/components/commodities/commodity-card';
 
@@ -7,17 +8,17 @@ type CommodityGridProps = {
 	commodities: {
 		name: string;
 		quantity: number;
-		unit: Unit;
+		unit: string;
 		unitPrice: number;
 		date: Date;
 	}[];
-	maxCards?: number; // Optional prop to limit the number of cards displayed
+	maxCards?: number;
 };
 
 const CommodityGrid: React.FC<CommodityGridProps> = ({ commodities, maxCards }) => (
 	<div className="flex flex-wrap justify-center gap-10 sm:justify-start">
 		{commodities
-			.slice(0, maxCards ?? commodities.length) // Limit the number of cards if maxCards is provided
+			.slice(0, maxCards ?? commodities.length)
 			.map(commodity => (
 				<CommodityCard
 					key={commodity.name}

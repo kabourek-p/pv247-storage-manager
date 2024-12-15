@@ -1,12 +1,10 @@
-import type { Unit } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/library';
 import React from 'react';
 
 type CommodityCardProps = {
 	name: string;
-	quantity: Decimal | number;
-	unit: Unit;
-	unitPrice: Decimal | number;
+	quantity: number;
+	unit: string;
+	unitPrice: number;
 };
 
 const CommodityCard: React.FC<CommodityCardProps> = ({
@@ -15,15 +13,9 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 	unit,
 	unitPrice
 }) => {
-	const formattedQuantity = 
-		typeof quantity === 'number' || quantity instanceof Decimal
-			? Number(quantity).toLocaleString('en-US').replace(/,/g, '\u202F')
-			: quantity;
+	const formattedQuantity = quantity.toLocaleString('en-US').replace(/,/g, '\u202F')
 
-	const formattedUnitPrice = 
-		typeof unitPrice === 'number' || unitPrice instanceof Decimal
-			? Number(unitPrice).toLocaleString('en-US').replace(/,/g, '\u202F')
-			: unitPrice;
+	const formattedUnitPrice = unitPrice.toLocaleString('en-US').replace(/,/g, '\u202F')
 
 	const formattedUnit = 
 		unit === 'PIECE' && Number(quantity) > 1 ? `${unit}S` : unit;
