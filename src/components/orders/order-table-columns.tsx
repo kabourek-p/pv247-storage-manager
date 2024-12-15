@@ -58,12 +58,23 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 		header: 'id'
 	},
 	{
+		accessorKey: 'commodityUnit',
+		header: 'commodityUnit'
+	},
+	{
 		accessorKey: 'commodity',
 		header: 'Commodity'
 	},
 	{
 		accessorKey: 'numberOfUnits',
-		header: 'Amount per Piece'
+		header: 'Amount per Piece',
+		cell: ({ row }) => {
+			const amount = parseFloat(row.getValue('numberOfUnits'));
+			const unit = row.getValue('commodityUnit');
+			const formatted = `${amount} ${unit}`;
+
+			return <span className="font-medium">{formatted}</span>;
+		}
 	},
 	{
 		accessorKey: 'unitPrice',

@@ -92,7 +92,10 @@ const CustomTooltip = ({ unit, chartData, active, payload, label }: any) => {
 		return (
 			<div className="custom-tooltip rounded border bg-white shadow-md">
 				<div className="tooltip-header mb-2 rounded bg-primary p-2 text-white">
-					<span className="font-bold">Restock Data</span>
+					<span className="font-bold">
+						Restock Data for commodity:{' '}
+						{selectedData ? selectedData.commodity : ''}
+					</span>
 				</div>
 				<div className="pb-2 pl-2 pr-2">
 					{selectedData ? (

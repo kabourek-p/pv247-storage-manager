@@ -97,9 +97,11 @@ export const getOrderElementRows = async (
 ): Promise<OrderElementRow[]> => {
 	const order = await getOrder(id);
 	const orderElements = order ? order.orderElements : [];
+	console.log(orderElements);
 	return orderElements.map(e => ({
 		id: e.id,
 		commodity: e.commodityId,
+		commodityUnit: e.commodity.unit,
 		processingNote: e.processingNote,
 		unitQuantity: e.unitLength.toNumber(),
 		numberOfUnits: e.numberOfUnits.toNumber(),
@@ -214,6 +216,7 @@ export type OrderRow = {
 export type OrderElementRow = {
 	id: number;
 	commodity: string;
+	commodityUnit: string;
 	processingNote: string | null;
 	unitQuantity: number;
 	numberOfUnits: number;
