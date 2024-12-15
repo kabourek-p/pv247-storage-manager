@@ -24,7 +24,7 @@ export const createRestockServerAction = async (restock: RestockFormSchema) => {
 	}
 
 	revalidatePath('/restocks');
-
+	revalidatePath('/');
 	return { error: false, message: 'Restock successfully registered!' };
 };
 
@@ -63,7 +63,7 @@ export const getBarRestockDataServerAction = async () => {
 				taken: Number(restock.taken),
 				remaining: Number(restock.quantity - restock.taken),
 				unitType: commodity.unit,
-				commodity: commodity.name,
+				commodity: commodity.name
 			}));
 		})
 	);

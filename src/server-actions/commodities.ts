@@ -26,7 +26,7 @@ export const createCommodityServerAction = async (
 	}
 
 	revalidatePath('/commodities');
-
+	revalidatePath('/');
 	return { error: false, message: 'Commodity successfully created!' };
 };
 

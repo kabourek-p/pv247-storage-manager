@@ -52,7 +52,7 @@ const DataTable = <TData, TValue>({
 			columnFilters
 		},
 		initialState: {
-			columnVisibility: { id: false }
+			columnVisibility: { id: false, commodityUnit: false }
 		}
 	});
 

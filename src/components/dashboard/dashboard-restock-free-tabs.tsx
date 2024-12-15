@@ -37,7 +37,7 @@ const RestockFreeTabs = ({ chartData }: { chartData: BarRestockData[] }) => (
 		</TabsContent>
 		<TabsContent value="PIECES">
 			<DashboardRestockFreeBarChart
-				chartData={chartData.filter(r => r.unitType === 'PIECES')}
+				chartData={chartData.filter(r => r.unitType === 'PIECE')}
 				unit="Pieces"
 				commodityType="pieces"
 			/>

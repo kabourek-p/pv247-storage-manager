@@ -180,6 +180,7 @@ export const lockOrderServerAction = async (id: number) => {
 
 	revalidatePath('/orders');
 	revalidatePath(`/order/${order.id}`);
+	revalidatePath('/');
 
 	return { error: false, message: 'Order successfully locked!' };
 };
