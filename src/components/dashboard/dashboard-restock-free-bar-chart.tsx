@@ -33,7 +33,7 @@ export const DashboardRestockFreeBarChart = ({
 	unit: string;
 	commodityType: string;
 }) => (
-	<Card>
+	<Card className="max-h-[500px] overflow-hidden">
 		<CardHeader>
 			<CardTitle>Undepleted Restocks</CardTitle>
 			<div className="flex gap-2 pt-1 font-medium leading-none">
@@ -41,8 +41,8 @@ export const DashboardRestockFreeBarChart = ({
 				{commodityType}.
 			</div>
 		</CardHeader>
-		<CardContent>
-			<ChartContainer config={chartConfig}>
+		<CardContent className="flex h-full items-center justify-center">
+			<ChartContainer config={chartConfig} className="max-h-[300px] h-1/2 w-full">
 				{chartData.length ? (
 					<BarChart accessibilityLayer data={chartData}>
 						<CartesianGrid vertical={false} />

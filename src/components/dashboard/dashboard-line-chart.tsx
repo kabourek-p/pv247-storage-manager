@@ -34,13 +34,13 @@ export const DashboardLineChart = ({
 }: {
 	chartData: ChartData[];
 }) => (
-	<Card>
+	<Card className="max-h-[500px] overflow-hidden">
 		<CardHeader>
 			<CardTitle>Number of orders per day</CardTitle>
 			<CardDescription>Last {chartData.length} days</CardDescription>
 		</CardHeader>
-		<CardContent>
-			<ChartContainer config={chartConfig}>
+		<CardContent className="flex h-full items-center justify-center">
+			<ChartContainer config={chartConfig} className="max-h-[300px] h-1/2 w-full">
 				<LineChart
 					accessibilityLayer
 					data={chartData}
