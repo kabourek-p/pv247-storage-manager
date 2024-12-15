@@ -42,9 +42,10 @@ export const getCommodityCardsServerAction = async () => {
 			);
 			return {
 				name: commodity.name,
-				quantity,
+				quantity: Number(quantity),
 				unit: commodity.unit,
-				unitPrice: restocks[0]?.unitPrice ?? 0
+				unitPrice: Number(restocks[0]?.unitPrice ?? 0),
+				date: restocks[0]?.date
 			};
 		})
 	);

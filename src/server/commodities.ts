@@ -4,7 +4,16 @@ import { type CommodityFormSchema } from '@/components/form/commodities/commodit
 
 import prisma from '../lib/prisma';
 
-export const getCommodities = async () => prisma.commodity.findMany();
+export const getCommodities = async () =>
+	prisma.commodity.findMany({
+		include: {
+			restocks: {
+				select: {
+					date: true
+				}
+			}
+		}
+	});
 
 export const createCommodity = async (commodity: CommodityFormSchema) =>
 	prisma.commodity.create({

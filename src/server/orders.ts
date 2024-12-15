@@ -131,8 +131,9 @@ export const getRestockData = async (commodity: string) =>
 									ON sd."restockId" = r."id"
 									LEFT JOIN "Commodity" AS c
 									ON c."name" = r."commodityId"
+									WHERE c."name" = ${commodity}
 									GROUP BY r."id", c.name
-									HAVING SUM(sd."quantity") IS NULL OR SUM(sd."quantity") < r."quantity" AND c."name" = ${commodity}
+									HAVING SUM(sd."quantity") IS NULL OR SUM(sd."quantity") < r."quantity"
 									ORDER BY r."date"`;
 
 export type RestockData = {
