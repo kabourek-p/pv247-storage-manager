@@ -16,13 +16,13 @@ const RestockFreeTabs = ({ chartData }: { chartData: BarRestockData[] }) => (
 				Weight
 			</TabsTrigger>
 			<TabsTrigger
-				className="rounded-none bg-primary text-white data-[state=active]:bg-secondary"
+				className="rounded-none bg-primary text-white data-[state=active]:bg-primary-light"
 				value="PIECES"
 			>
 				Pieces
 			</TabsTrigger>
 			<TabsTrigger
-				className="rounded-none rounded-r-md bg-primary text-white data-[state=active]:bg-secondary"
+				className="rounded-none rounded-r-md bg-primary text-white data-[state=active]:bg-primary-light"
 				value="MM"
 			>
 				Length
