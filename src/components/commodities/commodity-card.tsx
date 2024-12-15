@@ -13,11 +13,15 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 	unit,
 	unitPrice
 }) => {
-	const formattedQuantity = quantity.toLocaleString('en-US').replace(/,/g, '\u202F')
+	const formattedQuantity = quantity
+		.toLocaleString('en-US')
+		.replace(/,/g, '\u202F');
 
-	const formattedUnitPrice = unitPrice.toLocaleString('en-US').replace(/,/g, '\u202F')
+	const formattedUnitPrice = unitPrice
+		.toLocaleString('en-US')
+		.replace(/,/g, '\u202F');
 
-	const formattedUnit = 
+	const formattedUnit =
 		unit === 'PIECE' && Number(quantity) > 1 ? `${unit}S` : unit;
 
 	return (
