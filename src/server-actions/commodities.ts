@@ -2,10 +2,9 @@
 
 import { revalidatePath } from 'next/cache';
 
-import { getCommodities } from '@/server/commodity';
+import { getCommodities, createCommodity } from '@/server/commodities';
 import type { CommodityFormSchema } from '@/components/form/commodities/commodity-form';
-import { createCommodity } from '@/server/commodities';
-import { getRestockData } from '@/server/orders';
+import { getRestockData } from '@/server/restocks';
 
 export const createCommodityServerAction = async (
 	commodity: CommodityFormSchema
@@ -33,9 +32,11 @@ export const createCommodityServerAction = async (
 
 export const getCommodityCardsServerAction = async () => {
 	const commodities = await getCommodities();
+	console.log(commodities);
 	return await Promise.all(
 		commodities.map(async commodity => {
 			const restocks = await getRestockData(commodity.name);
+			console.log(restocks);
 			const quantity = restocks.reduce(
 				(sum, current) => sum + current.quantity - current.taken,
 				0

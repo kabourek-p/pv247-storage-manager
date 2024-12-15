@@ -15,7 +15,7 @@ import {
 	type StockDispatch
 } from '@/server/stock-dispatch';
 import { createInvoice } from '@/server/invoice';
-import {getRestockData} from "@/server/restocks";
+import { getRestockData } from '@/server/restocks';
 
 export const createOrderServerAction = async (order: OrderFormSchema) => {
 	try {

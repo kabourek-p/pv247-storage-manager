@@ -3,7 +3,8 @@
 import { revalidatePath } from 'next/cache';
 
 import type { RestockFormSchema } from '@/components/form/restocks/restock-form';
-import { createRestock, getRestocks } from '@/server/restocks';
+import { createRestock, getRestockData, getRestocks } from '@/server/restocks';
+import { getCommodities } from '@/server/commodities';
 
 export const createRestockServerAction = async (restock: RestockFormSchema) => {
 	try {
@@ -47,7 +48,29 @@ export const getRestockRows = async (
 	}));
 };
 
-// export const
+export const getBarRestockDataServerAction = async () => {
+	const commodities = await getCommodities();
+	const restocks = await Promise.all(
+		commodities.map(async commodity => {
+			const restocks = await getRestockData(commodity.name);
+			return restocks.map(restock => ({
+				invoiceNumber: restock.invoiceNumber,
+				unitPrice: Number(restock.unitPrice),
+				taken: Number(restock.taken),
+				remaining: Number(restock.quantity - restock.taken)
+			}));
+		})
+	);
+	console.log(restocks);
+	return restocks.reduce((accumulator, value) => accumulator.concat(value), []);
+};
+
+export type BarRestockData = {
+	invoiceNumber: string;
+	taken: number;
+	remaining: number;
+	unitPrice: number;
+};
 
 export type RestockRow = {
 	date: string;

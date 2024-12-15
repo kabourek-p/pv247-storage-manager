@@ -145,6 +145,7 @@ type OrderCount = {
 export type RestockData = {
 	id: number;
 	date: Date;
+	invoiceNumber: string;
 	quantity: number;
 	unitPrice: number;
 	taken: number;

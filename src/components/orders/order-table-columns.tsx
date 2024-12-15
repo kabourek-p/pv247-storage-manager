@@ -96,8 +96,8 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 		}
 	},
 	{
-		accessorKey: 'unitLength',
-		header: 'Lenght of Unit'
+		accessorKey: 'unitQuantity',
+		header: 'Unit quantity'
 	},
 	{
 		accessorKey: 'processingNote',
