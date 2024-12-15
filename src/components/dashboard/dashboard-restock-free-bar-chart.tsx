@@ -1,24 +1,15 @@
 'use client';
 
-import { TrendingUp } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
-import { useState } from 'react';
 import * as React from 'react';
 
-import {
-	Card,
-	CardContent,
-	CardFooter,
-	CardHeader,
-	CardTitle
-} from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import {
 	type ChartConfig,
 	ChartContainer,
 	ChartLegend,
 	ChartLegendContent,
-	ChartTooltip,
-	ChartTooltipContent
+	ChartTooltip
 } from '@/components/ui/chart';
 import { type BarRestockData } from '@/server-actions/restocks';
 
@@ -83,6 +74,7 @@ export const DashboardRestockFreeBarChart = ({
 	</Card>
 );
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const CustomTooltip = ({ unit, chartData, active, payload, label }: any) => {
 	if (active && payload?.length) {
 		const selectedData: BarRestockData = chartData.find(
@@ -107,11 +99,15 @@ const CustomTooltip = ({ unit, chartData, active, payload, label }: any) => {
 							</div>
 							<div className="tooltip-item text-center">
 								<span className="block font-bold">Remaining Quantity</span>
-								<span className="block">{selectedData.remaining} {unit}</span>
+								<span className="block">
+									{selectedData.remaining} {unit}
+								</span>
 							</div>
 							<div className="tooltip-item text-center">
 								<span className="block font-bold">Already Used</span>
-								<span className="block">{selectedData.taken} {unit}</span>
+								<span className="block">
+									{selectedData.taken} {unit}
+								</span>
 							</div>
 						</div>
 					) : (

@@ -4,12 +4,11 @@ import authUser from '@/lib/auth';
 import { Card } from '@/components/card';
 import { DashboardLineChart } from '@/components/dashboard/dashboard-line-chart';
 import { getOrderCountsServerAction } from '@/server-actions/orders';
-import { DashboardRestockFreeBarChart } from '@/components/dashboard/dashboard-restock-free-bar-chart';
 import { getBarRestockDataServerAction } from '@/server-actions/restocks';
 import RestockFreeTabs from '@/components/dashboard/dashboard-restock-free-tabs';
 
 const Dashboard = async () => {
-	const user = await authUser();
+	const _ = await authUser();
 	const ordersData = await getOrderCountsServerAction(7);
 	const restockData = await getBarRestockDataServerAction();
 	console.log(restockData);

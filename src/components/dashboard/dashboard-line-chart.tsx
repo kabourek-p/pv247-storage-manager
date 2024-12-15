@@ -13,10 +13,8 @@ import {
 import {
 	type ChartConfig,
 	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent
+	ChartTooltip
 } from '@/components/ui/chart';
-import { cn } from '@/lib/cn';
 
 const chartConfig = {
 	orders: {
@@ -80,7 +78,7 @@ export const DashboardLineChart = ({
 		</CardContent>
 	</Card>
 );
-
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const CustomTooltip = ({ chartData, active, payload, label }: any) => {
 	if (active && payload?.length) {
 		const selectedData = chartData.find((day: ChartData) => day.date === label);

@@ -10,7 +10,7 @@ const RestockFreeTabs = ({ chartData }: { chartData: BarRestockData[] }) => (
 	<Tabs defaultValue="KG" className="mt-8 w-full border">
 		<TabsList className="grid w-full grid-cols-3 rounded-md">
 			<TabsTrigger
-				className="rounded-none rounded-l-md bg-primary text-white data-[state=active]:bg-secondary"
+				className="rounded-none rounded-l-md bg-primary text-white data-[state=active]:bg-primary-light"
 				value="KG"
 			>
 				Weight
