@@ -7,14 +7,15 @@ import {
 	createOrder,
 	editOrder,
 	getOrder,
-	getOrders,
-	getRestockData
+	getOrderCounts,
+	getOrders
 } from '@/server/orders';
 import {
 	createStockDispatches,
 	type StockDispatch
 } from '@/server/stock-dispatch';
 import { createInvoice } from '@/server/invoice';
+import { getRestockData } from '@/server/restocks';
 
 export const createOrderServerAction = async (order: OrderFormSchema) => {
 	try {
@@ -96,9 +97,11 @@ export const getOrderElementRows = async (
 ): Promise<OrderElementRow[]> => {
 	const order = await getOrder(id);
 	const orderElements = order ? order.orderElements : [];
+	console.log(orderElements);
 	return orderElements.map(e => ({
 		id: e.id,
 		commodity: e.commodityId,
+		commodityUnit: e.commodity.unit,
 		processingNote: e.processingNote,
 		unitQuantity: e.unitLength.toNumber(),
 		numberOfUnits: e.numberOfUnits.toNumber(),
@@ -177,8 +180,26 @@ export const lockOrderServerAction = async (id: number) => {
 
 	revalidatePath('/orders');
 	revalidatePath(`/order/${order.id}`);
+	revalidatePath('/');
 
 	return { error: false, message: 'Order successfully locked!' };
+};
+
+export const getOrderCountsServerAction = async (days_back: number) => {
+	const data = await getOrderCounts(days_back);
+	return data.map(day => {
+		const orderNotes = day.ordernotes.filter(x => x !== null);
+		return {
+			date: new Intl.DateTimeFormat('cs-CZ', {
+				day: '2-digit',
+				//month: 'long',
+				month: '2-digit',
+				year: 'numeric'
+			}).format(new Date(day.date)),
+			orderNotes,
+			count: orderNotes.length
+		};
+	});
 };
 
 const generateInvoiceNumber = (orderId: number) => `INV-${orderId.toString()}`;
@@ -196,6 +217,7 @@ export type OrderRow = {
 export type OrderElementRow = {
 	id: number;
 	commodity: string;
+	commodityUnit: string;
 	processingNote: string | null;
 	unitQuantity: number;
 	numberOfUnits: number;

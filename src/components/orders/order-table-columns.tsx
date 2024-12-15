@@ -17,7 +17,7 @@ const orderColumns: ColumnDef<OrderRow, string>[] = [
 	},
 	{
 		accessorKey: 'numberOfElements',
-		header: 'Number of Elements'
+		header: 'Number of Entries'
 	},
 	{
 		accessorKey: 'totalPrice',
@@ -58,12 +58,23 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 		header: 'id'
 	},
 	{
+		accessorKey: 'commodityUnit',
+		header: 'commodityUnit'
+	},
+	{
 		accessorKey: 'commodity',
 		header: 'Commodity'
 	},
 	{
 		accessorKey: 'numberOfUnits',
-		header: 'Number of units'
+		header: 'Amount per Piece',
+		cell: ({ row }) => {
+			const amount = parseFloat(row.getValue('numberOfUnits'));
+			const unit = row.getValue('commodityUnit');
+			const formatted = `${amount} ${unit}`;
+
+			return <span className="font-medium">{formatted}</span>;
+		}
 	},
 	{
 		accessorKey: 'unitPrice',
@@ -96,8 +107,8 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 		}
 	},
 	{
-		accessorKey: 'unitLength',
-		header: 'Lenght of Unit'
+		accessorKey: 'unitQuantity',
+		header: 'Number of Pieces'
 	},
 	{
 		accessorKey: 'processingNote',

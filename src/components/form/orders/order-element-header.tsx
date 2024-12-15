@@ -10,13 +10,13 @@ const OrderElementHeader = () => (
 				Commodity
 			</TableHead>
 			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2 text-center">
-				Unit Quantity
+				Amount per Piece
 			</TableHead>
 			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2 text-center">
-				Unit Price
+				Price per Unit (CZK)
 			</TableHead>
 			<TableHead className="text-centerborder-l w-fit border-r border-gray-300 px-4 py-2">
-				Number of Units
+				Number of Pieces
 			</TableHead>
 			<TableHead className="border-l border-gray-300 px-4 py-2 text-center">
 				Note

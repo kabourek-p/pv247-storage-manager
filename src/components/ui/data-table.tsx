@@ -28,13 +28,15 @@ type DataTableProps<TData, TValue> = {
 	data: TData[];
 	rowClickHandler?: (id: string) => void;
 	filter?: string;
+	filterByName?: string;
 };
 
 const DataTable = <TData, TValue>({
 	columns,
 	data,
 	rowClickHandler,
-	filter
+	filter,
+	filterByName
 }: DataTableProps<TData, TValue>) => {
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
 		[]
@@ -50,7 +52,7 @@ const DataTable = <TData, TValue>({
 			columnFilters
 		},
 		initialState: {
-			columnVisibility: { id: false }
+			columnVisibility: { id: false, commodityUnit: false }
 		}
 	});
 
@@ -59,7 +61,7 @@ const DataTable = <TData, TValue>({
 			{filter && (
 				<div className="flex items-center pb-4">
 					<Input
-						placeholder="Filter by identifier..."
+						placeholder={`Filter by ${filterByName}...`}
 						value={(table.getColumn(filter)?.getFilterValue() as string) ?? ''}
 						onChange={event =>
 							table.getColumn(filter)?.setFilterValue(event.target.value)
@@ -112,7 +114,7 @@ const DataTable = <TData, TValue>({
 												`relative block h-10 border-b border-gray-300 px-2 py-1 text-left`,
 												`before:pr-2 before:font-bold before:content-[attr(data-label)]`,
 												`md:table-cell md:text-center md:before:content-none`,
-												`${filter ? 'cursor-pointer' : ''}`
+												`${filter === 'note' ? 'cursor-pointer' : 'hover:cursor-default'}`
 											)}
 											key={cell.id}
 											data-label={`${cell.column.columnDef.header}:`}

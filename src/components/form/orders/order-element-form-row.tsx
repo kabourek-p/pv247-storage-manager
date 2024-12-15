@@ -6,7 +6,7 @@ import {
 	type Merge
 } from 'react-hook-form';
 
-import TrashButton from '@/components/trash-button';
+import TrashButton from '@/components/ui/trash-button';
 import { FormTextField } from '@/components/form/form-text-field';
 import { Select } from '@/components/form/select';
 import { TableCell, TableRow } from '@/components/ui/table';

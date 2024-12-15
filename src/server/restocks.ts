@@ -1,6 +1,7 @@
 'use server';
 
 import { type RestockFormSchema } from '@/components/form/restocks/restock-form';
+import { type RestockData } from '@/server/orders';
 
 import prisma from '../lib/prisma';
 
@@ -24,3 +25,16 @@ export const createRestock = async (restock: RestockFormSchema) =>
 			authorId: restock.authorId
 		}
 	});
+
+export const getRestockData = async (commodity: string) =>
+	prisma.$queryRaw<
+		RestockData[]
+	>`SELECT r.id, r.date, r."invoiceNumber", r.quantity, r."unitPrice", SUM(sd."quantity") AS taken, c.name
+									FROM "Restock" AS r LEFT JOIN "StockDispatch" AS sd
+									ON sd."restockId" = r."id"
+									LEFT JOIN "Commodity" AS c
+									ON c."name" = r."commodityId"
+									WHERE c."name" = ${commodity}
+									GROUP BY r."id", c.name
+									HAVING SUM(sd."quantity") IS NULL OR SUM(sd."quantity") < r."quantity"
+									ORDER BY r."date"`;

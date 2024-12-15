@@ -1,5 +1,5 @@
 import CreateOrderForm from '@/components/form/orders/create-order-form';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 import authUser from '@/lib/auth';
 

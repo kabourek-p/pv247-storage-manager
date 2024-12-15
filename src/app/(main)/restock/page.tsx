@@ -1,5 +1,5 @@
 import CreateRestockForm from '@/components/form/restocks/create-restock-form';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 
 const RestockPage = async () => {

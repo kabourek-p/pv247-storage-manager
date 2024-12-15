@@ -14,6 +14,7 @@ const RestockTable = ({ data }: { data: RestockRow[] }) => {
 			data={data}
 			columns={getRestockColumns(user?.role === 'ADMIN')}
 			filter="commodity"
+			filterByName="Commodity"
 		/>
 	);
 };

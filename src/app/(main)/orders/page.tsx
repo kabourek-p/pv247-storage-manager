@@ -2,7 +2,7 @@ import React from 'react';
 
 import AddOrderButton from '@/components/orders/add-order-button';
 import { getOrderRows } from '@/server-actions/orders';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 import OrderTable from '@/components/orders/order-table';
 import authUser from '@/lib/auth';
 
