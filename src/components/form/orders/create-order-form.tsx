@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { type User } from '@prisma/client';
 
 import OrderForm from '@/components/form/orders/order-form';
@@ -12,19 +12,6 @@ const CreateOrderForm = (props: {
 	commodities: string[];
 }) => {
 	const { user } = useLoggedInUser();
-
-	useEffect(() => {
-		const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-			event.preventDefault();
-		};
-
-		window.addEventListener('beforeunload', handleBeforeUnload);
-
-		return () => {
-			window.removeEventListener('beforeunload', handleBeforeUnload);
-		};
-	});
-
 	return (
 		<div className="sm: content-center sm:p-2">
 			<OrderForm

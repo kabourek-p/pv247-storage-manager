@@ -17,7 +17,7 @@ const orderColumns: ColumnDef<OrderRow, string>[] = [
 	},
 	{
 		accessorKey: 'numberOfElements',
-		header: 'Number of Elements'
+		header: 'Number of Entries'
 	},
 	{
 		accessorKey: 'totalPrice',
@@ -63,7 +63,7 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 	},
 	{
 		accessorKey: 'numberOfUnits',
-		header: 'Number of units'
+		header: 'Amount per Piece'
 	},
 	{
 		accessorKey: 'unitPrice',
@@ -97,7 +97,7 @@ export const orderElementColumns: ColumnDef<OrderElementRow, string>[] = [
 	},
 	{
 		accessorKey: 'unitQuantity',
-		header: 'Unit quantity'
+		header: 'Number of Pieces'
 	},
 	{
 		accessorKey: 'processingNote',

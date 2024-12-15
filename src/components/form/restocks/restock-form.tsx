@@ -93,7 +93,7 @@ const RestockForm = ({
 
 					<FormTextField
 						name="unitPrice"
-						label="Unit price"
+						label="Price per Unit (CZK)"
 						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.unitPrice?.message}
 					/>
