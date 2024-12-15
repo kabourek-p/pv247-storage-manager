@@ -43,32 +43,38 @@ export const DashboardRestockFreeBarChart = ({
 		</CardHeader>
 		<CardContent>
 			<ChartContainer config={chartConfig}>
-				<BarChart accessibilityLayer data={chartData}>
-					<CartesianGrid vertical={false} />
-					<XAxis
-						dataKey="invoiceNumber"
-						tickLine={false}
-						tickMargin={10}
-						axisLine={false}
-					/>
-					<ChartTooltip
-						cursor
-						content={<CustomTooltip unit={unit} chartData={chartData} />}
-					/>
-					<ChartLegend content={<ChartLegendContent />} />
-					<Bar
-						dataKey="taken"
-						stackId="a"
-						fill="var(--color-taken)"
-						radius={[0, 0, 4, 4]}
-					/>
-					<Bar
-						dataKey="remaining"
-						stackId="a"
-						fill="var(--color-remaining)"
-						radius={[4, 4, 0, 0]}
-					/>
-				</BarChart>
+				{chartData.length ? (
+					<BarChart accessibilityLayer data={chartData}>
+						<CartesianGrid vertical={false} />
+						<XAxis
+							dataKey="invoiceNumber"
+							tickLine={false}
+							tickMargin={10}
+							axisLine={false}
+						/>
+						<ChartTooltip
+							cursor
+							content={<CustomTooltip unit={unit} chartData={chartData} />}
+						/>
+						<ChartLegend content={<ChartLegendContent />} />
+						<Bar
+							dataKey="taken"
+							stackId="a"
+							fill="var(--color-taken)"
+							radius={[0, 0, 4, 4]}
+						/>
+						<Bar
+							dataKey="remaining"
+							stackId="a"
+							fill="var(--color-remaining)"
+							radius={[4, 4, 0, 0]}
+						/>
+					</BarChart>
+				) : (
+					<div className="flex h-full items-center justify-center border text-center">
+						No data to display!
+					</div>
+				)}
 			</ChartContainer>
 		</CardContent>
 	</Card>
