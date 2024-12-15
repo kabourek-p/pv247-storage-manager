@@ -39,9 +39,13 @@ export const getRestockRows = async (
 			year: 'numeric'
 		}).format(new Date(r.date)),
 		commodity: r.commodityId,
-		quantity: r.quantity.toString(),
+		quantity: Number(r.quantity)
+			.toLocaleString('en-US')
+			.replace(/,/g, '\u202F'),
 		unit: r.commodity.unit,
-		unitPrice: r.unitPrice.toString(),
+		unitPrice: Number(r.unitPrice)
+			.toLocaleString('en-US')
+			.replace(/,/g, '\u202F'),
 		supplierName: r.supplierName,
 		invoiceNumber: r.invoiceNumber,
 		authorName: r.author.name
