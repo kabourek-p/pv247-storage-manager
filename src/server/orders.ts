@@ -126,7 +126,7 @@ export const getOrder = async (id: number) =>
 export const getOrderCounts = async (days_back: number) =>
 	await prisma.$queryRawUnsafe<
 		OrderCount[]
-	>(`SELECT gs.day AS date, COUNT(o."date") AS orders
+	>(` SELECT gs.day AS date, array_agg(o."note") AS orderNotes
 										FROM generate_series(
 												CURRENT_DATE - interval '${days_back} days',
 												CURRENT_DATE,
@@ -151,7 +151,7 @@ export const getRestockData = async (commodity: string) =>
 
 type OrderCount = {
 	date: Date;
-	orders: bigint;
+	ordernotes: string[];
 };
 
 export type RestockData = {

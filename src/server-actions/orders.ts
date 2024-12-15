@@ -184,23 +184,22 @@ export const lockOrderServerAction = async (id: number) => {
 
 export const getOrderCountsServerAction = async (days_back: number) => {
 	const data = await getOrderCounts(days_back);
-	return data.map(day => ({
-		date: new Intl.DateTimeFormat('cs-CZ', {
-			day: '2-digit',
-			//month: 'long',
-			month: '2-digit',
-			year: 'numeric'
-		}).format(new Date(day.date)),
-		orders: Number(day.orders)
-	}))
+	return data.map(day => {
+		const orderNotes = day.ordernotes.filter(x => x !== null);
+		return {
+			date: new Intl.DateTimeFormat('cs-CZ', {
+				day: '2-digit',
+				//month: 'long',
+				month: '2-digit',
+				year: 'numeric'
+			}).format(new Date(day.date)),
+			orderNotes,
+			count: orderNotes.length
+		};
+	});
 };
 
 const generateInvoiceNumber = (orderId: number) => `INV-${orderId.toString()}`;
-
-export type OrderCount = {
-	date: string;
-	orders: number;
-};
 
 export type OrderRow = {
 	id: number;

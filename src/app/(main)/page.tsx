@@ -3,17 +3,7 @@ import React from 'react';
 import authUser from '@/lib/auth';
 import { Card } from '@/components/card';
 import { DashboardLineChart } from '@/components/dashboard/dashboard';
-import {getOrderCountsServerAction} from "@/server-actions/orders";
-
-
-const chartData = [
-	{ date: '1.1.2024', orders: 186 },
-	{ date: '2.1.2024', orders: 305 },
-	{ date: '3.1.2024', orders: 237 },
-	{ date: '4.1.2024', orders: 73 },
-	{ date: '5.1.2024', orders: 209 },
-	{ date: '6.1.2024', orders: 214 }
-];
+import { getOrderCountsServerAction } from '@/server-actions/orders';
 
 const Dashboard = async () => {
 	const user = await authUser();

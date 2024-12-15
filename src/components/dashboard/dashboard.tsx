@@ -12,8 +12,7 @@ import {
 import {
 	type ChartConfig,
 	ChartContainer,
-	ChartTooltip,
-	ChartTooltipContent
+	ChartTooltip
 } from '@/components/ui/chart';
 
 const chartConfig = {
@@ -23,15 +22,21 @@ const chartConfig = {
 	}
 } satisfies ChartConfig;
 
+type ChartData = {
+	date: string;
+	orderNotes: string[];
+	count: number;
+};
+
 export const DashboardLineChart = ({
 	chartData
 }: {
-	chartData: { date: string; orders: number }[];
+	chartData: ChartData[];
 }) => (
 	<Card>
 		<CardHeader>
 			<CardTitle>Number of orders per day</CardTitle>
-			<CardDescription>Last month</CardDescription>
+			<CardDescription>Last {chartData.length} days</CardDescription>
 		</CardHeader>
 		<CardContent>
 			<ChartContainer config={chartConfig}>
@@ -51,28 +56,42 @@ export const DashboardLineChart = ({
 						tickMargin={8}
 					/>
 					<YAxis
-						dataKey="orders"
+						dataKey="count"
 						tickLine={false}
 						axisLine={false}
 						tickMargin={8}
 					/>
 					<ChartTooltip
 						cursor={false}
-						content={<ChartTooltipContent hideLabel />}
+						content={<CustomTooltip chartData={chartData} />}
 					/>
 					<Line
-						dataKey="orders"
+						dataKey="count"
 						type="linear"
 						stroke="var(--color-orders)"
 						strokeWidth={2}
 						dot
-						activeDot={{
-							className: 'hover:cursor-pointer',
-							onClick: (_event, payload) => console.log(payload.index)
-						}}
 					/>
 				</LineChart>
 			</ChartContainer>
 		</CardContent>
 	</Card>
 );
+
+const CustomTooltip = ({ chartData, active, payload, label }: any) => {
+	if (active && payload?.length) {
+		return (
+			<div className="custom-tooltip">
+				<ul>
+					{chartData
+						.filter((day: ChartData) => day.date === label)[0]
+						.orderNotes.map((order: string) => (
+							<li key={order}>{order}</li>
+						))}
+				</ul>
+			</div>
+		);
+	}
+
+	return null;
+};
