@@ -15,13 +15,18 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 	unit,
 	unitPrice
 }) => {
-	const formattedQuantity =
-		quantity instanceof Decimal ? quantity.toString() : quantity;
-	const formattedUnitPrice =
-		unitPrice instanceof Decimal ? unitPrice.toString() : unitPrice;
+	const formattedQuantity = 
+		typeof quantity === 'number' || quantity instanceof Decimal
+			? Number(quantity).toLocaleString('en-US').replace(/,/g, '\u202F')
+			: quantity;
 
-	const formattedUnit =
-		unit === 'PIECE' && Number(formattedQuantity) > 1 ? `${unit}S` : unit;
+	const formattedUnitPrice = 
+		typeof unitPrice === 'number' || unitPrice instanceof Decimal
+			? Number(unitPrice).toLocaleString('en-US').replace(/,/g, '\u202F')
+			: unitPrice;
+
+	const formattedUnit = 
+		unit === 'PIECE' && Number(quantity) > 1 ? `${unit}S` : unit;
 
 	return (
 		<div className="flex h-64 w-56 flex-col items-center justify-between rounded-lg border border-black bg-gradient-to-b from-secondary-light to-secondary p-4 text-black shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl">
