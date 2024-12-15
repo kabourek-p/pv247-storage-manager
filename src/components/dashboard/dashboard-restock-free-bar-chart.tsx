@@ -34,13 +34,21 @@ const chartConfig = {
 } satisfies ChartConfig;
 
 export const DashboardRestockFreeBarChart = ({
-	chartData
+	chartData,
+	unit,
+	commodityType
 }: {
 	chartData: BarRestockData[];
+	unit: string;
+	commodityType: string;
 }) => (
 	<Card>
 		<CardHeader>
 			<CardTitle>Undepleted Restocks</CardTitle>
+			<div className="flex gap-2 pt-1 font-medium leading-none">
+				Available capacity from each restocks of commodities measured by{' '}
+				{commodityType}.
+			</div>
 		</CardHeader>
 		<CardContent>
 			<ChartContainer config={chartConfig}>
@@ -54,7 +62,7 @@ export const DashboardRestockFreeBarChart = ({
 					/>
 					<ChartTooltip
 						cursor
-						content={<CustomTooltip chartData={chartData} />}
+						content={<CustomTooltip unit={unit} chartData={chartData} />}
 					/>
 					<ChartLegend content={<ChartLegendContent />} />
 					<Bar
@@ -72,18 +80,10 @@ export const DashboardRestockFreeBarChart = ({
 				</BarChart>
 			</ChartContainer>
 		</CardContent>
-		<CardFooter className="flex-col items-start gap-2 text-sm">
-			<div className="flex gap-2 font-medium leading-none">
-				Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-			</div>
-			<div className="text-muted-foreground leading-none">
-				Showing total visitors for the last 6 months
-			</div>
-		</CardFooter>
 	</Card>
 );
 
-const CustomTooltip = ({ chartData, active, payload, label }: any) => {
+const CustomTooltip = ({ unit, chartData, active, payload, label }: any) => {
 	if (active && payload?.length) {
 		const selectedData: BarRestockData = chartData.find(
 			(restock: BarRestockData) => restock.invoiceNumber === label
@@ -107,11 +107,11 @@ const CustomTooltip = ({ chartData, active, payload, label }: any) => {
 							</div>
 							<div className="tooltip-item text-center">
 								<span className="block font-bold">Remaining Quantity</span>
-								<span className="block">{selectedData.remaining}</span>
+								<span className="block">{selectedData.remaining} {unit}</span>
 							</div>
 							<div className="tooltip-item text-center">
 								<span className="block font-bold">Already Used</span>
-								<span className="block">{selectedData.taken}</span>
+								<span className="block">{selectedData.taken} {unit}</span>
 							</div>
 						</div>
 					) : (

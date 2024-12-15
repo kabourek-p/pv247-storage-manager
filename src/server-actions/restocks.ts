@@ -57,7 +57,8 @@ export const getBarRestockDataServerAction = async () => {
 				invoiceNumber: restock.invoiceNumber,
 				unitPrice: Number(restock.unitPrice),
 				taken: Number(restock.taken),
-				remaining: Number(restock.quantity - restock.taken)
+				remaining: Number(restock.quantity - restock.taken),
+				unitType: commodity.unit
 			}));
 		})
 	);
@@ -70,6 +71,7 @@ export type BarRestockData = {
 	taken: number;
 	remaining: number;
 	unitPrice: number;
+	unitType: string;
 };
 
 export type RestockRow = {

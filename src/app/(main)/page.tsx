@@ -6,6 +6,7 @@ import { DashboardLineChart } from '@/components/dashboard/dashboard-line-chart'
 import { getOrderCountsServerAction } from '@/server-actions/orders';
 import { DashboardRestockFreeBarChart } from '@/components/dashboard/dashboard-restock-free-bar-chart';
 import { getBarRestockDataServerAction } from '@/server-actions/restocks';
+import RestockFreeTabs from '@/components/dashboard/dashboard-restock-free-tabs';
 
 const Dashboard = async () => {
 	const user = await authUser();
@@ -17,7 +18,7 @@ const Dashboard = async () => {
 			<Card className="pb-10">
 				<h2 className="mb-4 text-4xl">Dashboard</h2>
 				<DashboardLineChart chartData={ordersData} />
-				<DashboardRestockFreeBarChart chartData={restockData} />
+				<RestockFreeTabs chartData={restockData} />
 			</Card>
 		</div>
 	);
