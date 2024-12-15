@@ -42,7 +42,7 @@ const OrderForm = (params: {
 	defaultValues: OrderFormDefaultData;
 	commodities: string[];
 	redirectPath: string;
-	allowSaveNext: boolean;
+	allowSaveNext?: boolean;
 	submitFn: (
 		data: OrderFormSchema
 	) => Promise<{ error: boolean; message: string }>;
