@@ -65,8 +65,8 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 
 					<Select
 						options={['KG', 'PIECE', 'MM']}
-						label="Commodity"
-						name="commodity"
+						label="Unit"
+						name="unit"
 						error={form.formState.errors?.unit?.message}
 					/>
 
