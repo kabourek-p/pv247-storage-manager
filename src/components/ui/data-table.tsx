@@ -111,7 +111,7 @@ const DataTable = <TData, TValue>({
 											className={cn(
 												`relative block h-10 border-b border-gray-300 px-2 py-1 text-left`,
 												`before:pr-2 before:font-bold before:content-[attr(data-label)]`,
-												`md:table-cell md:text-center md:before:content-none`,
+												`hover:cursor-default md:table-cell md:text-center md:before:content-none`,
 												`${filter ? 'cursor-pointer' : ''}`
 											)}
 											key={cell.id}
