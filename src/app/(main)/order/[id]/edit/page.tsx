@@ -1,21 +1,33 @@
 'use server';
 
+import { forbidden, notFound } from 'next/navigation';
+
 import { getAvailableCommodities } from '@/server-actions/commodities';
 import EditOrderForm from '@/components/form/orders/edit-order-form';
 import { getOrderData } from '@/server-actions/orders';
 import { Card } from '@/components/card';
+import authUser from '@/lib/auth';
 
 const OrderEditPage = async ({
 	params
 }: {
 	params: Promise<{ id: number }>;
 }) => {
+	const user = await authUser();
 	const { id } = await params;
+	const order = await getOrderData(+id);
+
+	if (user.id !== order?.authorId && user.role !== 'ADMIN') {
+		forbidden();
+	}
+
 	const commodities = await getAvailableCommodities();
 	const orderData = await getOrderData(+id);
-	if (orderData === undefined) {
-		throw new Error();
+
+	if (order?.id === undefined || orderData === undefined) {
+		notFound();
 	}
+
 	return (
 		<div className="grid min-h-screen grid-rows-[20px_1fr_20px] gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
 			<Card>

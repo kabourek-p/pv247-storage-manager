@@ -1,4 +1,5 @@
 import React from 'react';
+import { forbidden, notFound } from 'next/navigation';
 
 import DataTable from '@/components/ui/data-table';
 import { orderElementColumns } from '@/components/orders/order-table-columns';
@@ -6,13 +7,20 @@ import { getOrderData, getOrderElementRows } from '@/server-actions/orders';
 import EditOrderButton from '@/components/orders/edit-order-button';
 import LockOrderButton from '@/components/orders/lock-order-button';
 import { Card } from '@/components/card';
+import authUser from '@/lib/auth';
 
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
+	const user = await authUser();
+
 	const { id } = await params;
-	const data = await getOrderElementRows(+id);
 	const order = await getOrderData(+id);
+	if (user.id !== order?.authorId && user.role !== 'ADMIN') {
+		forbidden();
+	}
+
+	const data = await getOrderElementRows(+id);
 	if (order === undefined) {
-		throw new Error();
+		notFound();
 	}
 
 	return (

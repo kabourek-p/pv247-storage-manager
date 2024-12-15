@@ -20,6 +20,7 @@ const OrderTable = ({ data }: { data: OrderRow[] }) => {
 			columns={getOrderColumns(user?.role === 'ADMIN')}
 			rowClickHandler={handleRowClick}
 			filter="note"
+			filterByName="Identifier"
 		/>
 	);
 };
