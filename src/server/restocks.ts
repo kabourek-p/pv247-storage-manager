@@ -1,9 +1,9 @@
 'use server';
 
 import { type RestockFormSchema } from '@/components/form/restocks/restock-form';
+import { type RestockData } from '@/server/orders';
 
 import prisma from '../lib/prisma';
-import {RestockData} from "@/server/orders";
 
 export const getRestocks = async (authorId: string | null) =>
 	prisma.restock.findMany({

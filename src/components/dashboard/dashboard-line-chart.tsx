@@ -1,6 +1,7 @@
 'use client';
 
 import { CartesianGrid, Line, LineChart, XAxis, YAxis } from 'recharts';
+import * as React from 'react';
 
 import {
 	Card,
@@ -12,8 +13,10 @@ import {
 import {
 	type ChartConfig,
 	ChartContainer,
-	ChartTooltip
+	ChartTooltip,
+	ChartTooltipContent
 } from '@/components/ui/chart';
+import { cn } from '@/lib/cn';
 
 const chartConfig = {
 	orders: {
@@ -62,7 +65,7 @@ export const DashboardLineChart = ({
 						tickMargin={8}
 					/>
 					<ChartTooltip
-						cursor={false}
+						cursor
 						content={<CustomTooltip chartData={chartData} />}
 					/>
 					<Line
@@ -80,18 +83,29 @@ export const DashboardLineChart = ({
 
 const CustomTooltip = ({ chartData, active, payload, label }: any) => {
 	if (active && payload?.length) {
+		const selectedData = chartData.find((day: ChartData) => day.date === label);
+
 		return (
-			<div className="custom-tooltip">
-				<ul>
-					{chartData
-						.filter((day: ChartData) => day.date === label)[0]
-						.orderNotes.map((order: string) => (
-							<li key={order}>{order}</li>
-						))}
-				</ul>
+			<div className="custom-tooltip rounded border bg-white shadow-md">
+				<div className="tooltip-header mb-2 rounded bg-primary p-2 text-white">
+					<span className="font-bold">Created Orders</span>
+				</div>
+
+				<div className="pb-2 pl-2 pr-2">
+					{selectedData.orderNotes.length ? (
+						<ul className="tooltip-list list-inside list-disc">
+							{selectedData.orderNotes.map((order: string, index: number) => (
+								<li key={index} className="tooltip-item text-gray-800">
+									{order}
+								</li>
+							))}
+						</ul>
+					) : (
+						<p className="italic text-gray-500">No orders available</p>
+					)}
+				</div>
 			</div>
 		);
 	}
-
 	return null;
 };

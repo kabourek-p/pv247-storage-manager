@@ -2,11 +2,12 @@
 
 import { TrendingUp } from 'lucide-react';
 import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts';
+import { useState } from 'react';
+import * as React from 'react';
 
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle
@@ -20,14 +21,6 @@ import {
 	ChartTooltipContent
 } from '@/components/ui/chart';
 import { type BarRestockData } from '@/server-actions/restocks';
-const chartData = [
-	{ invoiceNumber: 'January', taken: 186, remaining: 80, unitPrice: 100 },
-	{ invoiceNumber: 'February', taken: 305, remaining: 200, unitPrice: 100 },
-	{ invoiceNumber: 'March', taken: 237, remaining: 120, unitPrice: 100 },
-	{ invoiceNumber: 'April', taken: 73, remaining: 190, unitPrice: 100 },
-	{ invoiceNumber: 'May', taken: 209, remaining: 130, unitPrice: 100 },
-	{ invoiceNumber: 'June', taken: 214, remaining: 140, unitPrice: 100 }
-];
 
 const chartConfig = {
 	taken: {
@@ -59,7 +52,10 @@ export const DashboardRestockFreeBarChart = ({
 						tickMargin={10}
 						axisLine={false}
 					/>
-					<ChartTooltip content={<ChartTooltipContent hideLabel />} />
+					<ChartTooltip
+						cursor
+						content={<CustomTooltip chartData={chartData} />}
+					/>
 					<ChartLegend content={<ChartLegendContent />} />
 					<Bar
 						dataKey="taken"
@@ -86,3 +82,45 @@ export const DashboardRestockFreeBarChart = ({
 		</CardFooter>
 	</Card>
 );
+
+const CustomTooltip = ({ chartData, active, payload, label }: any) => {
+	if (active && payload?.length) {
+		const selectedData: BarRestockData = chartData.find(
+			(restock: BarRestockData) => restock.invoiceNumber === label
+		);
+		return (
+			<div className="custom-tooltip rounded border bg-white shadow-md">
+				<div className="tooltip-header mb-2 rounded bg-primary p-2 text-white">
+					<span className="font-bold">Restock Data</span>
+				</div>
+				<div className="pb-2 pl-2 pr-2">
+					{selectedData ? (
+						<div className="tooltip-content grid grid-cols-3 gap-4">
+							<div className="tooltip-item text-center">
+								<span className="block font-bold">Buying Price</span>
+								<span className="block">
+									{new Intl.NumberFormat('cs-CZ', {
+										style: 'currency',
+										currency: 'CZK'
+									}).format(selectedData.unitPrice)}
+								</span>
+							</div>
+							<div className="tooltip-item text-center">
+								<span className="block font-bold">Remaining Quantity</span>
+								<span className="block">{selectedData.remaining}</span>
+							</div>
+							<div className="tooltip-item text-center">
+								<span className="block font-bold">Already Used</span>
+								<span className="block">{selectedData.taken}</span>
+							</div>
+						</div>
+					) : (
+						<p className="italic text-gray-500">No data available</p>
+					)}
+				</div>
+			</div>
+		);
+	}
+
+	return null;
+};
