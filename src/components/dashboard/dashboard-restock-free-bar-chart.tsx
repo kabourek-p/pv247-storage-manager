@@ -42,7 +42,10 @@ export const DashboardRestockFreeBarChart = ({
 			</div>
 		</CardHeader>
 		<CardContent className="flex h-full items-center justify-center">
-			<ChartContainer config={chartConfig} className="max-h-[300px] h-1/2 w-full">
+			<ChartContainer
+				config={chartConfig}
+				className="h-1/2 max-h-[300px] w-full"
+			>
 				{chartData.length ? (
 					<BarChart accessibilityLayer data={chartData}>
 						<CartesianGrid vertical={false} />
