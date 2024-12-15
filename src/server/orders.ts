@@ -123,6 +123,20 @@ export const getOrder = async (id: number) =>
 		}
 	});
 
+export const getOrderCounts = async (days_back: number) =>
+	await prisma.$queryRawUnsafe<
+		OrderCount[]
+	>(`SELECT gs.day AS date, COUNT(o."date") AS orders
+										FROM generate_series(
+												CURRENT_DATE - interval '${days_back} days',
+												CURRENT_DATE,
+												interval '1 day'
+											) AS gs(day)
+										LEFT JOIN  "Order" AS o 
+										ON  date(o."date") = gs.day
+										GROUP BY gs.day
+										ORDER BY gs.day;`);
+
 export const getRestockData = async (commodity: string) =>
 	prisma.$queryRaw<
 		RestockData[]
@@ -134,6 +148,11 @@ export const getRestockData = async (commodity: string) =>
 									GROUP BY r."id", c.name
 									HAVING SUM(sd."quantity") IS NULL OR SUM(sd."quantity") < r."quantity" AND c."name" = ${commodity}
 									ORDER BY r."date"`;
+
+type OrderCount = {
+	date: Date;
+	orders: bigint;
+};
 
 export type RestockData = {
 	id: number;

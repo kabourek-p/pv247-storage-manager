@@ -2,7 +2,7 @@ import React from 'react';
 
 import AddRestockButton from '@/components/restocks/add-restock-button';
 import { getRestockRows } from '@/server-actions/restocks';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 import RestockTable from '@/components/restocks/restocks-table';
 import authUser from '@/lib/auth';
 

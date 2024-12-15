@@ -2,7 +2,7 @@ import React from 'react';
 
 import AddCommodityButton from '@/components/commodities/add-commodity-button';
 import CommodityGrid from '@/components/commodities/commodity-grid';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 import { getCommodityCardsServerAction } from '@/server-actions/commodities';
 
 const Commodities = async () => {

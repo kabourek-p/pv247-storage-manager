@@ -9,7 +9,7 @@ import {
 import { FormTextField } from '@/components/form/form-text-field';
 import { Select } from '@/components/form/select';
 
-import TrashButton from '../trash-button';
+import TrashButton from '../ui/trash-button';
 
 export const RestockElementTableRowSchema = z.object({
 	commodity: z.string().min(1, 'Commodity is required'),

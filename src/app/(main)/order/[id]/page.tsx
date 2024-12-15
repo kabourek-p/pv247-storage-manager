@@ -5,7 +5,7 @@ import { orderElementColumns } from '@/components/orders/order-table-columns';
 import { getOrderData, getOrderElementRows } from '@/server-actions/orders';
 import EditOrderButton from '@/components/orders/edit-order-button';
 import LockOrderButton from '@/components/orders/lock-order-button';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 	const { id } = await params;

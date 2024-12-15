@@ -3,7 +3,7 @@
 import { getAvailableCommodities } from '@/server-actions/commodities';
 import EditOrderForm from '@/components/form/orders/edit-order-form';
 import { getOrderData } from '@/server-actions/orders';
-import { Card } from '@/components/ui/card';
+import { Card } from '@/components/card';
 
 const OrderEditPage = async ({
 	params
