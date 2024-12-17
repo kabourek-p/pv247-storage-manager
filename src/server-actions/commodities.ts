@@ -35,10 +35,13 @@ export const getCommodityCardsServerAction = async () => {
 	return await Promise.all(
 		commodities.map(async commodity => {
 			const restocks = await getRestockData(commodity.name);
+			console.log(restocks);
 			const quantity = restocks.reduce(
-				(sum, current) => sum + current.quantity - current.taken,
+				(sum, current) => +sum + +current.quantity - +current.taken,
 				0
 			);
+			console.log(quantity);
+			console.log(commodity);
 			return {
 				name: commodity.name,
 				quantity: Number(quantity),
