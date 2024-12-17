@@ -1,18 +1,21 @@
 'use client';
 
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
 
-const AddCommodityButton = () => (
-	<Button
-		className="mb-2 w-40"
-		type="button"
-		onClick={() => redirect('/commodity')}
-	>
-		+ New commodity
-	</Button>
-);
+const AddCommodityButton = () => {
+	const router = useRouter();
+	return (
+		<Button
+			className="mb-4 h-12 w-full md:w-52"
+			type="button"
+			onClick={() => router.push('/commodity')}
+		>
+			+ New commodity
+		</Button>
+	);
+};
 
 export default AddCommodityButton;

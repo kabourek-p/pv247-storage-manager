@@ -15,7 +15,7 @@ const OrderElementHeader = () => (
 			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2 text-center">
 				Price per Unit (CZK)
 			</TableHead>
-			<TableHead className="text-centerborder-l w-fit border-r border-gray-300 px-4 py-2">
+			<TableHead className="w-fit border-l border-r border-gray-300 px-4 py-2 text-center">
 				Number of Pieces
 			</TableHead>
 			<TableHead className="border-l border-gray-300 px-4 py-2 text-center">

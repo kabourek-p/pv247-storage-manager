@@ -13,7 +13,6 @@ Deployed [here on Vercel](pv247-storage-manager-kss5.vercel.app).
 - react-hook-form
 - zod
 
-
 ## Installation
 
 ### Database
@@ -21,11 +20,12 @@ Deployed [here on Vercel](pv247-storage-manager-kss5.vercel.app).
 In order to run the application you need to set up postgres database running.
 There is a `Dockerfile` ready for you in `db/` folder.
 Run
+
 ```bash
 docker compose up -d
 ```
-to start running your local postgres database in the background.
 
+to start running your local postgres database in the background.
 
 ### Environment
 
@@ -34,14 +34,25 @@ Copy `template.env` file to `.env` and fill in necessary environment variables.
 
 In order create credentials for `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET`, you need first to set up Google OAuth ([check these steps](https://support.google.com/cloud/answer/6158849)).
 
-
 ### Application
 
 You need to install node packages and migrate database.
+
 ```bash
 npm install --legacy-peer-deps
 npm exec prisma migrate dev
 ```
+
+### Access Database UI
+
+Visit http://localhost:9002 and login screen will appear:
+You can connect to the devel db using:
+
+- System: `PostgreSQL`
+- Server: `db` (name provided by docker-compose
+- Username: `root`
+- Password: `123`
+- Database: `pv247-storage-manager`
 
 ## Run
 

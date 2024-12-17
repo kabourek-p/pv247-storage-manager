@@ -4,7 +4,7 @@ import React from 'react';
 import { z } from 'zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 import { Button } from '@/components/ui/button';
@@ -48,6 +48,7 @@ const RestockForm = ({
 	submitFn,
 	commodities
 }: RestockFormProps) => {
+	const router = useRouter();
 	const form = useForm<RestockFormSchema>({
 		resolver: zodResolver(restockSchema),
 		defaultValues: {
@@ -67,14 +68,14 @@ const RestockForm = ({
 			return;
 		}
 		toast.success(result.message);
-		redirect('/restocks');
+		router.push('/restocks');
 	};
 
 	return (
 		<div className="flex items-start justify-center">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-5 shadow-lg"
+					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-5 lg:shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<Select
@@ -87,28 +88,24 @@ const RestockForm = ({
 					<FormTextField
 						name="quantity"
 						label="Quantity"
-						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.quantity?.message}
 					/>
 
 					<FormTextField
 						name="unitPrice"
 						label="Price per Unit (CZK)"
-						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.unitPrice?.message}
 					/>
 
 					<FormTextField
 						name="supplierName"
 						label="Supplier name"
-						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.supplierName?.message}
 					/>
 
 					<FormTextField
 						name="invoiceNumber"
 						label="Invoice number"
-						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.invoiceNumber?.message}
 					/>
 					<span className="hidden">

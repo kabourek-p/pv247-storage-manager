@@ -19,15 +19,31 @@ const restockColumns: ColumnDef<RestockRow, string>[] = [
 	},
 	{
 		accessorKey: 'quantity',
-		header: 'Quantity'
+		header: 'Amount',
+		cell: ({ row }) => {
+			const quantity = parseFloat(row.getValue('quantity'));
+			const unit = row.getValue('unit');
+			const formatted = `${quantity} ${unit}`;
+
+			return <span className="font-medium">{formatted}</span>;
+		}
 	},
 	{
-		accessorKey: 'unit',
-		header: 'Unit'
+		accessorKey: 'unit'
 	},
 	{
 		accessorKey: 'unitPrice',
-		header: 'Unit Price'
+		header: 'Unit Price',
+
+		cell: ({ row }) => {
+			const amount = parseFloat(row.getValue('unitPrice'));
+			const formatted = new Intl.NumberFormat('cs-CZ', {
+				style: 'currency',
+				currency: 'CZK'
+			}).format(amount);
+
+			return <span className="font-medium">{formatted}</span>;
+		}
 	},
 	{
 		accessorKey: 'supplierName',

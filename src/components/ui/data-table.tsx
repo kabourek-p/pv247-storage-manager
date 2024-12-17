@@ -26,6 +26,7 @@ import { cn } from '@/lib/cn';
 type DataTableProps<TData, TValue> = {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
+	addButton?: React.ReactNode;
 	rowClickHandler?: (id: string) => void;
 	filter?: string;
 	filterByName?: string;
@@ -34,6 +35,7 @@ type DataTableProps<TData, TValue> = {
 const DataTable = <TData, TValue>({
 	columns,
 	data,
+	addButton,
 	rowClickHandler,
 	filter,
 	filterByName
@@ -52,22 +54,23 @@ const DataTable = <TData, TValue>({
 			columnFilters
 		},
 		initialState: {
-			columnVisibility: { id: false, commodityUnit: false }
+			columnVisibility: { id: false, commodityUnit: false, unit: false }
 		}
 	});
 
 	return (
 		<div>
 			{filter && (
-				<div className="flex items-center pb-4">
+				<div className="flex flex-col justify-between gap-2 pb-4 md:flex-row">
 					<Input
 						placeholder={`Filter by ${filterByName}...`}
 						value={(table.getColumn(filter)?.getFilterValue() as string) ?? ''}
 						onChange={event =>
 							table.getColumn(filter)?.setFilterValue(event.target.value)
 						}
-						className="max-w-sm"
+						className="w-full md:w-80"
 					/>
+					{addButton}
 				</div>
 			)}
 			<div className="overflow-hidden rounded-md border shadow">

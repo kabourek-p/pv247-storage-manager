@@ -5,8 +5,8 @@ import { z } from 'zod';
 import { FormProvider, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import type { Unit } from '@prisma/client';
-import { redirect } from 'next/navigation';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import { FormTextField } from '@/components/form/form-text-field';
@@ -30,6 +30,7 @@ const commoditySchema = z.object({
 export type CommodityFormSchema = z.infer<typeof commoditySchema>;
 
 const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
+	const router = useRouter();
 	const form = useForm<CommodityFormSchema>({
 		resolver: zodResolver(commoditySchema),
 		defaultValues: {
@@ -45,21 +46,19 @@ const CommodityForm = ({ defaultValues, submitFn }: CommodityFormProps) => {
 			return;
 		}
 		toast.success(result.message);
-		redirect('/commodities');
+		router.push('/commodities');
 	};
 
-	console.log(form.formState.errors?.name?.message);
 	return (
 		<div className="flex items-start justify-center p-4">
 			<FormProvider {...form}>
 				<form
-					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-10 shadow-lg"
+					className="w-full max-w-xl space-y-4 rounded-lg bg-white p-4 lg:shadow-lg"
 					onSubmit={form.handleSubmit(onSubmit)}
 				>
 					<FormTextField
 						name="name"
 						label="Commodity name"
-						className="w-full rounded-lg bg-slate-50 py-1.5 shadow"
 						error={form.formState.errors?.name?.message}
 					/>
 

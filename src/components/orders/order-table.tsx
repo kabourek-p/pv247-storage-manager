@@ -1,19 +1,23 @@
 'use client';
 
 import React from 'react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import DataTable from '@/components/ui/data-table';
 import { getOrderColumns } from '@/components/orders/order-table-columns';
 import { useLoggedInUser } from '@/context/logged-in-user';
 import { type OrderRow } from '@/server-actions/orders';
 
-const handleRowClick = async (id: string) => {
-	redirect(`/order/${id}`);
-};
+import { Button } from '../ui/button';
 
 const OrderTable = ({ data }: { data: OrderRow[] }) => {
+	const router = useRouter();
 	const { user } = useLoggedInUser();
+
+	const handleRowClick = async (id: string) => {
+		router.push(`/order/${id}`);
+	};
+
 	return (
 		<DataTable
 			data={data}
@@ -21,6 +25,15 @@ const OrderTable = ({ data }: { data: OrderRow[] }) => {
 			rowClickHandler={handleRowClick}
 			filter="note"
 			filterByName="Identifier"
+			addButton={
+				<Button
+					type="button"
+					className="w-full md:w-auto"
+					onClick={() => router.push('/order')}
+				>
+					+ New order
+				</Button>
+			}
 		/>
 	);
 };
