@@ -18,9 +18,9 @@ export const FormTextField = ({
 	const { register } = useFormContext();
 
 	return (
-		<div className="flex flex-col space-x-2">
+		<div className="flex flex-col">
 			{label && (
-				<label className="p-2" htmlFor={name}>
+				<label className="py-2" htmlFor={name}>
 					{label}
 				</label>
 			)}

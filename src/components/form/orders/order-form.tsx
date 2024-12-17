@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { toast } from 'sonner';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 import { FormTextField } from '@/components/form/form-text-field';
 import { Button } from '@/components/ui/button';
@@ -47,6 +47,7 @@ const OrderForm = (params: {
 		data: OrderFormSchema
 	) => Promise<{ error: boolean; message: string }>;
 }) => {
+	const router = useRouter();
 	const form = useForm<OrderFormSchema>({
 		resolver: zodResolver(orderSchema),
 		defaultValues: {
@@ -69,7 +70,7 @@ const OrderForm = (params: {
 		}
 		toast.success(result.message);
 		form.reset();
-		redirect(params.redirectPath);
+		router.push(params.redirectPath);
 	};
 
 	const onSubmitAndNext = async (values: OrderFormSchema) => {
@@ -89,57 +90,42 @@ const OrderForm = (params: {
 					className="w-11/12 justify-center space-x-2 md:w-full"
 					onSubmit={form.handleSubmit(() => {})}
 				>
-					<div className="relative m-2 mb-4 flex flex-col items-start justify-between space-y-4 md:w-full">
-						<div
-							className={`rounded border px-4 py-2 ${
-								form.formState.errors?.note
-									? 'border-red-600'
-									: 'border-gray-300'
-							}`}
-						>
+					<div className="m-2 mb-4 flex flex-col items-end justify-between space-y-4 md:w-full md:flex-row md:space-x-4">
+						<div className="w-full rounded-lg border border-gray-200 px-4 py-4 shadow-lg">
 							<FormTextField
 								name="note"
 								label="Order Identifier"
-								className="mt-4 w-11/12 rounded-lg bg-slate-50 p-4 py-1.5 shadow"
 								error={form.formState.errors?.note?.message}
+								className="w-full py-1.5"
 							/>
 							<span className="hidden">
-								<FormTextField
-									name="id"
-									label="Id"
-									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
-								/>
+								<FormTextField name="id" label="Id" />
 							</span>
 							<span className="hidden">
-								<FormTextField
-									name="authorId"
-									label="authorId"
-									className="m-4 w-64 rounded-lg bg-slate-50 py-1.5 shadow"
-								/>
+								<FormTextField name="authorId" label="authorId" />
 							</span>
 						</div>
-					</div>
-					<div className="relative flex flex-col items-start justify-between space-y-4">
-						<div className="mb-4 flex w-full flex-col justify-end gap-2 sm:flex-row md:w-3/4 lg:absolute lg:bottom-0 lg:right-0">
-							{params.allowSaveNext && (
+						<div className="mb-4 flex min-h-12 w-full flex-col justify-end gap-1 sm:gap-2 md:flex-row md:gap-4">
+							<div className="flex gap-2">
+								{params.allowSaveNext && (
+									<Button
+										colorType="secondary"
+										className="mt-2 w-full grow"
+										onClick={form.handleSubmit(onSubmitAndNext)}
+									>
+										Save and continue
+									</Button>
+								)}
 								<Button
 									colorType="secondary"
-									className="mt-2 w-full sm:w-48"
-									onClick={form.handleSubmit(onSubmitAndNext)}
+									className="mt-2 w-full md:w-auto"
+									onClick={form.handleSubmit(onSubmit)}
 								>
-									Save and continue
+									Save
 								</Button>
-							)}
+							</div>
 							<Button
-								colorType="secondary"
-								className="mt-2 w-full sm:w-36"
-								onClick={form.handleSubmit(onSubmit)}
-							>
-								Save
-							</Button>
-
-							<Button
-								className="mt-2 w-full sm:w-36"
+								className="mt-2 w-full md:w-36"
 								type="button"
 								onClick={() =>
 									append({

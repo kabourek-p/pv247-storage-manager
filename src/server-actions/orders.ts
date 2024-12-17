@@ -97,7 +97,6 @@ export const getOrderElementRows = async (
 ): Promise<OrderElementRow[]> => {
 	const order = await getOrder(id);
 	const orderElements = order ? order.orderElements : [];
-	console.log(orderElements);
 	return orderElements.map(e => ({
 		id: e.id,
 		commodity: e.commodityId,

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 
 import CommodityCard from '@/components/commodities/commodity-card';
+import { cn } from '@/lib/cn';
 
 import { Button } from '../ui/button';
 
@@ -16,12 +17,14 @@ type CommodityGridProps = {
 	}[];
 	maxCards?: number;
 	sortingEnabled?: boolean;
+	horizontalScroll?: boolean;
 };
 
 const CommodityGrid: React.FC<CommodityGridProps> = ({
 	commodities,
 	maxCards,
-	sortingEnabled = false
+	sortingEnabled = false,
+	horizontalScroll = false
 }) => {
 	const [sortOrder, setSortOrder] = useState<
 		'highestPrice' | 'lowestPrice' | 'recentDate' | null
@@ -47,12 +50,13 @@ const CommodityGrid: React.FC<CommodityGridProps> = ({
 	});
 
 	return (
-		<div className="flex flex-col gap-10">
+		<div className="flex flex-col gap-3 md:gap-10">
 			{sortingEnabled && (
-				<div className="mb-4 flex justify-center gap-4 sm:justify-start">
+				<div className="mb-4 flex gap-4">
 					<Button
 						onClick={() => toggleSortOrder('highestPrice')}
-						className={`rounded-md px-4 py-2 ${sortOrder === 'highestPrice' ? 'bg-primary' : 'bg-secondary'} text-white`}
+						colorType={sortOrder === 'highestPrice' ? 'primary' : 'secondary'}
+						className="rounded-md px-4 py-2 text-white"
 					>
 						Highest Price
 					</Button>
@@ -71,7 +75,12 @@ const CommodityGrid: React.FC<CommodityGridProps> = ({
 				</div>
 			)}
 
-			<div className="flex flex-wrap justify-center gap-10 sm:justify-start">
+			<div
+				className={cn(
+					'flex flex-wrap gap-3 md:gap-10',
+					horizontalScroll && 'flex-nowrap overflow-x-scroll'
+				)}
+			>
 				{sortedCommodities
 					.slice(0, maxCards ?? commodities.length)
 					.map(commodity => (
@@ -81,6 +90,7 @@ const CommodityGrid: React.FC<CommodityGridProps> = ({
 							quantity={commodity.quantity}
 							unit={commodity.unit}
 							unitPrice={commodity.unitPrice}
+							horizontalScroll={horizontalScroll}
 						/>
 					))}
 			</div>

@@ -67,7 +67,6 @@ export const getBarRestockDataServerAction = async () => {
 			}));
 		})
 	);
-	console.log(restocks);
 	return restocks.reduce((accumulator, value) => accumulator.concat(value), []);
 };
 
