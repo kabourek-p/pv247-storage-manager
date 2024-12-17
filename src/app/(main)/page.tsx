@@ -30,7 +30,7 @@ const Dashboard = async () => {
 				<Card className="flex h-full items-center justify-center">
 					<RestockFreeTabs chartData={restockData} />
 				</Card>
-				<Card className="flex h-full items-center justify-center">
+				<Card className="grid h-full items-center">
 					<DashboardLineChart chartData={ordersData} />
 				</Card>
 			</div>
