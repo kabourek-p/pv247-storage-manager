@@ -2,7 +2,6 @@ import React from 'react';
 
 import CommodityGrid from '@/components/commodities/commodity-grid';
 import { getCommodityCardsServerAction } from '@/server-actions/commodities';
-// import authUser from '@/lib/auth';
 import { Card } from '@/components/card';
 import { DashboardLineChart } from '@/components/dashboard/dashboard-line-chart';
 import { getOrderCountsServerAction } from '@/server-actions/orders';
@@ -10,8 +9,6 @@ import { getBarRestockDataServerAction } from '@/server-actions/restocks';
 import RestockFreeTabs from '@/components/dashboard/dashboard-restock-free-tabs';
 
 const Dashboard = async () => {
-	// const _ = await authUser();
-	// TODO what are these?
 	const ordersData = await getOrderCountsServerAction(7);
 	const restockData = await getBarRestockDataServerAction();
 	const commodityData = await getCommodityCardsServerAction();
@@ -21,7 +18,6 @@ const Dashboard = async () => {
 				<h2 className="mb-8 pl-4 pt-4 text-4xl">Commodities</h2>
 				<CommodityGrid
 					commodities={commodityData}
-					maxCards={5}
 					sortingEnabled
 					horizontalScroll
 				/>

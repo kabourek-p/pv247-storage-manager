@@ -31,24 +31,24 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 	return (
 		<div
 			className={cn(
-				'flex h-40 w-28 flex-col items-center justify-between rounded-lg border border-black bg-gradient-to-b from-secondary-light to-secondary p-4 text-black shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl md:h-64 md:w-56',
+				'flex min-h-40 min-w-28 flex-col items-center justify-between rounded-lg border border-black bg-gradient-to-b from-secondary-light to-secondary p-4 text-black shadow-lg transition-shadow duration-300 ease-in-out hover:shadow-2xl md:h-64 md:w-56',
 				horizontalScroll && 'md:min-w-56'
 			)}
 		>
-			<div className="self-start text-lg font-semibold text-gray-800">
+			<div className="text-xs sm:text-sm self-start md:text-lg font-semibold text-gray-800">
 				{name}
 			</div>
 
 			<div className="flex w-full flex-grow items-center justify-center">
-				<div className="text-2xl font-extrabold text-gray-900 md:text-4xl">
+				<div className="text-lg sm:text-xl font-extrabold text-gray-900 md:text-4xl">
 					{formattedQuantity}
 				</div>
-				<div className="ml-2 text-xl font-medium text-gray-700">
+				<div className="ml-2 text-md md:text-xl font-medium text-gray-700">
 					{formattedUnit}
 				</div>
 			</div>
 
-			<div className="mt-3 self-start text-xl font-normal text-gray-800">
+			<div className="mt-3 self-start text-md sm:text-lg md:text-xl font-normal text-gray-800">
 				{formattedUnitPrice} CZK
 			</div>
 		</div>
