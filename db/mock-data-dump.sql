@@ -1,6 +1,6 @@
 BEGIN;
 
-TRUNCATE "Commodity", "Invoice", "Order", "OrderElement", "Restock", "Session", "StockDispatch", "User", "VerificationToken", "WeightToLenghtRatio";
+TRUNCATE "Commodity", "Invoice", "Order", "OrderElement", "Restock", "Session", "StockDispatch", "User", "VerificationToken", "Account", "WeightToLenghtRatio";
 
 INSERT INTO "User" ("id", "email", "name", "role", "password", "emailVerified", "image") VALUES
 ('dae9d65e-eb3b-4a60-a606-755013e7c299',	'peta.kabourek@seznam.cz',	'Petr Kabourek',	'',	'$2a$10$B4U3W6BHTqSjtibCRJqf/eWWfz7h5W6DFKEjmD8DPhXfks7XCOnXe',	NULL,	NULL),
