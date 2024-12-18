@@ -1,10 +1,10 @@
 import React from 'react';
+import { type Metadata } from 'next';
 
 import { getRestockRows } from '@/server-actions/restocks';
 import { Card } from '@/components/card';
 import RestockTable from '@/components/restocks/restocks-table';
 import authUser from '@/lib/auth';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Restocks'

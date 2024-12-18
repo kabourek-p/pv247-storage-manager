@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { type Metadata } from 'next';
 
 import { OtherLoginOptions } from '@/components/login/other-login-options';
 import { LoginSignupRedirect } from '@/components/login/login-signup-redirect';
 import { LoginForm } from '@/modules/user/components/login-form';
 import { auth } from '@/lib/auth';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Log in'

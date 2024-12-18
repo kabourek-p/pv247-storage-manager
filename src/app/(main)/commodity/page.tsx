@@ -1,9 +1,9 @@
 import { forbidden } from 'next/navigation';
+import { type Metadata } from 'next';
 
 import CreateCommodityForm from '@/components/form/commodities/create-commodity-form';
 import { Card } from '@/components/card';
 import authUser from '@/lib/auth';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Create commodity'

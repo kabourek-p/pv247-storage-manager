@@ -1,11 +1,11 @@
 import React from 'react';
+import { type Metadata } from 'next';
 
 import AddCommodityButton from '@/components/commodities/add-commodity-button';
 import CommodityGrid from '@/components/commodities/commodity-grid';
 import { Card } from '@/components/card';
 import { getCommodityCardsServerAction } from '@/server-actions/commodities';
 import authUser from '@/lib/auth';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Commodities'

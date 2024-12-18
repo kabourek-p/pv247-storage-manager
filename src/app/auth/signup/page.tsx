@@ -1,10 +1,10 @@
 import Image from 'next/image';
 import { redirect } from 'next/navigation';
+import { type Metadata } from 'next';
 
 import { auth } from '@/lib/auth';
 import { LoginSignupRedirect } from '@/components/login/login-signup-redirect';
 import { RegisterForm } from '@/modules/user/components/register-form';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Register'

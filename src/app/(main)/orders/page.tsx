@@ -1,10 +1,10 @@
 import React from 'react';
+import { type Metadata } from 'next';
 
 import { getOrderRows } from '@/server-actions/orders';
 import { Card } from '@/components/card';
 import OrderTable from '@/components/orders/order-table';
 import authUser from '@/lib/auth';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Orders'

@@ -1,4 +1,5 @@
 import React from 'react';
+import { type Metadata } from 'next';
 
 import CommodityGrid from '@/components/commodities/commodity-grid';
 import { getCommodityCardsServerAction } from '@/server-actions/commodities';
@@ -7,7 +8,6 @@ import { DashboardLineChart } from '@/components/dashboard/dashboard-line-chart'
 import { getOrderCountsServerAction } from '@/server-actions/orders';
 import { getBarRestockDataServerAction } from '@/server-actions/restocks';
 import RestockFreeTabs from '@/components/dashboard/dashboard-restock-free-tabs';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Dashboard'

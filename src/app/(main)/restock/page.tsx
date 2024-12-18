@@ -1,7 +1,8 @@
+import { type Metadata } from 'next';
+
 import CreateRestockForm from '@/components/form/restocks/create-restock-form';
 import { Card } from '@/components/card';
 import { getAvailableCommodities } from '@/server-actions/commodities';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Create restock'

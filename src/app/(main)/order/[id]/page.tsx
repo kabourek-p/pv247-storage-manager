@@ -1,5 +1,6 @@
 import React from 'react';
 import { forbidden, notFound } from 'next/navigation';
+import { type Metadata } from 'next';
 
 import DataTable from '@/components/ui/data-table';
 import { orderElementColumns } from '@/components/orders/order-table-columns';
@@ -9,7 +10,6 @@ import LockOrderButton from '@/components/orders/lock-order-button';
 import { Card } from '@/components/card';
 import authUser from '@/lib/auth';
 import { BackArrowButton } from '@/components/ui/back-arrow-button';
-import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Order detail'
