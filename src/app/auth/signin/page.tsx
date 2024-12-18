@@ -9,7 +9,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Log in'
-  };
+};
 
 const SignInPage = async () => {
 	const session = await auth();

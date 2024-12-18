@@ -11,7 +11,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Dashboard'
-  };
+};
 
 const Dashboard = async () => {
 	const ordersData = await getOrderCountsServerAction(7);

@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Create restock'
-  };
+};
 
 const RestockPage = async () => {
 	const commodities = await getAvailableCommodities();

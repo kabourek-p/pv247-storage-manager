@@ -35,20 +35,20 @@ const CommodityCard: React.FC<CommodityCardProps> = ({
 				horizontalScroll && 'md:min-w-56'
 			)}
 		>
-			<div className="text-xs sm:text-sm self-start md:text-lg font-semibold text-gray-800">
+			<div className="self-start text-xs font-semibold text-gray-800 sm:text-sm md:text-lg">
 				{name}
 			</div>
 
 			<div className="flex w-full flex-grow items-center justify-center">
-				<div className="text-lg sm:text-xl font-extrabold text-gray-900 md:text-4xl">
+				<div className="text-lg font-extrabold text-gray-900 sm:text-xl md:text-4xl">
 					{formattedQuantity}
 				</div>
-				<div className="ml-2 text-md md:text-xl font-medium text-gray-700">
+				<div className="text-md ml-2 font-medium text-gray-700 md:text-xl">
 					{formattedUnit}
 				</div>
 			</div>
 
-			<div className="mt-3 self-start text-md sm:text-lg md:text-xl font-normal text-gray-800">
+			<div className="text-md mt-3 self-start font-normal text-gray-800 sm:text-lg md:text-xl">
 				{formattedUnitPrice} CZK
 			</div>
 		</div>

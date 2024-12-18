@@ -9,7 +9,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Commodities'
-  };
+};
 
 const Commodities = async () => {
 	const user = await authUser();

@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Orders'
-  };
+};
 
 const OrdersPage = async () => {
 	const user = await authUser();

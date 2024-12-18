@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Restocks'
-  };
+};
 
 const Restocks = async () => {
 	const user = await authUser();

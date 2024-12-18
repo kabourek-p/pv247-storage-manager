@@ -13,7 +13,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Order detail'
-  };
+};
 
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 	const user = await authUser();

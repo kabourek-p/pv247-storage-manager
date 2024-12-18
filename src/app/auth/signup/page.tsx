@@ -8,7 +8,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
 	title: 'Register'
-  };
+};
 
 const SignUpPage = async () => {
 	const session = await auth();
