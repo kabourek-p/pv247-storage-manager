@@ -3,6 +3,11 @@ import { forbidden } from 'next/navigation';
 import CreateCommodityForm from '@/components/form/commodities/create-commodity-form';
 import { Card } from '@/components/card';
 import authUser from '@/lib/auth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Create commodity'
+  };
 
 const CommodityPage = async () => {
 	const user = await authUser();

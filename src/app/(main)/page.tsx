@@ -7,6 +7,11 @@ import { DashboardLineChart } from '@/components/dashboard/dashboard-line-chart'
 import { getOrderCountsServerAction } from '@/server-actions/orders';
 import { getBarRestockDataServerAction } from '@/server-actions/restocks';
 import RestockFreeTabs from '@/components/dashboard/dashboard-restock-free-tabs';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Dashboard'
+  };
 
 const Dashboard = async () => {
 	const ordersData = await getOrderCountsServerAction(7);

@@ -9,6 +9,11 @@ import LockOrderButton from '@/components/orders/lock-order-button';
 import { Card } from '@/components/card';
 import authUser from '@/lib/auth';
 import { BackArrowButton } from '@/components/ui/back-arrow-button';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Order detail'
+  };
 
 const Page = async ({ params }: { params: Promise<{ id: number }> }) => {
 	const user = await authUser();

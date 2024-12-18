@@ -4,8 +4,13 @@ import { getOrderRows } from '@/server-actions/orders';
 import { Card } from '@/components/card';
 import OrderTable from '@/components/orders/order-table';
 import authUser from '@/lib/auth';
+import { Metadata } from 'next';
 
-const Page = async () => {
+export const metadata: Metadata = {
+	title: 'Orders'
+  };
+
+const OrdersPage = async () => {
 	const user = await authUser();
 	const data = await getOrderRows(user?.role === 'ADMIN' ? null : user.id);
 	return (
@@ -19,4 +24,4 @@ const Page = async () => {
 	);
 };
 
-export default Page;
+export default OrdersPage;

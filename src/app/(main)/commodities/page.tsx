@@ -5,6 +5,11 @@ import CommodityGrid from '@/components/commodities/commodity-grid';
 import { Card } from '@/components/card';
 import { getCommodityCardsServerAction } from '@/server-actions/commodities';
 import authUser from '@/lib/auth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Commodities'
+  };
 
 const Commodities = async () => {
 	const user = await authUser();

@@ -4,6 +4,11 @@ import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { LoginSignupRedirect } from '@/components/login/login-signup-redirect';
 import { RegisterForm } from '@/modules/user/components/register-form';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Register'
+  };
 
 const SignUpPage = async () => {
 	const session = await auth();

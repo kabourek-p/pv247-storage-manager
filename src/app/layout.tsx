@@ -7,8 +7,12 @@ import { Providers } from '@/components/providers';
 
 const poppins = Poppins({ subsets: ['latin'], weight: ['400'] });
 
+ 
 export const metadata: Metadata = {
-	title: 'Warehouse manager'
+  title: {
+    template: '%s | Warehouse Manager',
+    default: 'Dashboard'
+  }
 };
 
 const RootLayout = ({

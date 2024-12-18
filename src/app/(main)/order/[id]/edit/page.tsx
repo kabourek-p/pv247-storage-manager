@@ -1,5 +1,3 @@
-'use server';
-
 import { forbidden, notFound } from 'next/navigation';
 import React from 'react';
 
@@ -9,6 +7,11 @@ import { getOrderData } from '@/server-actions/orders';
 import { Card } from '@/components/card';
 import authUser from '@/lib/auth';
 import { BackArrowButton } from '@/components/ui/back-arrow-button';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Edit order'
+  };
 
 const OrderEditPage = async ({
 	params

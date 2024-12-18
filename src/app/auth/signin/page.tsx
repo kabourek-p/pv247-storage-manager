@@ -5,6 +5,11 @@ import { OtherLoginOptions } from '@/components/login/other-login-options';
 import { LoginSignupRedirect } from '@/components/login/login-signup-redirect';
 import { LoginForm } from '@/modules/user/components/login-form';
 import { auth } from '@/lib/auth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Log in'
+  };
 
 const SignInPage = async () => {
 	const session = await auth();

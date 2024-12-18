@@ -2,6 +2,11 @@ import CreateOrderForm from '@/components/form/orders/create-order-form';
 import { Card } from '@/components/card';
 import { getAvailableCommodities } from '@/server-actions/commodities';
 import authUser from '@/lib/auth';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'Create order'
+  };
 
 const OrderPage = async () => {
 	const user = await authUser();
