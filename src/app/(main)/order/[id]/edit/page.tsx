@@ -1,14 +1,14 @@
 'use server';
 
 import { forbidden, notFound } from 'next/navigation';
+import React from 'react';
 
 import { getAvailableCommodities } from '@/server-actions/commodities';
 import EditOrderForm from '@/components/form/orders/edit-order-form';
 import { getOrderData } from '@/server-actions/orders';
 import { Card } from '@/components/card';
 import authUser from '@/lib/auth';
-import {BackArrowButton} from "@/components/ui/back-arrow-button";
-import React from "react";
+import { BackArrowButton } from '@/components/ui/back-arrow-button';
 
 const OrderEditPage = async ({
 	params
@@ -34,7 +34,7 @@ const OrderEditPage = async ({
 		<div className="grid min-h-screen grid-rows-[20px_1fr_20px] gap-16 p-8 pb-20 font-[family-name:var(--font-geist-sans)] sm:p-20">
 			<Card>
 				<div className="ml-4 sm:ml-0">
-					<BackArrowButton/>
+					<BackArrowButton />
 				</div>
 				<h2 className="mb-8 pl-4 pt-4 text-4xl">Edit order</h2>
 				<EditOrderForm

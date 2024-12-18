@@ -40,10 +40,7 @@ export const DashboardLineChart = ({
 			<CardDescription>Last {chartData.length} days</CardDescription>
 		</CardHeader>
 		<CardContent className="flex h-full items-center justify-center">
-			<ChartContainer
-				config={chartConfig}
-				className="h-full w-full"
-			>
+			<ChartContainer config={chartConfig} className="h-full w-full">
 				<LineChart
 					accessibilityLayer
 					data={chartData}
